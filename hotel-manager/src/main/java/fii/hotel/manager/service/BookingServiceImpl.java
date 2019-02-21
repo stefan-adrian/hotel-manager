@@ -1,6 +1,7 @@
 package fii.hotel.manager.service;
 
 import fii.hotel.manager.dto.BookingCreationDto;
+import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.exception.BookingNotFoundException;
 import fii.hotel.manager.mapper.BookingMapper;
 import fii.hotel.manager.model.Booking;
@@ -38,7 +39,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
         Booking savedBooking = bookingRepository.save(booking);
         logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
-        return bookingMapper.map(savedBooking);
+        return bookingMapper.mapToCreationDto(savedBooking);
         //TODO check bookings doesn't overlap
 
     }
@@ -54,5 +55,23 @@ public class BookingServiceImpl implements BookingService {
             logger.error("Booking with id " + id + " was not found in the database.");
             throw new BookingNotFoundException(id);
         }
+    }
+
+    private Booking getByIdFetchCarOrders(Long id) {
+        Optional<Booking> bookingOptional = bookingRepository.findByIdFetchCarOrders(id);
+        if (bookingOptional.isPresent()) {
+            Booking booking = bookingOptional.get();
+            logger.debug("Booking with id " + booking.getId() + " has benn retrieved from database.");
+            return booking;
+        } else {
+            logger.error("Booking with id " + id + " was not found in the database.");
+            throw new BookingNotFoundException(id);
+        }
+    }
+
+    @Override
+    public BookingDto getBookingDtoById(Long id) {
+        Booking booking = getByIdFetchCarOrders(id);
+        return bookingMapper.map(booking);
     }
 }
