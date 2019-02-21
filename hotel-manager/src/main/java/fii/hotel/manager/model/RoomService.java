@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
 public class RoomService {
     @Id
     @GeneratedValue
@@ -11,6 +12,7 @@ public class RoomService {
 
     private LocalDateTime timeOfOrder;
 
+    @OneToMany
     private List<Aliment> aliments;
 
     private Double totalCommandPrice;

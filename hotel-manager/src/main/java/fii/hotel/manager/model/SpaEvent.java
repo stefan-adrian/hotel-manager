@@ -15,6 +15,8 @@ public class SpaEvent {
 
     private String location;
 
+    @OneToOne
+    @JoinColumn(name = "spa_type_id")
     private SpaType spaType;
 
     public SpaEvent() {

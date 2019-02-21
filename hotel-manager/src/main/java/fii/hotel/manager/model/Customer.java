@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
-public class User {
+public class Customer {
     @Id
     @GeneratedValue
     private Long id;
@@ -20,10 +20,10 @@ public class User {
 
     private String surname;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer")
     private Set<Booking> bookings;
 
-    public User() {
+    public Customer() {
     }
 
     public Long getId() {

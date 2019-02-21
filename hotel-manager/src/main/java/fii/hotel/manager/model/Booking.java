@@ -1,9 +1,6 @@
 package fii.hotel.manager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -14,7 +11,7 @@ public class Booking {
     private Long id;
 
     @ManyToOne
-    private User user;
+    private Customer customer;
 
     @ManyToOne
     private Room room;
@@ -25,10 +22,13 @@ public class Booking {
 
     private Boolean roomCleaning;
 
+    @OneToMany
     private Set<RoomService> roomServices;
 
+    @OneToMany
     private Set<CarOrder> carOrders;
 
+    @OneToMany
     private Set<SpaEvent> spaEvents;
 
     public Booking() {
@@ -42,12 +42,12 @@ public class Booking {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Room getRoom() {
