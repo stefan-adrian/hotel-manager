@@ -25,7 +25,7 @@ public class Booking {
     @OneToMany
     private Set<RoomService> roomServices;
 
-    @OneToMany
+    @OneToMany(mappedBy = "booking")
     private Set<CarOrder> carOrders;
 
     @OneToMany

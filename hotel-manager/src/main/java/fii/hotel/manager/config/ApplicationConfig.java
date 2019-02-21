@@ -27,6 +27,7 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
                         RequestHandlerSelectors.basePackage("fii.hotel.manager.controller")))
                 .paths(Predicates.or(
                         regex("/aliments.*"),
+                        regex("/bookings.*"),
                         regex("/customers.*"),
                         regex("/rooms.*")))
                 .build()
