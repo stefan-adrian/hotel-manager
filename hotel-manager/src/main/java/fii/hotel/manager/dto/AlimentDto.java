@@ -1,10 +1,13 @@
 package fii.hotel.manager.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class AlimentDto implements Serializable {
 
-    private Long Id;
+    @ApiModelProperty(value = "Id", readOnly = true)
+    private Long id;
 
     private String name;
 
@@ -14,11 +17,11 @@ public class AlimentDto implements Serializable {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
