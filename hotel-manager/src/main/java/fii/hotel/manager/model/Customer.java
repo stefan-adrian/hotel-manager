@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class Customer {
     private String surname;
 
     @OneToMany(mappedBy = "customer")
-    private Set<Booking> bookings;
+    private Set<Booking> bookings = new HashSet<>();
 
     public Customer() {
     }
