@@ -57,9 +57,21 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
+    private Booking getByIdFetchCarOrders(Long id) {
+        Optional<Booking> bookingOptional = bookingRepository.findByIdFetchCarOrders(id);
+        if (bookingOptional.isPresent()) {
+            Booking booking = bookingOptional.get();
+            logger.debug("Booking with id " + booking.getId() + " has benn retrieved from database.");
+            return booking;
+        } else {
+            logger.error("Booking with id " + id + " was not found in the database.");
+            throw new BookingNotFoundException(id);
+        }
+    }
+
     @Override
     public BookingDto getBookingDtoById(Long id) {
-        Booking booking = getById(id);
+        Booking booking = getByIdFetchCarOrders(id);
         return bookingMapper.map(booking);
     }
 }

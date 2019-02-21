@@ -2,6 +2,7 @@ package fii.hotel.manager.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class BookingDto implements Serializable {
 
@@ -16,6 +17,8 @@ public class BookingDto implements Serializable {
     private LocalDateTime toTime;
 
     private Boolean roomCleaning;
+
+    private List<CarOrderDto> carOrderDtos;
 
     public BookingDto() {
     }
@@ -66,5 +69,13 @@ public class BookingDto implements Serializable {
 
     public void setRoomCleaning(Boolean roomCleaning) {
         this.roomCleaning = roomCleaning;
+    }
+
+    public List<CarOrderDto> getCarOrderDtos() {
+        return carOrderDtos;
+    }
+
+    public void setCarOrderDtos(List<CarOrderDto> carOrderDtos) {
+        this.carOrderDtos = carOrderDtos;
     }
 }
