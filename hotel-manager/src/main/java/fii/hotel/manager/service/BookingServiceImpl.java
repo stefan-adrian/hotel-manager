@@ -2,6 +2,7 @@ package fii.hotel.manager.service;
 
 import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.exception.BookingNotFoundException;
+import fii.hotel.manager.mapper.BookingMapper;
 import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.model.Room;
@@ -20,34 +21,33 @@ public class BookingServiceImpl implements BookingService {
     private BookingRepository bookingRepository;
     private CustomerService customerService;
     private RoomService roomService;
+    private BookingMapper bookingMapper;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService) {
+    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService, BookingMapper bookingMapper) {
         this.bookingRepository = bookingRepository;
         this.customerService = customerService;
         this.roomService = roomService;
+        this.bookingMapper = bookingMapper;
     }
 
     @Override
-    public Booking save(Long customerId, BookingCreationDto bookingCreationDto) {
+    public BookingCreationDto save(Long customerId, BookingCreationDto bookingCreationDto) {
         Customer customer = customerService.getById(customerId);
         Room room = roomService.getById(bookingCreationDto.getRoomId());
-        Booking booking = new Booking();
-        booking.setCustomer(customer);
-        booking.setRoom(room);
-        booking.setRoomCleaning(bookingCreationDto.getRoomCleaning());
-        booking.setFromTime(bookingCreationDto.getFromTime());
-        booking.setToTime(bookingCreationDto.getToTime());
+        Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
         Booking savedBooking = bookingRepository.save(booking);
         logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
-        return savedBooking;
+        return bookingMapper.map(savedBooking);
+        //TODO check bookings doesn't overlap
+
     }
 
     @Override
     public Booking getById(Long id) {
-        Optional<Booking> bookingOptional=bookingRepository.findById(id);
-        if(bookingOptional.isPresent()){
-            Booking booking=bookingOptional.get();
+        Optional<Booking> bookingOptional = bookingRepository.findById(id);
+        if (bookingOptional.isPresent()) {
+            Booking booking = bookingOptional.get();
             logger.debug("Booking with id " + booking.getId() + " has benn retrieved from database.");
             return booking;
         } else {

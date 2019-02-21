@@ -55,9 +55,7 @@ public class CustomerController {
             @ApiResponse(code = 200, message = "Booking successfully added")
     })
     @PostMapping(value = "/{customerId}/bookings")
-    public String addBookingForCustomer(@PathVariable Long customerId, @RequestBody BookingCreationDto bookingCreationDto) {
-        Booking booking = bookingService.save(customerId, bookingCreationDto);
-        //TODO change return type in a bookingDto and check bookings doesn't overlap
-        return "Success";
+    public BookingCreationDto addBookingForCustomer(@PathVariable Long customerId, @RequestBody BookingCreationDto bookingCreationDto) {
+        return bookingService.save(customerId, bookingCreationDto);
     }
 }
