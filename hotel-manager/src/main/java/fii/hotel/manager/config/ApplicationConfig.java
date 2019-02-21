@@ -26,7 +26,8 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
                 .apis(Predicates.or(
                         RequestHandlerSelectors.basePackage("fii.hotel.manager.controller")))
                 .paths(Predicates.or(
-                        regex("/aliments.*")))
+                        regex("/aliments.*"),
+                        regex("/rooms.*")))
                 .build()
                 .apiInfo(metaData());
     }
