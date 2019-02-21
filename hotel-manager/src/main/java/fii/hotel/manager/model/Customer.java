@@ -22,7 +22,7 @@ public class Customer {
     private String surname;
 
     @OneToMany(mappedBy = "customer")
-    private Set<Booking> bookings = new HashSet<>();
+    private Set<Booking> bookings;
 
     public Customer() {
     }
