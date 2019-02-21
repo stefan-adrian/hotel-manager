@@ -8,10 +8,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/aliments")
@@ -34,4 +35,14 @@ public class AlimentController {
         aliment = alimentService.save(aliment);
         return alimentMapper.map(aliment);
     }
+
+    @ApiOperation(value = "Get list of all aliments")
+    @ApiResponse(code = 200, message = "List of all aliments")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<AlimentDto> getAll(){
+        List<Aliment> aliments=alimentService.getAll();
+        return aliments.stream().map(alimentMapper::map).collect(Collectors.toList());
+    }
+
+
 }

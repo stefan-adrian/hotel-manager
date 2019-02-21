@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AlimentServiceImpl implements AlimentService {
     private AlimentRepository alimentRepository;
@@ -20,7 +22,14 @@ public class AlimentServiceImpl implements AlimentService {
     @Override
     public Aliment save(Aliment aliment) {
         Aliment alimentSaved = alimentRepository.save(aliment);
-        logger.info("New aliment "+alimentSaved.getName()+" with id "+alimentSaved.getId()+" was saved in the database.");
+        logger.debug("New aliment "+alimentSaved.getName()+" with id "+alimentSaved.getId()+" was saved in the database.");
         return alimentSaved;
+    }
+
+    @Override
+    public List<Aliment> getAll() {
+        List<Aliment> aliments=alimentRepository.findAll();
+        logger.debug("Retrieved all aliments from database.");
+        return aliments;
     }
 }
