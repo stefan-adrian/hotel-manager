@@ -13,6 +13,10 @@ public class SpaTypeDto implements Serializable {
 
     private Double price;
 
+    private Integer floor;
+
+    private String roomName;
+
     public SpaTypeDto() {
     }
 
@@ -38,5 +42,21 @@ public class SpaTypeDto implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Integer floor) {
+        this.floor = floor;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }

@@ -13,8 +13,6 @@ public class SpaEvent {
 
     private LocalDateTime endTime;
 
-    private String location;
-
     @OneToOne
     @JoinColumn(name = "spa_type_id")
     private SpaType spaType;
@@ -44,14 +42,6 @@ public class SpaEvent {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public SpaType getSpaType() {

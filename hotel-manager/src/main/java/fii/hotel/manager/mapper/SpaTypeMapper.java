@@ -12,6 +12,8 @@ public class SpaTypeMapper {
         spaType.setId(spaTypeDto.getId());
         spaType.setName(spaTypeDto.getName());
         spaType.setPrice(spaTypeDto.getPrice());
+        spaType.setFloor(spaTypeDto.getFloor());
+        spaType.setRoomName(spaTypeDto.getRoomName());
         return spaType;
     }
 
@@ -20,6 +22,8 @@ public class SpaTypeMapper {
         spaTypeDto.setId(spaType.getId());
         spaTypeDto.setName(spaType.getName());
         spaTypeDto.setPrice(spaType.getPrice());
+        spaTypeDto.setFloor(spaType.getFloor());
+        spaTypeDto.setRoomName(spaType.getRoomName());
         return spaTypeDto;
     }
 }
