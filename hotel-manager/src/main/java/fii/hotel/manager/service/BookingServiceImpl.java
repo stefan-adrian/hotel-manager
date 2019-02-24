@@ -25,10 +25,14 @@ public class BookingServiceImpl implements BookingService {
     private BookingMapper bookingMapper;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService, BookingMapper bookingMapper) {
+    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService) {
         this.bookingRepository = bookingRepository;
         this.customerService = customerService;
         this.roomService = roomService;
+    }
+
+    @Autowired
+    public void setBookingMapper(BookingMapper bookingMapper) {
         this.bookingMapper = bookingMapper;
     }
 

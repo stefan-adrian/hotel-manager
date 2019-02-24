@@ -1,13 +1,9 @@
-package fii.hotel.manager.model;
+package fii.hotel.manager.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-@Entity
-public class SpaType {
-    @Id
-    @GeneratedValue
+public class SpaTypeDto implements Serializable {
+
     private Long id;
 
     private String name;
@@ -18,7 +14,7 @@ public class SpaType {
 
     private String roomName;
 
-    public SpaType() {
+    public SpaTypeDto() {
     }
 
     public Long getId() {

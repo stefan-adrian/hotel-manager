@@ -13,11 +13,12 @@ public class SpaEvent {
 
     private LocalDateTime endTime;
 
-    private String location;
-
     @OneToOne
     @JoinColumn(name = "spa_type_id")
     private SpaType spaType;
+
+    @ManyToOne
+    private Booking booking;
 
     public SpaEvent() {
     }
@@ -46,19 +47,19 @@ public class SpaEvent {
         this.endTime = endTime;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public SpaType getSpaType() {
         return spaType;
     }
 
     public void setSpaType(SpaType spaType) {
         this.spaType = spaType;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

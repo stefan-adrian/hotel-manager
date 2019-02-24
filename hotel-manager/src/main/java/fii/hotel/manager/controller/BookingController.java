@@ -2,8 +2,10 @@ package fii.hotel.manager.controller;
 
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.dto.CarOrderDto;
+import fii.hotel.manager.dto.SpaEventDto;
 import fii.hotel.manager.service.BookingService;
 import fii.hotel.manager.service.CarOrderService;
+import fii.hotel.manager.service.SpaEventService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -17,11 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
     private CarOrderService carOrderService;
     private BookingService bookingService;
+    private SpaEventService spaEventService;
 
-    @Autowired
-    public BookingController(CarOrderService carOrderService, BookingService bookingService) {
+    public BookingController(CarOrderService carOrderService, BookingService bookingService, SpaEventService spaEventService) {
         this.carOrderService = carOrderService;
         this.bookingService = bookingService;
+        this.spaEventService = spaEventService;
     }
 
     @ApiOperation(value = "Get booking with specified id")
@@ -41,6 +44,16 @@ public class BookingController {
     })
     @PostMapping(value = "/{bookingId}/car-orders")
     public CarOrderDto addCarOrderForBooking(@PathVariable Long bookingId, @RequestBody CarOrderDto carOrderDto) {
-        return carOrderService.save(bookingId, carOrderDto);
+        return carOrderService.add(bookingId, carOrderDto);
+    }
+
+    @ApiOperation(value = "Add a new spa event for a booking")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Booking not found"),
+            @ApiResponse(code = 200, message = "Spa event successfully added")
+    })
+    @PostMapping(value = "/{bookingId}/spa-events")
+    public SpaEventDto addSpaEventForBooking(@PathVariable Long bookingId, @RequestBody SpaEventDto spaEventDto) {
+        return spaEventService.add(bookingId, spaEventDto);
     }
 }

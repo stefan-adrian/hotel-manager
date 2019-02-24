@@ -20,6 +20,8 @@ public class BookingDto implements Serializable {
 
     private List<CarOrderDto> carOrderDtos;
 
+    private List<SpaEventDto> spaEventDtos;
+
     public BookingDto() {
     }
 
@@ -77,5 +79,13 @@ public class BookingDto implements Serializable {
 
     public void setCarOrderDtos(List<CarOrderDto> carOrderDtos) {
         this.carOrderDtos = carOrderDtos;
+    }
+
+    public List<SpaEventDto> getSpaEventDtos() {
+        return spaEventDtos;
+    }
+
+    public void setSpaEventDtos(List<SpaEventDto> spaEventDtos) {
+        this.spaEventDtos = spaEventDtos;
     }
 }

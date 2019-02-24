@@ -24,11 +24,18 @@ public class CarOrderServiceImpl implements CarOrderService {
         this.carOrderMapper = carOrderMapper;
     }
 
+    private CarOrder save(CarOrder carOrder) {
+        CarOrder carOrderSaved = carOrderRepository.save(carOrder);
+        logger.debug("Car order " + carOrderSaved.getId() + " with booking id " + carOrderSaved.getBooking().getId() + " was saved in the database.");
+        return carOrderSaved;
+
+    }
+
     @Override
-    public CarOrderDto save(Long bookingId, CarOrderDto carOrderDto) {
+    public CarOrderDto add(Long bookingId, CarOrderDto carOrderDto) {
         Booking booking = bookingService.getById(bookingId);
-        CarOrder carOrder=carOrderMapper.map(booking,carOrderDto);
-        CarOrder carOrderSaved=carOrderRepository.save(carOrder);
+        CarOrder carOrder = carOrderMapper.map(booking, carOrderDto);
+        CarOrder carOrderSaved = save(carOrder);
         return carOrderMapper.map(carOrderSaved);
     }
 }

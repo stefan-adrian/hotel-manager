@@ -28,6 +28,7 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
                 .paths(Predicates.or(
                         regex("/aliments.*"),
                         regex("/bookings.*"),
+                        regex("/spa-types.*"),
                         regex("/customers.*"),
                         regex("/rooms.*")))
                 .build()
