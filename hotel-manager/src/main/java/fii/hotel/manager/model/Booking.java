@@ -28,7 +28,7 @@ public class Booking {
     @OneToMany(mappedBy = "booking")
     private Set<CarOrder> carOrders;
 
-    @OneToMany
+    @OneToMany(mappedBy = "booking")
     private Set<SpaEvent> spaEvents;
 
     public Booking() {

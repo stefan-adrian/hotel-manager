@@ -1,12 +1,9 @@
 package fii.hotel.manager.dto;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
 public class SpaTypeDto implements Serializable {
 
-    @ApiModelProperty(value = "Id", readOnly = true)
     private Long id;
 
     private String name;

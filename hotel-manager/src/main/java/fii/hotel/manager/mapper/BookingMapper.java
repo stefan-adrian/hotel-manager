@@ -3,6 +3,7 @@ package fii.hotel.manager.mapper;
 import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.dto.CarOrderDto;
+import fii.hotel.manager.dto.SpaEventDto;
 import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.model.Room;
@@ -18,12 +19,18 @@ public class BookingMapper {
     private CustomerMapper customerMapper;
     private RoomMapper roomMapper;
     private CarOrderMapper carOrderMapper;
+    private SpaEventMapper spaEventMapper;
 
     @Autowired
     public BookingMapper(CustomerMapper customerMapper, RoomMapper roomMapper, CarOrderMapper carOrderMapper) {
         this.customerMapper = customerMapper;
         this.roomMapper = roomMapper;
         this.carOrderMapper = carOrderMapper;
+    }
+
+    @Autowired
+    public void setSpaEventMapper(SpaEventMapper spaEventMapper) {
+        this.spaEventMapper = spaEventMapper;
     }
 
     public Booking map(Customer customer, Room room, BookingCreationDto bookingCreationDto) {
@@ -57,6 +64,8 @@ public class BookingMapper {
         bookingDto.setRoomDto(roomMapper.map(booking.getRoom()));
         List<CarOrderDto> carOrderDtos = booking.getCarOrders().stream().map(carOrderMapper::map).collect(Collectors.toList());
         bookingDto.setCarOrderDtos(carOrderDtos);
+        List<SpaEventDto> spaEventDtos = booking.getSpaEvents().stream().map(spaEventMapper::map).collect(Collectors.toList());
+        bookingDto.setSpaEventDtos(spaEventDtos);
         return bookingDto;
     }
 }

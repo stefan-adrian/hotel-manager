@@ -17,6 +17,9 @@ public class SpaEvent {
     @JoinColumn(name = "spa_type_id")
     private SpaType spaType;
 
+    @ManyToOne
+    private Booking booking;
+
     public SpaEvent() {
     }
 
@@ -50,5 +53,13 @@ public class SpaEvent {
 
     public void setSpaType(SpaType spaType) {
         this.spaType = spaType;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }
