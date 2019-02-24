@@ -2,6 +2,7 @@ package fii.hotel.manager.service;
 
 import fii.hotel.manager.model.Room;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RoomService {
@@ -11,4 +12,8 @@ public interface RoomService {
     List<Room> getAll();
 
     Room getById(Long id);
+
+    Room getByIdFetchBookings(Long id);
+
+    void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDateTime startTime, LocalDateTime endTime);
 }

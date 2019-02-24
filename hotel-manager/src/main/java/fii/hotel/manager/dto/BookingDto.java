@@ -22,6 +22,8 @@ public class BookingDto implements Serializable {
 
     private List<SpaEventDto> spaEventDtos;
 
+    private List<RoomserviceDto> roomserviceDtos;
+
     public BookingDto() {
     }
 
@@ -87,5 +89,13 @@ public class BookingDto implements Serializable {
 
     public void setSpaEventDtos(List<SpaEventDto> spaEventDtos) {
         this.spaEventDtos = spaEventDtos;
+    }
+
+    public List<RoomserviceDto> getRoomserviceDtos() {
+        return roomserviceDtos;
+    }
+
+    public void setRoomserviceDtos(List<RoomserviceDto> roomserviceDtos) {
+        this.roomserviceDtos = roomserviceDtos;
     }
 }

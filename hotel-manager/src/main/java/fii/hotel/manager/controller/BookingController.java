@@ -2,9 +2,12 @@ package fii.hotel.manager.controller;
 
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.dto.CarOrderDto;
+import fii.hotel.manager.dto.RoomserviceDto;
 import fii.hotel.manager.dto.SpaEventDto;
+import fii.hotel.manager.model.Roomservice;
 import fii.hotel.manager.service.BookingService;
 import fii.hotel.manager.service.CarOrderService;
+import fii.hotel.manager.service.RoomserviceService;
 import fii.hotel.manager.service.SpaEventService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,11 +23,15 @@ public class BookingController {
     private CarOrderService carOrderService;
     private BookingService bookingService;
     private SpaEventService spaEventService;
+    private RoomserviceService roomserviceService;
 
-    public BookingController(CarOrderService carOrderService, BookingService bookingService, SpaEventService spaEventService) {
+    @Autowired
+    public BookingController(CarOrderService carOrderService, BookingService bookingService,
+                             SpaEventService spaEventService, RoomserviceService roomserviceService) {
         this.carOrderService = carOrderService;
         this.bookingService = bookingService;
         this.spaEventService = spaEventService;
+        this.roomserviceService = roomserviceService;
     }
 
     @ApiOperation(value = "Get booking with specified id")
@@ -55,5 +62,15 @@ public class BookingController {
     @PostMapping(value = "/{bookingId}/spa-events")
     public SpaEventDto addSpaEventForBooking(@PathVariable Long bookingId, @RequestBody SpaEventDto spaEventDto) {
         return spaEventService.add(bookingId, spaEventDto);
+    }
+
+    @ApiOperation(value = "Add a new roomservice for a booking")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Booking not found"),
+            @ApiResponse(code = 200, message = "Roomservice successfully added")
+    })
+    @PostMapping(value = "/{bookingId}/roomservices")
+    public RoomserviceDto addRoomserviceForBooking(@PathVariable Long bookingId, @RequestBody RoomserviceDto roomserviceDto) {
+        return roomserviceService.add(bookingId, roomserviceDto);
     }
 }

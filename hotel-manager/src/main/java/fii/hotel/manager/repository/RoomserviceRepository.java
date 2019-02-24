@@ -1,9 +1,9 @@
 package fii.hotel.manager.repository;
 
-import fii.hotel.manager.model.RoomService;
+import fii.hotel.manager.model.Roomservice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoomServiceRepository extends JpaRepository<RoomService, Long> {
+public interface RoomserviceRepository extends JpaRepository<Roomservice, Long> {
 }

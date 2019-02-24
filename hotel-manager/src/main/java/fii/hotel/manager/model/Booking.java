@@ -22,8 +22,8 @@ public class Booking {
 
     private Boolean roomCleaning;
 
-    @OneToMany
-    private Set<RoomService> roomServices;
+    @OneToMany(mappedBy = "booking")
+    private Set<Roomservice> roomservices;
 
     @OneToMany(mappedBy = "booking")
     private Set<CarOrder> carOrders;
@@ -82,12 +82,12 @@ public class Booking {
         this.roomCleaning = roomCleaning;
     }
 
-    public Set<RoomService> getRoomServices() {
-        return roomServices;
+    public Set<Roomservice> getRoomservices() {
+        return roomservices;
     }
 
-    public void setRoomServices(Set<RoomService> roomServices) {
-        this.roomServices = roomServices;
+    public void setRoomservices(Set<Roomservice> roomservices) {
+        this.roomservices = roomservices;
     }
 
     public Set<CarOrder> getCarOrders() {
