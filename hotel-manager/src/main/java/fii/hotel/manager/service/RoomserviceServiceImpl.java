@@ -42,6 +42,6 @@ public class RoomserviceServiceImpl implements RoomserviceService {
     }
 
     private Double calculateTotalAlimentsPrice(List<Aliment> aliments) {
-        return 0.0;
+        return aliments.stream().mapToDouble(aliment -> aliment.getPrice()).sum();
     }
 }
