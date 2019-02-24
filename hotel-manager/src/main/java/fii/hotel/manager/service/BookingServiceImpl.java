@@ -39,13 +39,12 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BookingCreationDto save(Long customerId, BookingCreationDto bookingCreationDto) {
         Customer customer = customerService.getById(customerId);
-        Room room = roomService.getById(bookingCreationDto.getRoomId());
+        Room room = roomService.getByIdFetchBookings(bookingCreationDto.getRoomId());
+        roomService.checkThatRoomBookingTimeDoesNotOverlap(room, bookingCreationDto.getFromTime(), bookingCreationDto.getToTime());
         Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
         Booking savedBooking = bookingRepository.save(booking);
         logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
         return bookingMapper.mapToCreationDto(savedBooking);
-        //TODO check bookings doesn't overlap
-
     }
 
     @Override
