@@ -1,23 +1,21 @@
-package fii.hotel.manager.model;
+package fii.hotel.manager.dto;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
-public class RoomService {
-    @Id
-    @GeneratedValue
+public class RoomserviceDto implements Serializable {
     private Long id;
 
     private LocalDateTime timeOfOrder;
 
-    @OneToMany
-    private List<Aliment> aliments;
+    private List<AlimentDto> alimentDtos;
 
     private Double totalCommandPrice;
 
-    public RoomService() {
+    private Long bookingId;
+
+    public RoomserviceDto() {
     }
 
     public Long getId() {
@@ -36,12 +34,12 @@ public class RoomService {
         this.timeOfOrder = timeOfOrder;
     }
 
-    public List<Aliment> getAliments() {
-        return aliments;
+    public List<AlimentDto> getAlimentDtos() {
+        return alimentDtos;
     }
 
-    public void setAliments(List<Aliment> aliments) {
-        this.aliments = aliments;
+    public void setAlimentDtos(List<AlimentDto> alimentDtos) {
+        this.alimentDtos = alimentDtos;
     }
 
     public Double getTotalCommandPrice() {
@@ -50,5 +48,13 @@ public class RoomService {
 
     public void setTotalCommandPrice(Double totalCommandPrice) {
         this.totalCommandPrice = totalCommandPrice;
+    }
+
+    public Long getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Long bookingId) {
+        this.bookingId = bookingId;
     }
 }

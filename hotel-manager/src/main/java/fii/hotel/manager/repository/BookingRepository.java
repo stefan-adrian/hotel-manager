@@ -13,6 +13,6 @@ import java.util.Set;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query("SELECT b FROM Booking b LEFT JOIN FETCH b.carOrders co LEFT JOIN FETCH b.spaEvents se " +
-            " WHERE :id = b.id")
+            " LEFT JOIN FETCH b.roomservices rs LEFT JOIN FETCH rs.aliments WHERE :id = b.id")
     Optional<Booking> findByIdFetchCarOrders(@Param("id") Long id);
 }
