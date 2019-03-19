@@ -20,7 +20,8 @@
     <input type="number" formControlName="price">
   </label>
 
-  <mat-checkbox>TV</mat-checkbox>
   <button type="submit" [disabled]="!roomCreationForm.valid">Save</button>
 
 </form>
+
+<mat-checkbox [(ngModel)]="tv">TV</mat-checkbox>

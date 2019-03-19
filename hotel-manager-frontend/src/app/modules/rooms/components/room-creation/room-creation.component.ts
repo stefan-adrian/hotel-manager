@@ -11,6 +11,7 @@ import {RoomService} from "../../../../core/services/room.service";
 export class RoomCreationComponent implements OnInit {
 
   roomCreationForm: FormGroup;
+  tv: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,6 +21,7 @@ export class RoomCreationComponent implements OnInit {
 
   ngOnInit() {
     this.roomCreationForm = this.createFormGroup();
+    this.tv = false;
   }
 
   createFormGroup(): FormGroup {
@@ -27,16 +29,17 @@ export class RoomCreationComponent implements OnInit {
       name: [null, Validators.required],
       floor: [null, Validators.required],
       beds: [null, Validators.required],
-      tv: [true],
       price: [null, Validators.required]
     });
 
   }
 
   save() {
+    console.log(this.tv);
     const roomToCreate: Room = Object.assign({},
       this.roomCreationForm.value);
+    roomToCreate.tv = this.tv;
     this.roomService.add(roomToCreate).subscribe();
-    this.roomCreationForm=this.createFormGroup();
+    this.roomCreationForm = this.createFormGroup();
   }
 }
