@@ -10,12 +10,12 @@ const routes: Routes = [
     component: RoomListComponent
   },
   {
-    path: ':id',
-    component: RoomDetailComponent
-  },
-  {
     path: 'add',
     component: RoomCreationComponent
+  },
+  {
+    path: ':id',
+    component: RoomDetailComponent
   }
 ];
 
