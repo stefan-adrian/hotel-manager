@@ -18,10 +18,10 @@ export class RoomDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getHero();
+    this.getRoom();
   }
 
-  getHero(): void{
+  getRoom(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.roomService.getById(id)
       .subscribe(room=>this.room=room);
