@@ -1,27 +1,24 @@
-<form [formGroup]="roomCreationForm" (ngSubmit)="save()">
+<div class="example-container">
+  <form class="example-container" [formGroup]="roomCreationForm" (ngSubmit)="save()">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Enter room name" formControlName="name">
+    </mat-form-field>
 
-  <label>
-    Name:
-    <input type="text" formControlName="name">
-  </label>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Enter room floor" formControlName="floor">
+    </mat-form-field>
 
-  <label>
-    Floor:
-    <input type="number" formControlName="floor">
-  </label>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Enter room beds" formControlName="beds">
+    </mat-form-field>
 
-  <label>
-    Beds:
-    <input type="number" formControlName="beds">
-  </label>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Enter room price" formControlName="price">
+    </mat-form-field>
 
-  <label>
-    Price:
-    <input type="number" formControlName="price">
-  </label>
+    <mat-checkbox formControlName="tv">TV</mat-checkbox>
 
-  <button type="submit" [disabled]="!roomCreationForm.valid">Save</button>
+    <button type="submit" [disabled]="!roomCreationForm.valid">Save</button>
+  </form>
 
-</form>
-
-<mat-checkbox [(ngModel)]="tv">TV</mat-checkbox>
+</div>
