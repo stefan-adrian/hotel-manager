@@ -1,5 +1,6 @@
 package fii.hotel.manager.controller;
 
+import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.dto.CarOrderDto;
 import fii.hotel.manager.dto.RoomserviceDto;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/bookings")
+@CrossOrigin(origins = Utils.REQUEST_SOURCE)
 @Api(description = "Bookings requests")
 public class BookingController {
     private CarOrderService carOrderService;

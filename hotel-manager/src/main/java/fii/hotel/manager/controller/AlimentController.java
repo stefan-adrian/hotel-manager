@@ -1,5 +1,6 @@
 package fii.hotel.manager.controller;
 
+import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.AlimentDto;
 import fii.hotel.manager.mapper.AlimentMapper;
 import fii.hotel.manager.model.Aliment;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/aliments")
+@CrossOrigin(origins = Utils.REQUEST_SOURCE)
 @Api(description = "Aliments requests")
 public class AlimentController {
     private AlimentService alimentService;

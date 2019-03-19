@@ -1,5 +1,6 @@
 package fii.hotel.manager.controller;
 
+import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.dto.CustomerDto;
 import fii.hotel.manager.mapper.CustomerMapper;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customers")
+@CrossOrigin(origins = Utils.REQUEST_SOURCE)
 @Api(description = "Customers requests")
 public class CustomerController {
     private CustomerService customerService;

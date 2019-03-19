@@ -1,5 +1,6 @@
 package fii.hotel.manager.controller;
 
+import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.RoomDto;
 import fii.hotel.manager.mapper.RoomMapper;
 import fii.hotel.manager.model.Room;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rooms")
+@CrossOrigin(origins = Utils.REQUEST_SOURCE)
 @Api(description = "Rooms requests")
 public class RoomController {
     private RoomService roomService;

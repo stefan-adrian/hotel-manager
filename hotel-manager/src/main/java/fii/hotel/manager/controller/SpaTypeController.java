@@ -1,5 +1,6 @@
 package fii.hotel.manager.controller;
 
+import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.SpaTypeDto;
 import fii.hotel.manager.service.SpaTypeService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/spa-types")
+@CrossOrigin(origins = Utils.REQUEST_SOURCE)
 @Api(description = "Spa types requests")
 public class SpaTypeController {
     private SpaTypeService spaTypeService;
