@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,5 +57,16 @@ public class RoomController {
     public RoomDto getById(@PathVariable Long id) {
         Room room = roomService.getById(id);
         return roomMapper.map(room);
+    }
+
+    @ApiOperation(value = "Add image to a existing room")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Room not found"),
+            @ApiResponse(code = 204, message = "Image succesfully added")
+    })
+    @PatchMapping("/{id}/image")
+    public void uploadRoomImage(@RequestPart("image") MultipartFile image, @PathVariable Long id) {
+        Room room = roomService.getById(id);
+        roomService.save(room, image);
     }
 }

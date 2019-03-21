@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,17 @@ public class RoomServiceImpl implements RoomService {
         Room roomSaved = roomRepository.save(room);
         logger.debug("New room " + roomSaved.getName() + " with id " + roomSaved.getId() + " was saved in the database.");
         return roomSaved;
+    }
+
+    @Override
+    public Room save(Room room, MultipartFile image) {
+        try {
+            room.setImage(image.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        room = roomRepository.save(room);
+        return room;
     }
 
     @Override
