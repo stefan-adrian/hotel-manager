@@ -1,18 +1,31 @@
 .example-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .example-container > * {
-  width: 100%;
+  width: 70%;
 }
 
 .example-container form {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
+  /*margin-top: 20px;*/
+  /*margin: 20px auto;*/
+  /*display: block;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  /*text-align: center;*/
+  /*display: inline-block;*/
+/*
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);*/
 }
 
 .example-container form > * {
-  margin: 5px 0;
+  /*margin: 5px 0;*/
 }
 
 .example-container .mat-radio-button {
@@ -20,5 +33,5 @@
 }
 
 mat-form-field.mat-form-field {
-  font-size: 16px;
+  font-size: 20px;
 }

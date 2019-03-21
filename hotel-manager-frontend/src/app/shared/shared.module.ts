@@ -4,7 +4,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from "@angular/material";
+import {MatButtonModule, MatInputModule} from "@angular/material";
 
 @NgModule({
   declarations: [],
@@ -15,7 +15,8 @@ import {MatInputModule} from "@angular/material";
     MatCheckboxModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   exports: [
     HttpClientModule,
@@ -23,7 +24,8 @@ import {MatInputModule} from "@angular/material";
     MatCheckboxModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class SharedModule {
