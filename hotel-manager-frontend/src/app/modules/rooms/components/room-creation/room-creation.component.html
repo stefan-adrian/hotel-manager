@@ -16,7 +16,8 @@
       <input matInput type="number" placeholder="Price" formControlName="price">
     </mat-form-field>
     <mat-checkbox formControlName="tv">TV</mat-checkbox>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!roomCreationForm.valid">Save</button>
+    <!--<button mat-raised-button color="primary" type="submit" [disabled]="!roomCreationForm.valid">Save</button>-->
+    <button pButton type="button" label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid"></button>
 
   </form>
 
