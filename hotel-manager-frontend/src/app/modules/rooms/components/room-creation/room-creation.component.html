@@ -1,4 +1,5 @@
 <div class="example-container">
+  <br>
   <form class="example-container" [formGroup]="roomCreationForm" (ngSubmit)="save()">
     <mat-form-field>
       <input matInput type="text" placeholder="Name" formControlName="name">
@@ -15,9 +16,9 @@
     <mat-form-field>
       <input matInput type="number" placeholder="Price" formControlName="price">
     </mat-form-field>
-    <mat-checkbox formControlName="tv">TV</mat-checkbox>
-    <!--<button mat-raised-button color="primary" type="submit" [disabled]="!roomCreationForm.valid">Save</button>-->
-    <button pButton type="button" label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid"></button>
+    <p-checkbox binary="true" label="TV" formControlName="tv"></p-checkbox>
+    <br>
+    <button pButton label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid"></button>
 
   </form>
 

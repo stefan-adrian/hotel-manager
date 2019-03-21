@@ -4,8 +4,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule, MatInputModule} from "@angular/material";
+import {MatInputModule} from "@angular/material";
 import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -17,8 +18,8 @@ import {ButtonModule} from 'primeng/button';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    ButtonModule
+    ButtonModule,
+    CheckboxModule
   ],
   exports: [
     HttpClientModule,
@@ -27,8 +28,8 @@ import {ButtonModule} from 'primeng/button';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    ButtonModule
+    ButtonModule,
+    CheckboxModule
   ]
 })
 export class SharedModule {
