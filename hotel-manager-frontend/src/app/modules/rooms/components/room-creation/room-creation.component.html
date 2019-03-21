@@ -1,0 +1,25 @@
+<div class="form-container">
+  <br>
+  <form class="form-container" [formGroup]="roomCreationForm" (ngSubmit)="save()">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" placeholder="Floor" formControlName="floor">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" placeholder="Beds" formControlName="beds">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" placeholder="Price" formControlName="price">
+    </mat-form-field>
+    <p-checkbox binary="true" label="TV" formControlName="tv"></p-checkbox>
+    <br>
+    <button pButton label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid"></button>
+
+  </form>
+
+</div>
