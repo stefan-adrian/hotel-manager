@@ -9,6 +9,8 @@ import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {FileUploadModule} from 'primeng/fileupload';
 import {MatCardModule} from '@angular/material/card';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [],
@@ -23,7 +25,9 @@ import {MatCardModule} from '@angular/material/card';
     ButtonModule,
     CheckboxModule,
     FileUploadModule,
-    MatCardModule
+    MatCardModule,
+    MessageModule,
+    MessagesModule
   ],
   exports: [
     HttpClientModule,
@@ -35,7 +39,9 @@ import {MatCardModule} from '@angular/material/card';
     ButtonModule,
     CheckboxModule,
     FileUploadModule,
-    MatCardModule
+    MatCardModule,
+    MessageModule,
+    MessagesModule
   ]
 })
 export class SharedModule {

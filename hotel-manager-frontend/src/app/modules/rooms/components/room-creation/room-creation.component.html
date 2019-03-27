@@ -29,7 +29,8 @@
         </ul>
       </ng-template>
     </p-fileUpload>
-    <button pButton label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid||uploadFile==null"></button>
+    <button pButton label="Save"  class="ui-button-info" (click)="showSuccess()" type="submit" [disabled]="!roomCreationForm.valid||uploadFile==null"></button>
+    <p-messages [(value)]="message"></p-messages>
   </form>
   </mat-card>
 
