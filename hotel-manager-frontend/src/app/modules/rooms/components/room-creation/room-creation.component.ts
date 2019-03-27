@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Room} from "../../../../core/models/room.model";
 import {RoomService} from "../../../../core/services/room.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {__await} from "tslib";
 
 @Component({
   selector: 'app-room-creation',
@@ -40,12 +41,16 @@ export class RoomCreationComponent implements OnInit {
   save() {
     const roomToCreate: Room = Object.assign({},
       this.roomCreationForm.value);
-    this.roomService.add(roomToCreate).subscribe();
     let formData = new FormData();
     formData.append('image',this.uploadFile,this.uploadFile.name);
-    // formData.append('roomDto',JSON.stringify(roomToCreate),'roomDto');
-    this.httpClient
-      .post("http://localhost:8082/rooms/111/image", formData, this.options).subscribe();
+    this.roomService.add(roomToCreate).subscribe(result=>
+    {
+      let room=JSON.parse(JSON.stringify(result));
+      this.httpClient
+        .post("http://localhost:8082/rooms/"+room.id+"/image", formData, this.options).subscribe();
+    });
+
+
     this.roomCreationForm = this.createFormGroup();
   }
 
