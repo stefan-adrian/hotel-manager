@@ -12,6 +12,7 @@ export class RoomCreationComponent implements OnInit {
 
   roomCreationForm: FormGroup;
   uploadFile: any;
+  imageForm: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,11 +46,13 @@ export class RoomCreationComponent implements OnInit {
 
 
     this.roomCreationForm = this.createFormGroup();
+    this.imageForm.clear();
   }
 
-  onUpload(event) {
+  onUpload(event,form) {
     for (let file of event.files) {
       this.uploadFile = file;
     }
+    this.imageForm=form;
   }
 }

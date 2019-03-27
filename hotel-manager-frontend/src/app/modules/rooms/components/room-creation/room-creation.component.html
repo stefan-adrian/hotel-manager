@@ -21,7 +21,7 @@
     <br>
 
     <h5>Add image</h5>
-    <p-fileUpload mode="advanced" name="image" customUpload="true" accept="image/*" (uploadHandler)="onUpload($event)"
+    <p-fileUpload #imageForm mode="advanced" name="image" customUpload="true" accept="image/*" (uploadHandler)="onUpload($event,imageForm)"
                    maxFileSize="1000000" auto="true">
       <ng-template >
         <ul *ngIf="uploadFile!=null">
