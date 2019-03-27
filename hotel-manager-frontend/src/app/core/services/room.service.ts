@@ -24,4 +24,10 @@ export class RoomService {
   add(room: Room): Observable<Room> {
     return this.apiService.post('/rooms', room);
   }
+
+  addImage(room: Room,uploadFile: any): void{
+    let formData = new FormData();
+    formData.append('image',uploadFile,uploadFile.name);
+    this.apiService.patch(`/rooms/${room.id}/image`,formData).subscribe();
+  }
 }

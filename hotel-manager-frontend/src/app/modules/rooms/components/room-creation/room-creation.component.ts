@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Room} from "../../../../core/models/room.model";
 import {RoomService} from "../../../../core/services/room.service";
 
@@ -11,6 +11,7 @@ import {RoomService} from "../../../../core/services/room.service";
 export class RoomCreationComponent implements OnInit {
 
   roomCreationForm: FormGroup;
+  uploadFile: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +37,19 @@ export class RoomCreationComponent implements OnInit {
   save() {
     const roomToCreate: Room = Object.assign({},
       this.roomCreationForm.value);
-    this.roomService.add(roomToCreate).subscribe();
+    this.roomService.add(roomToCreate).subscribe(result=>
+    {
+      let room=JSON.parse(JSON.stringify(result));
+      this.roomService.addImage(room,this.uploadFile);
+    });
+
+
     this.roomCreationForm = this.createFormGroup();
+  }
+
+  onUpload(event) {
+    for (let file of event.files) {
+      this.uploadFile = file;
+    }
   }
 }

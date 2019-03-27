@@ -1,9 +1,6 @@
 package fii.hotel.manager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -21,6 +18,9 @@ public class Room {
     private Boolean tv;
 
     private Double price;
+
+    @Lob
+    private byte[] image;
 
     @OneToMany(mappedBy = "room")
     private Set<Booking> bookings;
@@ -74,6 +74,14 @@ public class Room {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public Set<Booking> getBookings() {

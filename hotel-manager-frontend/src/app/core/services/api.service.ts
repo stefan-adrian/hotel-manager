@@ -12,6 +12,8 @@ const BASE_URL = environment.api_url;
 export class ApiService {
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
+  private optionsFile = {headers: new HttpHeaders().set("Accept", "application/json")};
+
 
   constructor(private httpClient: HttpClient) {
   }
@@ -38,6 +40,10 @@ export class ApiService {
 
   public delete(path: string): Observable<any> {
     return this.httpClient.delete(BASE_URL + path).pipe(catchError(this.formatErrors));
+  }
+
+  public patch(path: string, form: FormData): Observable<any> {
+    return this.httpClient.patch(BASE_URL + path, form, this.optionsFile);
   }
 
 }
