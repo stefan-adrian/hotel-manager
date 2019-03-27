@@ -18,10 +18,19 @@
     </mat-form-field>
     <p-checkbox binary="true" label="TV" formControlName="tv"></p-checkbox>
     <br>
-    <h3>Basic with Auto</h3>
-    <p-fileUpload #fubauto mode="basic" name="image" customUpload="true" accept="image/*" maxFileSize="1000000" (uploadHandler)="onUpload($event)" auto="true" chooseLabel="Browse"></p-fileUpload>
-    <button pButton label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid"></button>
 
+    <!--<h3>Basic with Auto</h3>-->
+    <!--<p-fileUpload mode="basic" name="image" customUpload="true" accept="image/*" maxFileSize="1000000" (uploadHandler)="onUpload($event)" auto="true" chooseLabel="Browse"></p-fileUpload>-->
+    <h5>Image</h5>
+    <p-fileUpload name="image" customUpload="true" accept="image/*" (uploadHandler)="onUpload($event)"
+                   maxFileSize="1000000" auto="true">
+      <ng-template >
+        <ul *ngIf="uploadFile!=null">
+          <li>{{uploadFile.name}} - {{uploadFile.size}} bytes</li>
+        </ul>
+      </ng-template>
+    </p-fileUpload>
+    <button pButton label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid||uploadFile==null"></button>
   </form>
 
 </div>
