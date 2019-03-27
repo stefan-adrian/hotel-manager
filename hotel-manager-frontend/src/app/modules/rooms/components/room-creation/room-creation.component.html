@@ -18,6 +18,8 @@
     </mat-form-field>
     <p-checkbox binary="true" label="TV" formControlName="tv"></p-checkbox>
     <br>
+    <h3>Basic with Auto</h3>
+    <p-fileUpload #fubauto mode="basic" name="image" customUpload="true" accept="image/*" maxFileSize="1000000" (uploadHandler)="onUpload($event)" auto="true" chooseLabel="Browse"></p-fileUpload>
     <button pButton label="Save" class="ui-button-raised" type="submit" [disabled]="!roomCreationForm.valid"></button>
 
   </form>

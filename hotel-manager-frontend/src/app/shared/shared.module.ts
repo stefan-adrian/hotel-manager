@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from "@angular/material";
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     MatFormFieldModule,
     MatInputModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    FileUploadModule
   ],
   exports: [
     HttpClientModule,
@@ -29,7 +31,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     MatFormFieldModule,
     MatInputModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    FileUploadModule
   ]
 })
 export class SharedModule {
