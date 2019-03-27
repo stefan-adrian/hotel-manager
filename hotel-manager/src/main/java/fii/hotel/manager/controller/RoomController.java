@@ -68,8 +68,7 @@ public class RoomController {
             @ApiResponse(code = 404, message = "Room not found"),
             @ApiResponse(code = 204, message = "Image succesfully added")
     })
-//    @PatchMapping("/{id}/image")
-    @PostMapping("/{id}/image")
+    @PatchMapping("/{id}/image")
     public void uploadRoomImage(@RequestPart("image") MultipartFile image, @PathVariable Long id) {
         Room room = roomService.getById(id);
         roomService.save(room, image);
