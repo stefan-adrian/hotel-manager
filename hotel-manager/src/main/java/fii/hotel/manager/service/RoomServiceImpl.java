@@ -40,7 +40,7 @@ public class RoomServiceImpl implements RoomService {
         try {
             room.setImage(image.getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Image for room with id " + room.getId() + " could not be saved in the database.");
         }
         room = roomRepository.save(room);
         return room;

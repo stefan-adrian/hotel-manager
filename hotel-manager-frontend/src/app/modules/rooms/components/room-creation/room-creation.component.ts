@@ -52,7 +52,6 @@ export class RoomCreationComponent implements OnInit {
       this.roomService.addImage(room,this.uploadFile);
       this.revertFormGroup();
     });
-
   }
 
   onUpload(event,form) {

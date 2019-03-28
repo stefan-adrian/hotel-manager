@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: './modules/rooms/rooms.module#RoomsModule'
   },
   {
+    path: 'aliments',
+    loadChildren: './modules/aliments/aliments.module#AlimentsModule'
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'

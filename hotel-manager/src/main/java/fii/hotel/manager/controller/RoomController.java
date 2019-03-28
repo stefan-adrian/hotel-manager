@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,12 +67,13 @@ public class RoomController {
     @ApiOperation(value = "Add image to a existing room")
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "Room not found"),
-            @ApiResponse(code = 204, message = "Image succesfully added")
+            @ApiResponse(code = 204, message = "Image successfully added")
     })
     @PatchMapping("/{id}/image")
-    public void uploadRoomImage(@RequestPart("image") MultipartFile image, @PathVariable Long id) {
+    public ResponseEntity<Object> uploadRoomImage(@RequestPart("image") MultipartFile image, @PathVariable Long id) {
         Room room = roomService.getById(id);
         roomService.save(room, image);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @ApiOperation(value = "Get room image")
