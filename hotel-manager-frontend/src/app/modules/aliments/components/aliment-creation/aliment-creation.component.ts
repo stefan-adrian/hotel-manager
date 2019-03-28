@@ -42,7 +42,6 @@ export class AlimentCreationComponent implements OnInit {
   save() {
     const alimentToCreate: Aliment = Object.assign({},
       this.alimentCreationForm.value);
-    console.log("AICI");
     this.alimentService.add(alimentToCreate).subscribe(result=>
     {
       let aliment=JSON.parse(JSON.stringify(result));
