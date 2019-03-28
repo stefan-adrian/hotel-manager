@@ -1,5 +1,5 @@
 <div class="form-container">
-  <mat-card class="my-card">
+  <p-panel header="Room creation form">
     <br>
     <form class="form-container" [formGroup]="alimentCreationForm" (ngSubmit)="save()">
       <mat-form-field>
@@ -12,17 +12,18 @@
       <br>
 
       <h5>Add image</h5>
-      <p-fileUpload #imageForm mode="advanced" name="image" customUpload="true" accept="image/*" (uploadHandler)="onUpload($event,imageForm)"
+      <p-fileUpload #imageForm mode="advanced" name="image" customUpload="true" accept="image/*"
+                    (uploadHandler)="onUpload($event,imageForm)"
                     maxFileSize="1000000" auto="true">
-        <ng-template >
+        <ng-template>
           <ul *ngIf="uploadFile!=null">
             <li>{{uploadFile.name}} - {{uploadFile.size}} bytes</li>
           </ul>
         </ng-template>
       </p-fileUpload>
-      <button pButton label="Save"  class="ui-button-info" (click)="showSuccess()" type="submit" [disabled]="!alimentCreationForm.valid||uploadFile==null"></button>
+      <button pButton label="Save" class="ui-button-info" (click)="showSuccess()" type="submit"
+              [disabled]="!alimentCreationForm.valid||uploadFile==null"></button>
       <p-messages [(value)]="message"></p-messages>
     </form>
-  </mat-card>
-
+  </p-panel>
 </div>
