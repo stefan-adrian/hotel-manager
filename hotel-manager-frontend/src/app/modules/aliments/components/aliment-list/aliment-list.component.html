@@ -1,9 +1,51 @@
-<h2>List of aliments</h2>
-<ul>
-  <li *ngFor="let aliment of aliments">
-    <a>
-      <span class="badge">{{aliment.id}}</span> {{aliment.name}}
-    </a>
-  </li>
-</ul>
+<p-dataView #dv [value]="aliments" [paginator]="true" [rows]="10" paginatorPosition="both">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <div class="ui-g-6 ui-md-4">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-aliment pTemplate="listItem">
+    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+      <div class="ui-g-12 ui-md-8 car-details">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-6">Name: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{aliment.name}}</b></div>
 
+          <div class="ui-g-2 ui-sm-6">Price: </div>
+          <div class="ui-g-10 ui-sm-6"><b>{{aliment.price}}</b></div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template let-aliment pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel [header]="aliment.name" [style]="{'text-align':'center'}">
+        <div>{{aliment.price}}</div>
+        <hr class="ui-widget-content" style="border-top:0">
+      </p-panel>
+    </div>
+  </ng-template>
+</p-dataView>
+
+
+
+<!--<p-dataView [value]="aliments"  [paginator]="true" [rows]="5">
+  <p-header>
+    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+  </p-header>
+  <ng-template let-aliment pTemplate="listItem">
+    <div>
+      {{aliment.id}}
+    </div>
+  </ng-template>
+  <ng-template let-aliment pTemplate="gridItem">
+    <div class="ui-g-12 ui-md-3">
+      {{aliment.price}}
+    </div>
+  </ng-template>
+</p-dataView>-->

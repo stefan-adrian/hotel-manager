@@ -11,6 +11,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {PanelModule} from "primeng/panel";
+import {DataViewModule} from 'primeng/dataview';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import {PanelModule} from "primeng/panel";
     FileUploadModule,
     MessageModule,
     MessagesModule,
-    PanelModule
+    PanelModule,
+    DataViewModule
   ],
   exports: [
     HttpClientModule,
@@ -41,7 +43,8 @@ import {PanelModule} from "primeng/panel";
     FileUploadModule,
     MessageModule,
     MessagesModule,
-    PanelModule
+    PanelModule,
+    DataViewModule
   ]
 })
 export class SharedModule {
