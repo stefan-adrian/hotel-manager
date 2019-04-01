@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Aliment} from "../../../../core/models/aliment.model";
 import {AlimentService} from "../../../../core/services/aliment.service";
 
+
 @Component({
   selector: 'app-aliment-list',
   templateUrl: './aliment-list.component.html',
@@ -22,7 +23,8 @@ export class AlimentListComponent implements OnInit {
 
   getAliments(): void {
     this.alimentService.getAll()
-      .subscribe(aliments => this.aliments = aliments);
+      .subscribe(aliments => {
+        this.aliments = aliments;
+      });
   }
-
 }

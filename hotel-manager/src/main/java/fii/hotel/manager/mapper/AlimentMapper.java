@@ -12,6 +12,7 @@ public class AlimentMapper {
         aliment.setId(alimentDto.getId());
         aliment.setName(alimentDto.getName());
         aliment.setPrice(alimentDto.getPrice());
+        aliment.setImage(alimentDto.getImage());
         return aliment;
     }
 
@@ -20,6 +21,7 @@ public class AlimentMapper {
         alimentDto.setId(aliment.getId());
         alimentDto.setName(aliment.getName());
         alimentDto.setPrice(aliment.getPrice());
+        alimentDto.setImage(aliment.getImage());
         return alimentDto;
     }
 }
