@@ -13,6 +13,7 @@ import {MessageModule} from 'primeng/message';
 import {PanelModule} from "primeng/panel";
 import {DataViewModule} from 'primeng/dataview';
 import {SafeHtml} from "./pipes/safe-html";
+import {DropdownModule} from "primeng/primeng";
 
 @NgModule({
   declarations: [SafeHtml],
@@ -30,7 +31,8 @@ import {SafeHtml} from "./pipes/safe-html";
     MessageModule,
     MessagesModule,
     PanelModule,
-    DataViewModule
+    DataViewModule,
+    DropdownModule
   ],
   exports: [
     HttpClientModule,
@@ -46,7 +48,10 @@ import {SafeHtml} from "./pipes/safe-html";
     MessagesModule,
     PanelModule,
     DataViewModule,
+    DropdownModule,
+
     SafeHtml
+
   ]
 })
 export class SharedModule {
