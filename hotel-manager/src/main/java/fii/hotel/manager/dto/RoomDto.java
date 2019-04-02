@@ -19,6 +19,8 @@ public class RoomDto implements Serializable {
 
     private Double price;
 
+    private byte[] image;
+
     public RoomDto() {
     }
 
@@ -68,5 +70,13 @@ public class RoomDto implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
