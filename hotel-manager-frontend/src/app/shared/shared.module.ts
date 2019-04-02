@@ -11,9 +11,13 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {PanelModule} from "primeng/panel";
+import {DataViewModule} from 'primeng/dataview';
+import {SafeHtml} from "./pipes/safe-html";
+import {DropdownModule} from "primeng/primeng";
+import {InputTextModule} from "primeng/primeng";
 
 @NgModule({
-  declarations: [],
+  declarations: [SafeHtml],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -27,7 +31,10 @@ import {PanelModule} from "primeng/panel";
     FileUploadModule,
     MessageModule,
     MessagesModule,
-    PanelModule
+    PanelModule,
+    DataViewModule,
+    DropdownModule,
+    InputTextModule
   ],
   exports: [
     HttpClientModule,
@@ -41,7 +48,13 @@ import {PanelModule} from "primeng/panel";
     FileUploadModule,
     MessageModule,
     MessagesModule,
-    PanelModule
+    PanelModule,
+    DataViewModule,
+    DropdownModule,
+    InputTextModule,
+
+    SafeHtml
+
   ]
 })
 export class SharedModule {

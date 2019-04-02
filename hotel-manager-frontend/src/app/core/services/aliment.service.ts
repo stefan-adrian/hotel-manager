@@ -12,13 +12,15 @@ export class AlimentService {
     private apiService: ApiService
   ) { }
 
+  getAll(): Observable<Aliment[]>{
+    return this.apiService.get('/aliments');
+  }
+
   add(aliment : Aliment) : Observable<Aliment>{
-    console.log("Aici2");
     return this.apiService.post('/aliments', aliment);
   }
 
   addImage(aliment : Aliment, uploadFile: any) : void{
-    console.log("AICI3");
     let formData = new FormData();
     formData.append('image', uploadFile, uploadFile.name);
     this.apiService.patch(`/aliments/${aliment.id}/image`,formData).subscribe();

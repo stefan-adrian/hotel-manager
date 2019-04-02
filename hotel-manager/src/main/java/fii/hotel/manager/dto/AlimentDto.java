@@ -10,6 +10,8 @@ public class AlimentDto implements Serializable {
 
     private Double price;
 
+    private byte[] image;
+
     public AlimentDto() {
     }
 
@@ -35,5 +37,13 @@ public class AlimentDto implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
