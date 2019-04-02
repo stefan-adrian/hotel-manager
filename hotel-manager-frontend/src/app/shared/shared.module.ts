@@ -14,6 +14,7 @@ import {PanelModule} from "primeng/panel";
 import {DataViewModule} from 'primeng/dataview';
 import {SafeHtml} from "./pipes/safe-html";
 import {DropdownModule} from "primeng/primeng";
+import {InputTextModule} from "primeng/primeng";
 
 @NgModule({
   declarations: [SafeHtml],
@@ -32,7 +33,8 @@ import {DropdownModule} from "primeng/primeng";
     MessagesModule,
     PanelModule,
     DataViewModule,
-    DropdownModule
+    DropdownModule,
+    InputTextModule
   ],
   exports: [
     HttpClientModule,
@@ -49,6 +51,7 @@ import {DropdownModule} from "primeng/primeng";
     PanelModule,
     DataViewModule,
     DropdownModule,
+    InputTextModule,
 
     SafeHtml
 
