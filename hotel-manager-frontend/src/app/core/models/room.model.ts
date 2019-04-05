@@ -5,4 +5,5 @@ export class Room{
   beds: number;
   tv: boolean;
   price: number;
+  image: ArrayBuffer;
 }

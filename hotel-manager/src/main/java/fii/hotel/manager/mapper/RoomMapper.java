@@ -15,6 +15,7 @@ public class RoomMapper {
         room.setPrice(roomDto.getPrice());
         room.setTv(roomDto.getTv());
         room.setName(roomDto.getName());
+        room.setImage(roomDto.getImage());
         return room;
     }
 
@@ -26,6 +27,7 @@ public class RoomMapper {
         roomDto.setName(room.getName());
         roomDto.setTv(room.getTv());
         roomDto.setPrice(room.getPrice());
+        roomDto.setImage(room.getImage());
         return roomDto;
     }
 }
