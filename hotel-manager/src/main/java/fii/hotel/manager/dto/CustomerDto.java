@@ -1,5 +1,6 @@
 package fii.hotel.manager.dto;
 
+import fii.hotel.manager.model.Role;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ public class CustomerDto implements Serializable {
     private String name;
 
     private String surname;
+
+    private Role role;
 
     public CustomerDto() {
     }
@@ -58,5 +61,13 @@ public class CustomerDto implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
