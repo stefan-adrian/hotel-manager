@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Message} from "primeng/api";
+import {CustomerService} from "../../../../core/services/customer.service";
+import {Aliment} from "../../../../core/models/aliment.model";
+import {Customer} from "../../../../core/models/customer.model";
 
 @Component({
   selector: 'app-customer-creation',
@@ -7,9 +12,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerCreationComponent implements OnInit {
 
-  constructor() { }
+  customerCreationForm: FormGroup;
+  message: Message[] = [];
+
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private customerService: CustomerService
+  ) { }
 
   ngOnInit() {
+    this.customerCreationForm = this.createFormGroup();
+  }
+
+  createFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      email: [null, Validators.required],
+      password: [null, Validators.required],
+      name: [null, Validators.required],
+      surname: [null, Validators.required],
+      role: [null, Validators.required]
+    });
+  }
+
+  revertFormGroup() {
+    this.customerCreationForm = this.createFormGroup();
+  }
+
+  save() {
+    const customerToCreate: Customer = Object.assign({},
+      this.customerCreationForm.value);
+    this.customerService.add(customerToCreate).subscribe();
+    this.revertFormGroup();
+  }
+
+  showSuccess() {
+    this.message = [];
+    this.message.push({severity:'info', summary:'Account Created'});
   }
 
 }

@@ -1,3 +1,31 @@
-<p>
-  customer-creation works!
-</p>
+<div class="form-container">
+  <p-panel header="Account creation form">
+    <br>
+    <form class="form-container" [formGroup]="customerCreationForm" (ngSubmit)="save()">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Surname" formControlName="surname">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Email" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Password" formControlName="password">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Role" formControlName="role">
+      </mat-form-field>
+      <br>
+
+      <button pButton label="Save" class="ui-button-info" (click)="showSuccess()" type="submit"
+              [disabled]="!customerCreationForm.valid"></button>
+      <p-messages [(value)]="message"></p-messages>
+    </form>
+  </p-panel>
+</div>
