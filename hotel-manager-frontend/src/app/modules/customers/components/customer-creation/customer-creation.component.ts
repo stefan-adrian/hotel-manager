@@ -18,7 +18,7 @@ export class CustomerCreationComponent implements OnInit {
 
   customerCreationForm: FormGroup;
   message: Message[] = [];
-  hide=true;
+  hide = true;
   roles: Role[] = [
     {value: 'USER', viewValue: 'User'},
     {value: 'ADMIN', viewValue: 'Admin'}
@@ -27,7 +27,8 @@ export class CustomerCreationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomerService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.customerCreationForm = this.createFormGroup();
@@ -35,7 +36,7 @@ export class CustomerCreationComponent implements OnInit {
 
   createFormGroup(): FormGroup {
     return this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: [null, Validators.required],
       name: [null, Validators.required],
       surname: [null, Validators.required],
@@ -56,7 +57,7 @@ export class CustomerCreationComponent implements OnInit {
 
   showSuccess() {
     this.message = [];
-    this.message.push({severity:'info', summary:'Account Created'});
+    this.message.push({severity: 'info', summary: 'Account Created'});
   }
 
 }
