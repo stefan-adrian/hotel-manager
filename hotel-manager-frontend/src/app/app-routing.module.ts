@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: './modules/aliments/aliments.module#AlimentsModule'
   },
   {
+    path: 'customers',
+    loadChildren: './modules/customers/customers.module#CustomersModule'
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
