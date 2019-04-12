@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Message} from "primeng/api";
 import {CustomerService} from "../../../../core/services/customer.service";
-import {Aliment} from "../../../../core/models/aliment.model";
 import {Customer} from "../../../../core/models/customer.model";
+
+export interface Role {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-customer-creation',
@@ -14,7 +18,11 @@ export class CustomerCreationComponent implements OnInit {
 
   customerCreationForm: FormGroup;
   message: Message[] = [];
-
+  hide=true;
+  roles: Role[] = [
+    {value: 'USER', viewValue: 'User'},
+    {value: 'ADMIN', viewValue: 'Admin'}
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +35,7 @@ export class CustomerCreationComponent implements OnInit {
 
   createFormGroup(): FormGroup {
     return this.formBuilder.group({
-      email: [null, Validators.required],
+      email: ['', Validators.required],
       password: [null, Validators.required],
       name: [null, Validators.required],
       surname: [null, Validators.required],

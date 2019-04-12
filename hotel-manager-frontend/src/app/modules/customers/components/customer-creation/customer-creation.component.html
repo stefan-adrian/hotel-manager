@@ -15,11 +15,23 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" placeholder="Password" formControlName="password">
+        <input matInput placeholder="Password"   formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
 
+<!--
       <mat-form-field>
         <input matInput type="text" placeholder="Role" formControlName="role">
+      </mat-form-field>
+-->
+
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{role.viewValue}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <br>
 
