@@ -21,6 +21,8 @@ public class Customer {
 
     private String surname;
 
+    private Role role;
+
     @OneToMany(mappedBy = "customer")
     private Set<Booking> bookings;
 
@@ -65,6 +67,14 @@ public class Customer {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Set<Booking> getBookings() {

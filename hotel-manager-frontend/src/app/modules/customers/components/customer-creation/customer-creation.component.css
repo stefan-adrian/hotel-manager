@@ -1,0 +1,21 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container > * {
+  width: 60%;
+}
+
+.form-container form > * {
+  margin: 5px 0;
+}
+
+.form-container .mat-radio-button {
+  margin: 0 12px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 20px;
+}
