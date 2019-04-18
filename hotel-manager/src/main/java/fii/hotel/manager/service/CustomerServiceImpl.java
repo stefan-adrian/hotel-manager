@@ -40,4 +40,17 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerNotFoundException(id);
         }
     }
+
+    @Override
+    public Customer getByEmail(String email){
+        Optional<Customer> customerOptional = customerRepository.findByEmail(email);
+        if (customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            logger.debug("Customer with email " + customer.getEmail() + " has benn retrieved from database.");
+            return customer;
+        } else {
+            logger.error("Customer with email " + email + " was not found in the database.");
+            throw new CustomerNotFoundException(email);
+        }
+    }
 }

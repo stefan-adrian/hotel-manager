@@ -6,4 +6,6 @@ public interface CustomerService {
     Customer save(Customer customer);
 
     Customer getById(Long id);
+
+    Customer getByEmail(String email);
 }
