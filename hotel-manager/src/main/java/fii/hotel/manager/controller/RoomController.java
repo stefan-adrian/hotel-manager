@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +40,7 @@ public class RoomController {
     @ApiOperation(value = "Add a new room")
     @ApiResponse(code = 200, message = "Room successfully added")
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public RoomDto add(@RequestBody RoomDto roomDto) {
         Room room = roomMapper.map(roomDto);
         room = roomService.save(room);

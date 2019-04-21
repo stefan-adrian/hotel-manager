@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +40,7 @@ public class AlimentController {
     @ApiOperation(value = "Add a new aliment")
     @ApiResponse(code = 200, message = "Aliment successfully added")
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public AlimentDto add(@RequestBody AlimentDto alimentDto) {
         Aliment aliment = alimentMapper.map(alimentDto);
         aliment = alimentService.save(aliment);

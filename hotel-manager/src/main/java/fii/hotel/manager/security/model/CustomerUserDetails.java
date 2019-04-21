@@ -1,5 +1,6 @@
-package fii.hotel.manager.model;
+package fii.hotel.manager.security.model;
 
+import fii.hotel.manager.model.Customer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,9 +10,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CustomUserDetails extends Customer implements UserDetails {
+public class CustomerUserDetails extends Customer implements UserDetails {
 
-    public CustomUserDetails(Customer customer) {
+    public CustomerUserDetails(Customer customer) {
         super(customer);
     }
 
@@ -20,7 +21,7 @@ public class CustomUserDetails extends Customer implements UserDetails {
         List<String> roles = new ArrayList<>();
         roles.add(getRole().toString());
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 

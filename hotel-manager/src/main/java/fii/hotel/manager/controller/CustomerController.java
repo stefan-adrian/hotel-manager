@@ -46,8 +46,6 @@ public class CustomerController {
             @ApiResponse(code = 404, message = "Customer not found"),
             @ApiResponse(code = 200, message = "Retrieved customer with the asked id")
     })
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/{id}")
     public CustomerDto getById(@PathVariable Long id) {
         Customer customer = customerService.getById(id);
