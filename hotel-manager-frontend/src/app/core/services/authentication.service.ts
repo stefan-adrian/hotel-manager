@@ -32,10 +32,15 @@ export class AuthenticationService {
   getToken(): String {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     var token = currentUser && currentUser.token;
-    return token ? token : "";
+    return token ? token.token : "";
   }
 
   logout(): void {
     localStorage.removeItem('currentUser');
+  }
+
+  isLoggedIn(): boolean {
+    var token: String = this.getToken();
+    return token && token.length > 0;
   }
 }
