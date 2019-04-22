@@ -20,8 +20,8 @@ export class CustomerCreationComponent implements OnInit {
   message: Message[] = [];
   hide = true;
   roles: Role[] = [
-    {value: 'USER', viewValue: 'User'},
-    {value: 'ADMIN', viewValue: 'Admin'}
+    {value: 'ROLE_USER', viewValue: 'User'},
+    {value: 'ROLE_ADMIN', viewValue: 'Admin'}
   ];
 
   constructor(

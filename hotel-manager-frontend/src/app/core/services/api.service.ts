@@ -11,11 +11,19 @@ const BASE_URL = environment.api_url;
 })
 export class ApiService {
 
-  private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-  private optionsFile = {headers: new HttpHeaders().set("Accept", "application/json")};
+  private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + this.getToken())};
+  private optionsFile = {headers: new HttpHeaders().set("Accept", "application/json")
+      .set('Authorization', 'Bearer ' + this.getToken())};
 
 
   constructor(private httpClient: HttpClient) {
+  }
+
+  getToken(): String {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    var token = currentUser && currentUser.token;
+    return token ? token.token : "";
   }
 
   private formatErrors(error: any) {
@@ -23,7 +31,7 @@ export class ApiService {
   }
 
   public get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.httpClient.get(BASE_URL + path, {params}).pipe(catchError(this.formatErrors));
+    return this.httpClient.get(BASE_URL + path, this.options).pipe(catchError(this.formatErrors));
   }
 
   public put(path: string, body: object = {}): Observable<any> {
