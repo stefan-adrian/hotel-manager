@@ -4,6 +4,7 @@ import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.security.dto.AuthenticationRequestDto;
 import fii.hotel.manager.security.dto.AuthenticationResponseDto;
 import fii.hotel.manager.security.exception.AuthenticationException;
+import fii.hotel.manager.security.model.CustomerUserDetails;
 import fii.hotel.manager.security.service.UserDetailsServiceImpl;
 import fii.hotel.manager.security.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class SecurityController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDto authenticationRequestDto){
         authenticate(authenticationRequestDto.getUsername(),authenticationRequestDto.getPassword());
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequestDto.getUsername());
+        final CustomerUserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequestDto.getUsername());
         final String token = tokenService.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponseDto(token));

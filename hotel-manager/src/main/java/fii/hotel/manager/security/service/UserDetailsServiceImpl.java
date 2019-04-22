@@ -1,10 +1,9 @@
 package fii.hotel.manager.security.service;
 
-import fii.hotel.manager.security.model.CustomerUserDetails;
 import fii.hotel.manager.model.Customer;
+import fii.hotel.manager.security.model.CustomerUserDetails;
 import fii.hotel.manager.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public CustomerUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Customer customer = customerService.getByEmail(username);
         return new CustomerUserDetails(customer);
     }

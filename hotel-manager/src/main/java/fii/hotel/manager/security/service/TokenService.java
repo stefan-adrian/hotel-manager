@@ -60,8 +60,9 @@ public class TokenService {
         return false;
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(CustomerUserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("role",userDetails.getRole().toString());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

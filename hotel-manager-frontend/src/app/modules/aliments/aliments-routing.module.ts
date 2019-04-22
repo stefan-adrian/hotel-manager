@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AlimentCreationComponent} from "./components/aliment-creation/aliment-creation.component";
 import {AlimentListComponent} from "./components/aliment-list/aliment-list.component";
 import {AuthenticationGuard} from "../../core/guards/authentication-guard";
+import {RoleGuard} from "../../core/guards/role-guard";
 
 const routes: Routes = [
   {
@@ -13,7 +14,10 @@ const routes: Routes = [
   {
     path: 'add',
     component: AlimentCreationComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    }
   }
 ];
 
