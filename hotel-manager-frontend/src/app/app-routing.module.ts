@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: './modules/home/home.module#HomeModule'
   },
   {
+    path: 'login',
+    loadChildren: './modules/authentication/authentication.module#AuthenticationModule'
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
