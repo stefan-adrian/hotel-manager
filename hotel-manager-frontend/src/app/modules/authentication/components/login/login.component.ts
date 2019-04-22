@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Message} from "primeng/api";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {LoginModel} from "../../../../core/models/login.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService
   ) {
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.createFormGroup();
+    this.authenticationService.logout();
   }
 
   createFormGroup(): FormGroup {
@@ -39,6 +42,16 @@ export class LoginComponent implements OnInit {
   login() {
     const loginModel: LoginModel = Object.assign({},
       this.loginForm.value);
-    this.authenticationService.authenticate(loginModel);
+    this.authenticationService.authenticate(loginModel).subscribe(result=>{
+      if(result==true){
+        this.router.navigate(['home']);
+      } else {
+        this.message = [];
+        this.message.push({severity:'info', summary:'Email or password incorrect'});
+      }
+    },() => {
+      this.message = [];
+      this.message.push({severity:'info', summary:'Email or password incorrect'})
+    });
   }
 }
