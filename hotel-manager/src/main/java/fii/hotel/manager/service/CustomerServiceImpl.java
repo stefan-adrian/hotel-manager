@@ -6,6 +6,7 @@ import fii.hotel.manager.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -38,6 +39,19 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             logger.error("Customer with id " + id + " was not found in the database.");
             throw new CustomerNotFoundException(id);
+        }
+    }
+
+    @Override
+    public Customer getByEmail(String email){
+        Optional<Customer> customerOptional = customerRepository.findByEmail(email);
+        if (customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            logger.debug("Customer with email " + customer.getEmail() + " has benn retrieved from database.");
+            return customer;
+        } else {
+            logger.error("Customer with email " + email + " was not found in the database.");
+            throw new CustomerNotFoundException(email);
         }
     }
 }

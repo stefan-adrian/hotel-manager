@@ -15,8 +15,16 @@ const routes: Routes = [
     loadChildren: './modules/customers/customers.module#CustomersModule'
   },
   {
+    path: 'home',
+    loadChildren: './modules/home/home.module#HomeModule'
+  },
+  {
+    path: 'login',
+    loadChildren: './modules/authentication/authentication.module#AuthenticationModule'
+  },
+  {
     path: '',
-    redirectTo: '',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];

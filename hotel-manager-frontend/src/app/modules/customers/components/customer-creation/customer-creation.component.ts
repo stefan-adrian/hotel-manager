@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Message} from "primeng/api";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {Customer} from "../../../../core/models/customer.model";
+import {AuthenticationService} from "../../../../core/services/authentication.service";
 
 export interface Role {
   value: string;
@@ -20,18 +21,20 @@ export class CustomerCreationComponent implements OnInit {
   message: Message[] = [];
   hide = true;
   roles: Role[] = [
-    {value: 'USER', viewValue: 'User'},
-    {value: 'ADMIN', viewValue: 'Admin'}
+    {value: 'ROLE_USER', viewValue: 'User'},
+    {value: 'ROLE_ADMIN', viewValue: 'Admin'}
   ];
 
   constructor(
     private formBuilder: FormBuilder,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private authenticationService: AuthenticationService
   ) {
   }
 
   ngOnInit() {
     this.customerCreationForm = this.createFormGroup();
+    this.authenticationService.logout();
   }
 
   createFormGroup(): FormGroup {

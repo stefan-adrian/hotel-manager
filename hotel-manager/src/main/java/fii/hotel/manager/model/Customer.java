@@ -29,6 +29,16 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(Customer customer) {
+        this.id = customer.getId();
+        this.email = customer.getEmail();
+        this.password = customer.getPassword();
+        this.name = customer.getName();
+        this.surname = customer.getSurname();
+        this.role = customer.getRole();
+        this.bookings = customer.getBookings();
+    }
+
     public Long getId() {
         return id;
     }
