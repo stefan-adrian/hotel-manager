@@ -9,23 +9,31 @@
       <li class="nav-item active">
         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="authenticationService.isLoggedIn()" class="nav-item">
         <a class="nav-link" href="/aliments">Aliments</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/rooms">Rooms</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/customers/add">Register</a>
-      </li>
-      <li class="nav-item dropdown">
+      <li *ngIf="authenticationService.getUserRole()==='ROLE_ADMIN'" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
           <a class="dropdown-item" href="/aliments/add">Aliment</a>
           <a class="dropdown-item" href="/rooms/add">Room</a>
         </div>
       </li>
-
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="!authenticationService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li *ngIf="!authenticationService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" href="/customers/add">Register</a>
+      </li>
+      <li *ngIf="authenticationService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" href="/login">Logout</a>
+      </li>
     </ul>
   </div>
+
 </nav>
