@@ -13,7 +13,7 @@ export class CustomerService {
   ) {
   }
 
-  add(customer: Customer): Observable<Customer> {
+  add(customer: Customer): Observable<any> {
     return this.apiService.post('/customers', customer);
   }
 }
