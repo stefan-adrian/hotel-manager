@@ -1,5 +1,7 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.model.Customer;
+
 public interface EmailService {
-    void sendSimpleMessage(String to, String subject, String text);
+    void sendWelcomeMail(Customer customer);
 }

@@ -6,7 +6,6 @@ import fii.hotel.manager.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer save(Customer customer) {
         Customer customerSaved = customerRepository.save(customer);
-        emailService.sendSimpleMessage(customer.getEmail(),"Successful registration","Registration was successful");
+        emailService.sendWelcomeMail(customer);
         logger.debug("Customer with email " + customerSaved.getEmail() + " and id " + customerSaved.getId() + " was saved in the database.");
         return customerSaved;
     }
