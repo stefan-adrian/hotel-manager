@@ -1,5 +1,6 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.exception.CustomerAlreadyExistsException;
 import fii.hotel.manager.exception.CustomerNotFoundException;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.repository.CustomerRepository;
@@ -25,6 +26,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer save(Customer customer) {
+        Optional<Customer> customerOptional = customerRepository.findByEmail(customer.getEmail());
+        if(customerOptional.isPresent()){
+            logger.error("Customer with email " + customer.getEmail() + " already is in the database.");
+            throw new CustomerAlreadyExistsException(customer.getEmail());
+        }
         Customer customerSaved = customerRepository.save(customer);
         emailService.sendWelcomeMail(customer);
         logger.debug("Customer with email " + customerSaved.getEmail() + " and id " + customerSaved.getId() + " was saved in the database.");
