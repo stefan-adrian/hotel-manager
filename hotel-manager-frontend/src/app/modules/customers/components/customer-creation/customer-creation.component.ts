@@ -4,6 +4,9 @@ import {Message} from "primeng/api";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {Customer} from "../../../../core/models/customer.model";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
+import {catchError, map} from "rxjs/operators";
+import {of} from "rxjs";
+import {Router} from "@angular/router";
 
 export interface Role {
   value: string;
@@ -26,6 +29,7 @@ export class CustomerCreationComponent implements OnInit {
   ];
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
     private authenticationService: AuthenticationService
@@ -54,13 +58,18 @@ export class CustomerCreationComponent implements OnInit {
   save() {
     const customerToCreate: Customer = Object.assign({},
       this.customerCreationForm.value);
-    this.customerService.add(customerToCreate).subscribe();
-    this.revertFormGroup();
+    this.customerService.add(customerToCreate).pipe(
+      map(response=>{
+        this.message = [];
+        this.message.push({severity: 'info', summary: 'Account Created'});
+        this.router.navigate(['/login']);
+      }),
+      catchError((err) => {
+        this.message = [];
+        this.customerCreationForm.controls['email'].setErrors({'incorrect': true});
+        this.message.push({severity: 'error', summary: err.message});
+        return of();
+      }))
+    .subscribe();
   }
-
-  showSuccess() {
-    this.message = [];
-    this.message.push({severity: 'info', summary: 'Account Created'});
-  }
-
 }
