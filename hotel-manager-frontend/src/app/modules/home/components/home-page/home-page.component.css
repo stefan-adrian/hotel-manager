@@ -1,0 +1,80 @@
+.hotel-image {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+}
+
+.hotel-info-position{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.hotel-info-align{
+  text-align: center;
+  padding: 2% 0;
+  width: 75%;
+}
+
+.hotel-info-h1{
+  font-family:Brush Script MT, Brush Script Std, cursive;
+  font-size:4em;
+}
+
+.hotel-info-h2{
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size:2em;
+}
+
+.hotel-info-p{
+  font-size:1.2em;
+  font-family:"PT Serif";
+
+}
+
+.room-booking {
+  display: table;
+}
+
+.room-booking-left{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 55%;
+}
+
+.room-image {
+  width: 70%;
+  height: auto;
+  max-height: 400px;
+  max-width: 600px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-right: 1%;
+  margin-left: 13%;
+}
+
+.room-booking-right{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 45%;
+}
+
+.room-booking-h{
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size:3em;
+  margin-right: 10%;
+}
+
+.room-booking-p{
+  margin-right: 10%;
+  font-size:1.2em;
+  font-family:"PT Serif";
+}
+
+.room-booking-btn{
+  margin-right: 10%;
+}
