@@ -1,11 +1,11 @@
-.hotel-image {
+.slider-image {
   width: 100%;
   height: auto;
   max-height: 700px;
 }
 
-@media only screen and (min-width: 1500px){
-  .hotel-image {
+@media only screen and (min-width: 1500px) {
+  .slider-image {
     max-height: 800px;
   }
 }
@@ -39,29 +39,34 @@
 
 }
 
-@media only screen and (min-width: 450px){
+@media only screen and (min-width: 450px) {
   .hotel-info-align {
     padding: 15% 0;
   }
+
   .hotel-info-h1 {
     font-size: 3em;
   }
+
   .hotel-info-h2 {
     font-size: 1.5em;
   }
+
   .hotel-info-p {
     font-size: 1.2em;
   }
 }
 
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 600px) {
   .hotel-info-align {
     padding: 2% 0;
     width: 75%;
   }
+
   .hotel-info-h1 {
     font-size: 4em;
   }
+
   .hotel-info-h2 {
     font-size: 2em;
   }
@@ -82,7 +87,7 @@
   width: 100%;
 }
 
-.room-image {
+.options-image {
   width: 100%;
   height: auto;
   max-height: 400px;
@@ -108,7 +113,7 @@
   font-family: "PT Serif";
 }
 
-@media only screen and (min-width: 450px){
+@media only screen and (min-width: 450px) {
 
   .room-booking-h {
     font-size: 3em;
@@ -120,11 +125,10 @@
 
 }
 
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 800px) {
 
   .room-booking {
     display: table;
-    margin-bottom: 3%;
   }
 
   .room-booking-left {
@@ -134,12 +138,8 @@
     width: 55%;
   }
 
-  .room-image {
+  .options-image {
     width: 70%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-right: 1%;
-    margin-left: 13%;
   }
 
   .room-booking-right {
@@ -160,7 +160,6 @@
   .room-booking-btn {
     margin-right: 10%;
   }
-
 }
 
 
@@ -168,28 +167,6 @@
   display: flex;
   flex-direction: column-reverse;
   margin-bottom: 3%;
-}
-
-
-.roomservice-left {
-  text-align: center;
-  width: 100%;
-}
-
-.roomservice-image {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  max-width: 600px;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-right: 1%;
-  margin-left: 1%;
-}
-
-.roomservice-right {
-  text-align: center;
-  width: 100%;
 }
 
 .roomservice-h {
@@ -202,7 +179,7 @@
   font-family: "PT Serif";
 }
 
-@media only screen and (min-width: 450px){
+@media only screen and (min-width: 450px) {
 
   .roomservice-h {
     font-size: 3em;
@@ -217,41 +194,17 @@
   .roomservice {
     display: table;
   }
-  .roomservice-left {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    width: 55%;
-  }
-
-  .roomservice-image {
-    width: 70%;
-    height: auto;
-    max-height: 400px;
-    max-width: 600px;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-right: 1%;
-    margin-left: 13%;
-  }
-
-  .roomservice-right {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    width: 45%;
-  }
 
   .roomservice-h {
-    margin-left: 35%;
+    margin-left: 10%;
   }
 
   .roomservice-p {
-    margin-left: 35%;
+    margin-left: 10%;
   }
 
   .roomservice-btn {
-    margin-left: 35%;
+    margin-left: 10%;
   }
 
 }
