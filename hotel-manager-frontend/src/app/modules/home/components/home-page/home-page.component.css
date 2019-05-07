@@ -4,7 +4,7 @@
   max-height: 700px;
 }
 
-@media screen and (min-device-width: 1500px){
+@media only screen and (min-width: 1500px){
   .hotel-image {
     max-height: 800px;
   }
@@ -39,7 +39,7 @@
 
 }
 
-@media screen and (min-device-width: 450px){
+@media only screen and (min-width: 450px){
   .hotel-info-align {
     padding: 15% 0;
   }
@@ -54,7 +54,7 @@
   }
 }
 
-@media screen and (min-device-width: 600px){
+@media only screen and (min-width: 600px){
   .hotel-info-align {
     padding: 2% 0;
     width: 75%;
@@ -108,7 +108,7 @@
   font-family: "PT Serif";
 }
 
-@media screen and (min-device-width: 450px){
+@media only screen and (min-width: 450px){
 
   .room-booking-h {
     font-size: 3em;
@@ -120,7 +120,7 @@
 
 }
 
-@media screen and (min-device-width: 800px){
+@media only screen and (min-width: 800px){
 
   .room-booking {
     display: table;
@@ -202,7 +202,7 @@
   font-family: "PT Serif";
 }
 
-@media screen and (min-device-width: 450px){
+@media only screen and (min-width: 450px){
 
   .roomservice-h {
     font-size: 3em;
@@ -213,7 +213,7 @@
   }
 }
 
-@media screen and (min-device-width: 800px) {
+@media only screen and (min-width: 800px) {
   .roomservice {
     display: table;
   }
