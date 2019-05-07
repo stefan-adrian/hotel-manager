@@ -17,6 +17,7 @@ import {DropdownModule} from "primeng/primeng";
 import {InputTextModule} from "primeng/primeng";
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [SafeHtml],
