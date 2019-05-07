@@ -1,7 +1,16 @@
 .footer-bar{
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-around;
+}
+
+
+@media screen and (min-device-width: 600px){
+  .footer-bar{
+    flex-direction: row;
+  }
+
 }
 
 .text{
