@@ -1,4 +1,4 @@
-<div class="form-container">
+<!--<div class="form-container">
   <p-panel header="Login form">
     <br>
     <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
@@ -18,4 +18,32 @@
       <p-messages [(value)]="message"></p-messages>
     </form>
   </p-panel>
-</div>
+</div>-->
+<!--<div class="login">-->
+
+  <div class="login">
+    <div class="login-image" style="background-image: url('assets/images/hotel-image4.jpg');">
+    </div>
+
+    <div class="login-form">
+      <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Email" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <br>
+
+        <button pButton label="Login" class="ui-button-info" type="submit"
+                [disabled]="!loginForm.valid"></button>
+        <p-messages [(value)]="message"></p-messages>
+      </form>
+
+    </div>
+  </div>
+
+<!--</div>-->
