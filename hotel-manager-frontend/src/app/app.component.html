@@ -1,3 +1,11 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div [ngStyle]="{'min-height': clientHeight + 'px'}" class="upper">
+  <!-- 'margin-bootom': '-FooterHeight' -->
+  <app-header></app-header>
+  <!-- Your Navbar here -->
+  <router-outlet></router-outlet>
+  <div class="lower"></div>
+  <!-- 200px is FooterHeight  this will push
+  the footer so it will not overlap if you have very long content  -->
+</div>
+
 <app-footer></app-footer>

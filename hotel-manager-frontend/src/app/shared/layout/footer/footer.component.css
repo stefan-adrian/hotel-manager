@@ -1,18 +1,25 @@
 .footer-bar{
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
-}
-
-
-@media only screen and (min-width: 600px){
-  .footer-bar{
-    flex-direction: row;
-  }
-
 }
 
 .text{
   text-align: center;
+  font-size: 50%;
+}
+
+.footer{
+  height: 75px;
+}
+
+@media only screen and (min-width: 600px){
+  .text{
+    font-size: 100%;
+  }
+
+  .footer{
+    height: 150px;
+  }
 }

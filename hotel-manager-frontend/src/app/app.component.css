@@ -1,0 +1,17 @@
+.upper {
+  margin-bottom: 75px;
+}
+.lower{
+  height: 75px;
+}
+
+
+@media only screen and (min-width: 600px){
+  .upper {
+    margin-bottom: -150px;
+  }
+  .lower{
+    height: 150px;
+  }
+
+}
