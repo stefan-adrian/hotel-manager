@@ -1,6 +1,8 @@
-<div class="form-container">
-  <p-panel header="Room creation form">
-    <br>
+<div class="login">
+  <div class="login-image" style="background-image: url('assets/images/hotel-image5.jpg');">
+  </div>
+
+  <div class="login-form">
     <form class="form-container" [formGroup]="roomCreationForm" (ngSubmit)="save()">
       <mat-form-field>
         <input matInput type="text" placeholder="Name" formControlName="name">
@@ -34,5 +36,6 @@
               [disabled]="!roomCreationForm.valid||uploadFile==null"></button>
       <p-messages [(value)]="message"></p-messages>
     </form>
-  </p-panel>
+
+  </div>
 </div>

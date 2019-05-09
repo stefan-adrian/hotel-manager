@@ -1,6 +1,8 @@
-<div class="form-container">
-  <p-panel header="Login form">
-    <br>
+<div class="login">
+  <div class="login-image" style="background-image: url('assets/images/hotel-image4.jpg');">
+  </div>
+
+  <div class="login-form">
     <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
 
       <mat-form-field>
@@ -17,5 +19,7 @@
               [disabled]="!loginForm.valid"></button>
       <p-messages [(value)]="message"></p-messages>
     </form>
-  </p-panel>
+
+  </div>
 </div>
+
