@@ -50,7 +50,6 @@ export class RoomCreationComponent implements OnInit {
     {
       let room=JSON.parse(JSON.stringify(result));
       this.roomService.addImage(room,this.uploadFile);
-      this.revertFormGroup();
     });
   }
 

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Message} from "primeng/api";
 import {AlimentService} from "../../../../core/services/aliment.service";
 import {Aliment} from "../../../../core/models/aliment.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-aliment-creation',
@@ -46,7 +47,6 @@ export class AlimentCreationComponent implements OnInit {
     {
       let aliment=JSON.parse(JSON.stringify(result));
       this.alimentService.addImage(aliment,this.uploadFile);
-      this.revertFormGroup();
     });
   }
 

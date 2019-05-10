@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs";
 import {Room} from "../models/room.model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {Room} from "../models/room.model";
 export class RoomService {
 
   constructor(
+    private router: Router,
     private apiService: ApiService
   ) {
   }
@@ -25,9 +27,12 @@ export class RoomService {
     return this.apiService.post('/rooms', room);
   }
 
-  addImage(room: Room,uploadFile: any): void{
+  addImage(room: Room, uploadFile: any): void {
     let formData = new FormData();
-    formData.append('image',uploadFile,uploadFile.name);
-    this.apiService.patch(`/rooms/${room.id}/image`,formData).subscribe();
+    formData.append('image', uploadFile, uploadFile.name);
+    this.apiService.patch(`/rooms/${room.id}/image`, formData).subscribe(
+      () => {
+        this.router.navigate(['/rooms']);
+      });
   }
 }
