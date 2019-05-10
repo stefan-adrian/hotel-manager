@@ -5,6 +5,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendWelcomeMail(Customer customer){
+    public void sendWelcomeMail(Customer customer) {
         try {
             MimeMessage mail = emailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail,
@@ -40,9 +41,9 @@ public class EmailServiceImpl implements EmailService {
             Template template = freemarkerConfig.getTemplate("welcome-email-template.ftl");
             Map model = new HashMap();
             model.put("name", customer.getName());
-            String htmlMessage = FreeMarkerTemplateUtils.processTemplateIntoString(template,model);
+            String htmlMessage = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
             helper.setTo(customer.getEmail());
-            helper.setText(htmlMessage,true);
+            helper.setText(htmlMessage, true);
             helper.setSubject("Welcome to our community!");
 
             emailSender.send(mail);
@@ -52,5 +53,14 @@ public class EmailServiceImpl implements EmailService {
         }
 
 
+    }
+
+    @Override
+    public void sendSimpleWelcomeMail(Customer customer) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(customer.getEmail());
+        message.setSubject("Welcome to our community!");
+        message.setText("Hello " + customer.getName());
+        emailSender.send(message);
     }
 }

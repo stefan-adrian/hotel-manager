@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerAlreadyExistsException(customer.getEmail());
         }
         Customer customerSaved = customerRepository.save(customer);
-        emailService.sendWelcomeMail(customer);
+        emailService.sendSimpleWelcomeMail(customer);
         logger.debug("Customer with email " + customerSaved.getEmail() + " and id " + customerSaved.getId() + " was saved in the database.");
         return customerSaved;
     }
