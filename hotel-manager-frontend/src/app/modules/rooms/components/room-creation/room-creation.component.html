@@ -13,27 +13,17 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="number" placeholder="Beds" formControlName="beds">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="number" placeholder="Price" formControlName="price">
-      </mat-form-field>
-      <p-checkbox binary="true" label="TV" formControlName="tv"></p-checkbox>
       <br>
 
-      <h5>Add image</h5>
-      <p-fileUpload #imageForm mode="advanced" name="image" customUpload="true" accept="image/*"
-                    (uploadHandler)="onUpload($event,imageForm)"
-                    maxFileSize="1000000" auto="true">
-        <ng-template>
-          <ul *ngIf="uploadFile!=null">
-            <li>{{uploadFile.name}} - {{uploadFile.size}} bytes</li>
-          </ul>
-        </ng-template>
-      </p-fileUpload>
-      <button pButton label="Save" class="ui-button-info" (click)="showSuccess()" type="submit"
-              [disabled]="!roomCreationForm.valid||uploadFile==null"></button>
+      <button pButton label="Save" class="ui-button-info" type="submit"
+              [disabled]="!roomCreationForm.valid"></button>
       <p-messages [(value)]="message"></p-messages>
     </form>
 

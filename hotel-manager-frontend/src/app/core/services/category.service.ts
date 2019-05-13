@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs";
-import {Room} from "../models/room.model";
 import {Category} from "../models/category.model";
 
 @Injectable({
