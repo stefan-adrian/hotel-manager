@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,7 +40,7 @@ public class CategoryController {
     @ApiOperation(value = "Add a new category")
     @ApiResponse(code = 200, message = "Category successfully added")
     @PostMapping
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public CategoryDto add(@RequestBody CategoryDto categoryDto) {
         Category category = categoryMapper.map(categoryDto);
         category = categoryService.save(category);

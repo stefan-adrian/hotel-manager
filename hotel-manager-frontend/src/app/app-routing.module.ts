@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: './modules/authentication/authentication.module#AuthenticationModule'
   },
   {
+    path: 'categories',
+    loadChildren: './modules/categories/categories.module#CategoriesModule'
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

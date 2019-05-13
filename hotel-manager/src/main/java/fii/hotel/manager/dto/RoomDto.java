@@ -1,5 +1,6 @@
 package fii.hotel.manager.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class RoomDto implements Serializable {
 
     private Integer floor;
 
+    @JsonProperty("category")
     private CategoryDto categoryDto;
 
     public RoomDto() {

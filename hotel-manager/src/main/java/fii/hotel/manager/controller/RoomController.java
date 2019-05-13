@@ -40,7 +40,7 @@ public class RoomController {
     @ApiOperation(value = "Add a new room")
     @ApiResponse(code = 200, message = "Room successfully added")
     @PostMapping
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public RoomDto add(@RequestBody RoomDto roomDto) {
         Room room = roomMapper.map(roomDto);
         room = roomService.save(room);
