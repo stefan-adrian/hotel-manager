@@ -36,17 +36,6 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room save(Room room, MultipartFile image) {
-        try {
-            room.setImage(image.getBytes());
-        } catch (IOException e) {
-            logger.error("Image for room with id " + room.getId() + " could not be saved in the database.");
-        }
-        room = roomRepository.save(room);
-        return room;
-    }
-
-    @Override
     public List<Room> getAll() {
         List<Room> rooms = roomRepository.findAll();
         logger.debug("Retrieved all rooms from database.");
@@ -96,9 +85,6 @@ public class RoomServiceImpl implements RoomService {
     }
 
     private boolean checkIfTimeInBetween(LocalDateTime toCheckDate, LocalDateTime startTime, LocalDateTime endTime) {
-        if (toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) <= 0) {
-            return true;
-        }
-        return false;
+        return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) <= 0;
     }
 }

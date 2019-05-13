@@ -10,8 +10,6 @@ public interface RoomService {
 
     Room save(Room room);
 
-    Room save(Room room, MultipartFile image);
-
     List<Room> getAll();
 
     Room getById(Long id);

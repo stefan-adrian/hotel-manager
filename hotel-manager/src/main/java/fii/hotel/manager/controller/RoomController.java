@@ -40,7 +40,7 @@ public class RoomController {
     @ApiOperation(value = "Add a new room")
     @ApiResponse(code = 200, message = "Room successfully added")
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public RoomDto add(@RequestBody RoomDto roomDto) {
         Room room = roomMapper.map(roomDto);
         room = roomService.save(room);
@@ -64,32 +64,5 @@ public class RoomController {
     public RoomDto getById(@PathVariable Long id) {
         Room room = roomService.getById(id);
         return roomMapper.map(room);
-    }
-
-    @ApiOperation(value = "Add image to a existing room")
-    @ApiResponses(value = {
-            @ApiResponse(code = 404, message = "Room not found"),
-            @ApiResponse(code = 204, message = "Image successfully added")
-    })
-    @PatchMapping("/{id}/image")
-    public ResponseEntity<Object> uploadRoomImage(@RequestPart("image") MultipartFile image, @PathVariable Long id) {
-        Room room = roomService.getById(id);
-        roomService.save(room, image);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @ApiOperation(value = "Get room image")
-    @ApiResponses(value = {
-            @ApiResponse(code = 404, message = "Room not found"),
-            @ApiResponse(code = 200, message = "Room image")
-    })
-    @GetMapping("/{id}/image")
-    public ResponseEntity<Resource> getRoomImage(@PathVariable Long id) {
-        Room room = roomService.getById(id);
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("image/jpeg"))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + room.getName() + ".jpeg\"")
-                .body(new ByteArrayResource(room.getImage()));
-
     }
 }
