@@ -1,9 +1,6 @@
 package fii.hotel.manager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
 public class Category {
@@ -22,6 +19,7 @@ public class Category {
 
     private Integer size;
 
+    @Column(length = 500)
     private String description;
 
     @Lob
