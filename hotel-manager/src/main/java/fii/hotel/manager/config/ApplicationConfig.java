@@ -30,6 +30,7 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
                         regex("/bookings.*"),
                         regex("/spa-types.*"),
                         regex("/customers.*"),
+                        regex("/categories.*"),
                         regex("/rooms.*")))
                 .build()
                 .apiInfo(metaData());

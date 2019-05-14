@@ -21,7 +21,7 @@
   <ng-template let-room pTemplate="listItem">
     <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
       <div class="ui-g-12 ui-md-3" style="text-align:center">
-        <img class="smaller" [src]="'data:image/jpg;base64,'+room.image | safeHtml" />
+        <img class="smaller" [src]="'data:image/jpg;base64,'+room.category.image | safeHtml" />
       </div>
       <div class="ui-g-12 ui-md-8 car-details">
         <div class="ui-g">
@@ -32,13 +32,13 @@
           <div class="ui-g-10 ui-sm-6"><b>{{room.floor}}</b></div>
 
           <div class="ui-g-2 ui-sm-6">Beds: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{room.beds}}</b></div>
+          <div class="ui-g-10 ui-sm-6"><b>{{room.category.beds}}</b></div>
 
           <div class="ui-g-2 ui-sm-6">TV: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{room.tv}}</b></div>
+          <div class="ui-g-10 ui-sm-6"><b>{{room.category.tv}}</b></div>
 
           <div class="ui-g-2 ui-sm-6">Price: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{room.price}}</b></div>
+          <div class="ui-g-10 ui-sm-6"><b>{{room.category.price}}</b></div>
 
         </div>
       </div>
@@ -46,9 +46,9 @@
   </ng-template>
   <ng-template let-room pTemplate="gridItem">
     <div style="padding:.5em" class="ui-g-12 ui-md-3">
-      <p-panel [header]="room.name" [style]="{'text-align':'center'}">
-        <img class="smaller" [src]="'data:image/jpg;base64,'+room.image | safeHtml" />
-        <div><b>{{room.price}}</b></div>
+      <p-panel [header]="room.category.name" [style]="{'text-align':'center'}">
+        <img class="smaller" [src]="'data:image/jpg;base64,'+room.category.image | safeHtml" />
+        <div><b>{{room.category.price}}</b></div>
         <hr class="ui-widget-content" style="border-top:0">
       </p-panel>
     </div>

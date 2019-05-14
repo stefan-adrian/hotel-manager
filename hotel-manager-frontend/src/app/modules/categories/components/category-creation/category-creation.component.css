@@ -1,0 +1,70 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container > * {
+  width: 80%;
+}
+
+.form-container form > * {
+  margin: 5px 0;
+}
+
+.form-container .mat-radio-button {
+  margin: 0 12px;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 20px;
+}
+
+
+
+.login{
+  width: 100%;
+  min-height: 100vh;
+
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row;
+}
+
+
+.login-image{
+
+  width: calc(100% - 560px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+
+}
+
+
+.login-form{
+  width: 560px;
+  min-height: 100vh;
+  display: block;
+  background-color: #e9ebee;
+  padding: 173px 55px 55px 55px;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+
+  .login-form{
+    width: 100%;
+  }
+  .login-image {
+    display: none;
+  }
+
+}
+
