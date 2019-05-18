@@ -17,7 +17,8 @@ import {DropdownModule} from "primeng/primeng";
 import {InputTextModule} from "primeng/primeng";
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
-import { FooterComponent } from './layout/footer/footer.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [SafeHtml],
@@ -39,7 +40,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     DropdownModule,
     InputTextModule,
     MatIconModule,
-    MatSelectModule
+    MatTabsModule
   ],
   exports: [
     HttpClientModule,
@@ -59,6 +60,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     InputTextModule,
     MatIconModule,
     MatSelectModule,
+    MatTabsModule,
 
     SafeHtml
 

@@ -1,0 +1,16 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     [routerLink]="['/bookings', {outlets: {sub: ['dates']}}]"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{dates.label}}
+  </a>
+  <a mat-tab-link
+     [routerLink]="['/bookings', {outlets: {sub: ['rooms']}}]"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{rooms.label}}
+  </a>
+</nav>
+
+<router-outlet name="sub"></router-outlet>
