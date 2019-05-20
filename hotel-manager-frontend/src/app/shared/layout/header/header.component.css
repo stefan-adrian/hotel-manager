@@ -1,0 +1,40 @@
+.header {
+  /*background-color:	#5F9EA0;*/
+  /*background-color:	#6495ED;*/
+
+  /*background-color:		#DCDCDC;*/
+
+  /*background-color:			#E6E6FA;*/
+  /*background-color:			#FFE4E1;*/
+
+  /*background-color:		#e9ebee;*/
+  background-color:		#F5F5F5;
+
+  min-height: 80px;
+}
+
+nav .navbar-nav li a{
+  color: 		black;
+  font-family: 'Dekko';
+  font-size: 1.2em;
+}
+
+.logo-image {
+  height: 70px;
+  width: 300px;
+}
+
+.logo{
+  margin-left: 80px;
+}
+
+.text{
+  margin-right: 150px;
+
+}
+
+.account{
+  /*margin-top: 10px;*/
+  margin-left: 20px;
+  font-size: 3em;
+}
