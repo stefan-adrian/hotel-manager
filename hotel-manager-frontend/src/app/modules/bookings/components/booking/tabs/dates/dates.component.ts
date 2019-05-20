@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ValidatorService} from "../../../../../../shared/services/validator.service";
 
 @Component({
   selector: 'app-dates',
@@ -7,10 +8,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./dates.component.css']
 })
 export class DatesComponent implements OnInit {
-
-  arrival: Date;
-
-  departure: Date;
 
   dates: Date[];
 
@@ -53,12 +50,17 @@ export class DatesComponent implements OnInit {
     return this.formBuilder.group({
       arrival:[null,Validators.required],
       departure:[null,Validators.required]
+      },
+      {
+        validator:
+          ValidatorService.datesNotOverlap
+
       }
     );
   }
 
   save(){
-    console.log(this.bookingDatesForm.value);
   }
+
 
 }
