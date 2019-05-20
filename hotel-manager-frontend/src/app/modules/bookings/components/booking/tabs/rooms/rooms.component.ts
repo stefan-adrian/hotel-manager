@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {BookingComponent} from "../../booking.component";
+import {Component, OnInit} from '@angular/core';
+import {DataService} from "../../../../../../shared/services/data.service";
 
 @Component({
   selector: 'app-rooms',
@@ -8,15 +8,15 @@ import {BookingComponent} from "../../booking.component";
 })
 export class RoomsComponent implements OnInit {
 
-  arrival:any;
-  departure: any;
+  private arrival:any;
+  private departure: any;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.arrival=this.dataService.getArrival();
+    this.departure=this.dataService.getDeparture();
     var tablinks;
-    this.arrival=BookingComponent.arrival;
-    this.departure=BookingComponent.departure;
     tablinks = document.getElementsByClassName("tablinks");
     tablinks[1].className+= " active";
   }

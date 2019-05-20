@@ -1,27 +1,9 @@
-<!--
-<nav mat-tab-nav-bar class="tab">
-  <span class="toolbar-flex"></span>
-  <a mat-tab-link class="tab"
-     [routerLink]="['/bookings', {outlets: {sub: ['dates']}}]"
-     [active]="dates.active">
-    {{dates.label}}
-  </a>
-  <a mat-tab-link class="tab"
-     [routerLink]="['/bookings', {outlets: {sub: ['rooms']}}]"
-     [active]="rooms.active">
-    {{rooms.label}}
-  </a>
-  <span class="toolbar-flex"></span>
-</nav>
-
--->
-
 <div class="tab">
   <span class="toolbar-flex"></span>
 
   <button class="tablinks active" [routerLink]="['/bookings', {outlets: {sub: ['dates']}}]">Select Dates</button>
-  <button class="tablinks" [routerLink]="['/bookings', {outlets: {sub: ['rooms']}}]">Select Rooms</button>
-  <button class="tablinks">Confirmation</button>
+  <button class="tablinks" [routerLink]="['/bookings', {outlets: {sub: ['rooms']}}]" [disabled]="!arrival">Select Rooms</button>
+  <button class="tablinks" [disabled]="true">Confirmation</button>
 
   <span class="toolbar-flex"></span>
 
