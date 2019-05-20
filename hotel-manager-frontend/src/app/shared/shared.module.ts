@@ -13,12 +13,11 @@ import {MessageModule} from 'primeng/message';
 import {PanelModule} from "primeng/panel";
 import {DataViewModule} from 'primeng/dataview';
 import {SafeHtml} from "./pipes/safe-html";
-import {DropdownModule} from "primeng/primeng";
-import {InputTextModule} from "primeng/primeng";
+import {DropdownModule, InputTextModule} from "primeng/primeng";
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [SafeHtml],
@@ -40,7 +39,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     DropdownModule,
     InputTextModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    CalendarModule
   ],
   exports: [
     HttpClientModule,
@@ -61,6 +61,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatSelectModule,
     MatTabsModule,
+    CalendarModule,
 
     SafeHtml
 

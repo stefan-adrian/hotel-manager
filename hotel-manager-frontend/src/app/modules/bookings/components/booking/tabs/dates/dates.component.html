@@ -1,3 +1,14 @@
-<p>
-  dates works!
-</p>
+<form class="form-container" [formGroup]="bookingDatesForm" (ngSubmit)="save()">
+
+
+  <h5>Arrival</h5>
+  <p-calendar [(ngModel)]="arrival" [inline]="true" [minDate]="minDate" [maxDate]="departure" formControlName="arrival"></p-calendar>
+
+  <h5>Departure</h5>
+  <p-calendar [(ngModel)]="departure"  [inline]="true" [minDate]="arrival||minDate" formControlName="departure"></p-calendar>
+
+
+  <button pButton label="Search" class="ui-button-info" type="submit"
+          [disabled]="!bookingDatesForm.valid"></button>
+
+</form>

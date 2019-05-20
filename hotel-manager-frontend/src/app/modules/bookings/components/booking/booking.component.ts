@@ -28,19 +28,21 @@ export class BookingComponent implements OnInit {
     this.dates = {
       label: 'Select Dates',
       link: 'dates',
+      active: false,
       index: 0
     };
     this.rooms={
       label: 'Select Rooms',
       link: 'rooms',
+      active: false,
       index: 1
     };
   }
 
   ngOnInit() {
-    this.router.events.subscribe((res) => {
+    /*this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-    });
+    });*/
   }
 
 }

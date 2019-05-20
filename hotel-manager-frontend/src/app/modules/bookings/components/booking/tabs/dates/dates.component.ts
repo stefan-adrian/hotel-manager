@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-dates',
@@ -7,9 +8,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatesComponent implements OnInit {
 
-  constructor() { }
+  arrival: Date;
+
+  departure: Date;
+
+  dates: Date[];
+
+  rangeDates: Date[];
+
+  minDate: Date;
+
+  maxDate: Date;
+
+  invalidDates: Array<Date>;
+
+  bookingDatesForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder
+  ){
+
+  }
 
   ngOnInit() {
+    let today = new Date();
+    let month = today.getMonth();
+    let year = today.getFullYear();
+    let prevMonth = (month === 0) ? 11 : month -1;
+    let prevYear = (prevMonth === 11) ? year - 1 : year;
+    let nextMonth = (month === 11) ? 0 : month + 1;
+    let nextYear = year+3;
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(nextYear);
+
+    let invalidDate = new Date();
+    invalidDate.setDate(today.getDate() - 1);
+    this.invalidDates = [today,invalidDate];
+
+    this.bookingDatesForm=this.createFormGroup();
+  }
+
+  createFormGroup(): FormGroup{
+    return this.formBuilder.group({
+      arrival:[null,Validators.required],
+      departure:[null,Validators.required]
+      }
+    );
+  }
+
+  save(){
+    console.log(this.bookingDatesForm.value);
   }
 
 }
