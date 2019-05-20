@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BookingComponent} from "../../booking.component";
 
 @Component({
   selector: 'app-rooms',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomsComponent implements OnInit {
 
+  arrival:any;
+  departure: any;
+
   constructor() { }
 
   ngOnInit() {
+    var tablinks;
+    this.arrival=BookingComponent.arrival;
+    this.departure=BookingComponent.departure;
+    tablinks = document.getElementsByClassName("tablinks");
+    tablinks[1].className+= " active";
   }
 
 }

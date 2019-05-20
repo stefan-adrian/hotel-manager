@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidatorService} from "../../../../../../shared/services/validator.service";
+import {BookingComponent} from "../../booking.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dates',
@@ -22,7 +24,8 @@ export class DatesComponent implements OnInit {
   bookingDatesForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ){
 
   }
@@ -60,6 +63,10 @@ export class DatesComponent implements OnInit {
   }
 
   save(){
+    BookingComponent.arrival=this.bookingDatesForm.get('arrival').value;
+    BookingComponent.departure=this.bookingDatesForm.get('departure').value;
+    this.router.navigate(['/bookings', {outlets: {sub: ['rooms']}}]);
+
   }
 
 

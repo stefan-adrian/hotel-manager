@@ -12,6 +12,8 @@ export class BookingComponent implements OnInit {
   activeLinkIndex = -1;
   dates: any;
   rooms: any;
+  public static arrival: Date;
+  public static departure: Date;
 
   constructor(private router: Router) {
     this.navLinks = [
