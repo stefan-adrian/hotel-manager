@@ -1,0 +1,19 @@
+.select-dates{
+  background-color:		#F5F5F5;
+}
+
+.dates{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.submit-button{
+  text-align: center;
+}
+
+.date{
+  text-align: center;
+
+}
