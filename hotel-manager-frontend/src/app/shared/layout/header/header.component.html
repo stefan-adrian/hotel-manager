@@ -26,14 +26,15 @@
           <a class="dropdown-item" href="/rooms/add">Room</a>
         </div>
       </li>
-      <!--<li>
-        <mat-icon>home</mat-icon>
-      </li>
-      <li>
-        <mat-icon>room_service</mat-icon>
-      </li>-->
-      <li>
-        <mat-icon class="account">account_circle</mat-icon>
+      <li class="nav-item dropdown">
+        <a href="#"  class="nav-link" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <mat-icon class="account">account_circle</mat-icon>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown04">
+          <a class="nav-link" href="/login" *ngIf="!authenticationService.isLoggedIn()">Login</a>
+          <a class="nav-link" href="/customers/add" *ngIf="!authenticationService.isLoggedIn()">Register</a>
+          <a class="nav-link" href="/login" *ngIf="authenticationService.isLoggedIn()">Logout</a>
+        </div>
       </li>
       <!--<li *ngIf="!authenticationService.isLoggedIn()" class="nav-item">
         <a class="nav-link" href="/login">Login</a>
