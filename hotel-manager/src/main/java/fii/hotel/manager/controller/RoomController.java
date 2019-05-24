@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,5 +66,15 @@ public class RoomController {
     public RoomDto getById(@PathVariable Long id) {
         Room room = roomService.getById(id);
         return roomMapper.map(room);
+    }
+
+    @ApiOperation(value = "Get list of all rooms available between dates")
+    @ApiResponse(code = 200, message = "List of all rooms available between dates")
+    @GetMapping(value = "/available")
+    public List<RoomDto> getAllRomsAvailableBetweenDates(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate arrivalDate,
+                                                         @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate departureDate){
+        System.out.println(arrivalDate);
+        System.out.println(departureDate);
+        return null;
     }
 }

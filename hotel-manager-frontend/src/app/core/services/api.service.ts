@@ -30,8 +30,14 @@ export class ApiService {
     return throwError(error.error);
   }
 
-  public get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+  public get(path: string): Observable<any> {
     return this.httpClient.get(BASE_URL + path, this.options).pipe(catchError(this.formatErrors));
+  }
+
+  public getWithParams(path: string, params: HttpParams): Observable<any> {
+  let optionsWithParams = {headers: new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', 'Bearer ' + this.getToken()),params: params};
+    return this.httpClient.get(BASE_URL + path, optionsWithParams).pipe(catchError(this.formatErrors));
   }
 
   public put(path: string, body: object = {}): Observable<any> {

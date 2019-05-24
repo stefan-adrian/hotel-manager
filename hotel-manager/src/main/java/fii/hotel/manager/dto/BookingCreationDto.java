@@ -1,8 +1,10 @@
 package fii.hotel.manager.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class BookingCreationDto implements Serializable {
@@ -15,9 +17,11 @@ public class BookingCreationDto implements Serializable {
     @ApiModelProperty(value = "Customer Id", readOnly = true)
     private Long customerId;
 
-    private LocalDateTime fromTime;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fromTime;
 
-    private LocalDateTime toTime;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate toTime;
 
     private Boolean roomCleaning;
 
@@ -48,19 +52,19 @@ public class BookingCreationDto implements Serializable {
         this.roomId = roomId;
     }
 
-    public LocalDateTime getFromTime() {
+    public LocalDate getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
+    public void setFromTime(LocalDate fromTime) {
         this.fromTime = fromTime;
     }
 
-    public LocalDateTime getToTime() {
+    public LocalDate getToTime() {
         return toTime;
     }
 
-    public void setToTime(LocalDateTime toTime) {
+    public void setToTime(LocalDate toTime) {
         this.toTime = toTime;
     }
 

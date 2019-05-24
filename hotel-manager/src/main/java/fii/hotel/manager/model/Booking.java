@@ -1,6 +1,7 @@
 package fii.hotel.manager.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -16,9 +17,9 @@ public class Booking {
     @ManyToOne
     private Room room;
 
-    private LocalDateTime fromTime;
+    private LocalDate fromTime;
 
-    private LocalDateTime toTime;
+    private LocalDate toTime;
 
     private Boolean roomCleaning;
 
@@ -58,19 +59,19 @@ public class Booking {
         this.room = room;
     }
 
-    public LocalDateTime getFromTime() {
+    public LocalDate getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
+    public void setFromTime(LocalDate fromTime) {
         this.fromTime = fromTime;
     }
 
-    public LocalDateTime getToTime() {
+    public LocalDate getToTime() {
         return toTime;
     }
 
-    public void setToTime(LocalDateTime toTime) {
+    public void setToTime(LocalDate toTime) {
         this.toTime = toTime;
     }
 

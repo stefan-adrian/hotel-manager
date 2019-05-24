@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +71,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDateTime startTime, LocalDateTime endTime) {
+    public void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDate startTime, LocalDate endTime) {
         Set<Booking> bookings = room.getBookings();
         for (Booking booking : bookings) {
             if (checkIfTimeInBetween(booking.getToTime(), startTime, endTime)
@@ -84,7 +86,7 @@ public class RoomServiceImpl implements RoomService {
 
     }
 
-    private boolean checkIfTimeInBetween(LocalDateTime toCheckDate, LocalDateTime startTime, LocalDateTime endTime) {
+    private boolean checkIfTimeInBetween(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
         return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) <= 0;
     }
 }
