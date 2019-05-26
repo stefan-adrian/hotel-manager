@@ -3,6 +3,7 @@ import {DataService} from "../../../../../../shared/services/data.service";
 import {RoomService} from "../../../../../../core/services/room.service";
 import {DateFormat} from "../../../../../../shared/pipes/date-format";
 import {CategoryBooking} from "../../../../../../core/models/category-booking.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-rooms',
@@ -19,6 +20,7 @@ export class RoomsComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private roomService: RoomService,
+    private router: Router,
     private dateFormat: DateFormat
   ) { }
 
@@ -36,4 +38,8 @@ export class RoomsComponent implements OnInit {
       .subscribe(categoryBookings => this.categoryBookings = categoryBookings);
   }
 
+  book(categoryBooking: CategoryBooking): void{
+    this.dataService.setCategoryBooking(categoryBooking);
+    this.router.navigate(['/bookings', {outlets: {sub: ['confirmation']}}]);
+  }
 }

@@ -11,6 +11,7 @@ import {FooterComponent} from "./shared/layout/footer/footer.component";
 import {BookingComponent} from "./modules/bookings/components/booking/booking.component";
 import {RoomsComponent} from "./modules/bookings/components/booking/tabs/rooms/rooms.component";
 import {DatesComponent} from "./modules/bookings/components/booking/tabs/dates/dates.component";
+import {ConfirmationComponent} from "./modules/bookings/components/booking/tabs/confirmation/confirmation.component";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {DatesComponent} from "./modules/bookings/components/booking/tabs/dates/d
     FooterComponent,
     BookingComponent,
     RoomsComponent,
+    ConfirmationComponent,
     DatesComponent
   ],
   imports: [

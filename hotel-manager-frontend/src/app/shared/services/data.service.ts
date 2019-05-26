@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
+import {CategoryBooking} from "../../core/models/category-booking.model";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class DataService {
   private arrival: Date;
   private departureDate: BehaviorSubject<Date> = new BehaviorSubject<Date>(null);
   private departure: Date;
+  private categoryBookingSubject: BehaviorSubject<CategoryBooking> = new BehaviorSubject<CategoryBooking>(null);
+  private categoryBooking: CategoryBooking;
 
   constructor() { }
 
@@ -37,5 +40,18 @@ export class DataService {
 
   getDeparture(): Date{
     return this.departure;
+  }
+
+  setCategoryBooking(newCategoryBooking: CategoryBooking): void {
+    this.categoryBooking=newCategoryBooking;
+    this.categoryBookingSubject.next(newCategoryBooking);
+  }
+
+  getCategoryBookingObservable(): Observable<CategoryBooking> {
+    return this.categoryBookingSubject.asObservable();
+  }
+
+  getCategoryBooking(): CategoryBooking{
+    return this.categoryBooking;
   }
 }
