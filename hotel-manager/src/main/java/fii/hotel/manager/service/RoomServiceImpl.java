@@ -1,7 +1,10 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.CategoryBookingDto;
+import fii.hotel.manager.exception.NoRoomsAvailableForBookingException;
 import fii.hotel.manager.exception.RoomAlreadyBookedException;
 import fii.hotel.manager.exception.RoomNotFoundException;
+import fii.hotel.manager.mapper.CategoryBookingMapper;
 import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Room;
 import fii.hotel.manager.repository.RoomRepository;
@@ -9,25 +12,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class RoomServiceImpl implements RoomService {
 
     private RoomRepository roomRepository;
+    private CategoryBookingMapper categoryBookingMapper;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public RoomServiceImpl(RoomRepository roomRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, CategoryBookingMapper categoryBookingMapper) {
         this.roomRepository = roomRepository;
+        this.categoryBookingMapper = categoryBookingMapper;
     }
 
     @Override
@@ -88,5 +92,25 @@ public class RoomServiceImpl implements RoomService {
 
     private boolean checkIfTimeInBetween(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
         return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) <= 0;
+    }
+
+    @Override
+    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
+        List<CategoryBookingDto> categoryBookingDtos=new ArrayList<>();
+        long bookingDays= DAYS.between(arrivalDate,departureDate);
+        roomRepository.getRoomsAvailableBetweenDates(arrivalDate,departureDate).forEach(room -> {
+            if(categoryBookingDtos.size()==0||!categoryBookingDtos.get(categoryBookingDtos.size()-1).getName().equals(room.getCategory().getName())){
+                CategoryBookingDto categoryBookingDto=categoryBookingMapper.map(room.getCategory());
+                categoryBookingDto.setTotalBookingPrice(room.getCategory().getPrice()*bookingDays);
+                categoryBookingDtos.add(categoryBookingDto);
+            } else {
+                CategoryBookingDto categoryBookingDto=categoryBookingDtos.get(categoryBookingDtos.size()-1);
+                categoryBookingDto.setAvailableRooms(categoryBookingDto.getAvailableRooms()+1);
+            }
+        });
+        if(categoryBookingDtos.size()==0){
+            throw new NoRoomsAvailableForBookingException(arrivalDate,departureDate);
+        }
+        return categoryBookingDtos;
     }
 }

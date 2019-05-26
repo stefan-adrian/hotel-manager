@@ -1,10 +1,9 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.CategoryBookingDto;
 import fii.hotel.manager.model.Room;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RoomService {
@@ -18,4 +17,6 @@ public interface RoomService {
     Room getByIdFetchBookings(Long id);
 
     void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDate startTime, LocalDate endTime);
+
+    List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate);
 }

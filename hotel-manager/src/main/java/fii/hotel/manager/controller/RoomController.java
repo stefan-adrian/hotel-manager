@@ -1,6 +1,7 @@
 package fii.hotel.manager.controller;
 
 import fii.hotel.manager.config.Utils;
+import fii.hotel.manager.dto.CategoryBookingDto;
 import fii.hotel.manager.dto.RoomDto;
 import fii.hotel.manager.mapper.RoomMapper;
 import fii.hotel.manager.model.Room;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -71,10 +73,8 @@ public class RoomController {
     @ApiOperation(value = "Get list of all rooms available between dates")
     @ApiResponse(code = 200, message = "List of all rooms available between dates")
     @GetMapping(value = "/available")
-    public List<RoomDto> getAllRomsAvailableBetweenDates(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate arrivalDate,
+    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate arrivalDate,
                                                          @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate departureDate){
-        System.out.println(arrivalDate);
-        System.out.println(departureDate);
-        return null;
+        return roomService.getAllCategoriesAvailableBetweenDates(arrivalDate,departureDate);
     }
 }
