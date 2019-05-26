@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../../../../../shared/services/data.service";
 import {RoomService} from "../../../../../../core/services/room.service";
-import {Room} from "../../../../../../core/models/room.model";
 import {DateFormat} from "../../../../../../shared/pipes/date-format";
+import {CategoryBooking} from "../../../../../../core/models/category-booking.model";
 
 @Component({
   selector: 'app-rooms',
@@ -14,7 +14,7 @@ export class RoomsComponent implements OnInit {
 
   private arrival:Date;
   private departure: Date;
-  rooms: Room[];
+  categoryBookings: CategoryBooking[];
 
   constructor(
     private dataService: DataService,
@@ -33,7 +33,7 @@ export class RoomsComponent implements OnInit {
 
   getRoomsBetweenDates(): void {
     this.roomService.getAllBetweenDates(this.arrival,this.departure)
-      .subscribe(rooms => this.rooms = rooms);
+      .subscribe(categoryBookings => this.categoryBookings = categoryBookings);
   }
 
 }

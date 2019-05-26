@@ -1,0 +1,91 @@
+.room-booking {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+}
+
+.room-booking-left {
+  text-align: center;
+  width: 100%;
+}
+
+.options-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  /*max-width: 600px;*/
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.room-booking-right {
+  text-align: center;
+  width: 100%;
+}
+
+.room-booking-h {
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size: 1.8em;
+}
+
+.room-booking-p {
+  font-size: 1em;
+  font-family: "PT Serif";
+}
+
+@media only screen and (min-width: 450px) {
+
+  .room-booking-h {
+    font-size: 3em;
+  }
+
+  .room-booking-p {
+    font-size: 1.2em;
+  }
+
+}
+
+@media only screen and (min-width: 800px) {
+
+  .room-booking {
+    display: table;
+    width: 100%;
+  }
+
+  .room-booking-left {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 55%;
+  }
+
+  .options-image {
+    width: 85%;
+  }
+
+  .room-booking-right {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 45%;
+  }
+
+  .room-booking-h {
+    margin-right: 10%;
+  }
+
+  .room-booking-p {
+    margin-right: 10%;
+  }
+
+  .room-booking-btn {
+    margin-right: 10%;
+  }
+
+  .amenities-icons{
+    margin-right: 10%;
+
+  }
+}
