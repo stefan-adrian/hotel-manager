@@ -78,7 +78,9 @@ public class RoomServiceImpl implements RoomService {
         Set<Booking> bookings = room.getBookings();
         for (Booking booking : bookings) {
             if (checkIfStartTimeAvailable(startTime, booking.getFromTime(), booking.getToTime())
-                    || checkIfEndTimeAvailable(endTime, booking.getFromTime(), booking.getToTime())) {
+                    || checkIfEndTimeAvailable(endTime, booking.getFromTime(), booking.getToTime())
+                    || checkIfBookingDateIsBetweenDates(startTime, endTime, booking)
+                    || startTime.compareTo(endTime) >= 0) {
                 logger.debug("Room with id " + room.getId() + " cant be booked between " + startTime + " and " + endTime
                         + " because is already booked between " + booking.getFromTime() + " and " + booking.getToTime());
                 return false;
@@ -94,6 +96,10 @@ public class RoomServiceImpl implements RoomService {
 
     private boolean checkIfEndTimeAvailable(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
         return toCheckDate.compareTo(startTime) > 0 && toCheckDate.compareTo(endTime) <= 0;
+    }
+
+    private boolean checkIfBookingDateIsBetweenDates(LocalDate startDate, LocalDate endDate, Booking booking) {
+        return startDate.compareTo(booking.getFromTime()) <= 0 && endDate.compareTo(booking.getToTime()) >= 0;
     }
 
     @Override
