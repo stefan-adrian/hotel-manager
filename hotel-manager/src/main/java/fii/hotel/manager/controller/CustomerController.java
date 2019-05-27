@@ -51,14 +51,4 @@ public class CustomerController {
         Customer customer = customerService.getById(id);
         return customerMapper.map(customer);
     }
-
-    @ApiOperation(value = "Add a new booking for a customer")
-    @ApiResponses(value = {
-            @ApiResponse(code = 404, message = "Customer or room not found"),
-            @ApiResponse(code = 200, message = "Booking successfully added")
-    })
-    @PostMapping(value = "/{customerId}/bookings")
-    public BookingCreationDto addBookingForCustomer(@PathVariable Long customerId, @RequestBody BookingCreationDto bookingCreationDto) {
-        return bookingService.save(customerId, bookingCreationDto);
-    }
 }

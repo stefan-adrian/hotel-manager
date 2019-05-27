@@ -29,9 +29,16 @@ export class ConfirmationComponent implements OnInit {
     var tablinks;
     tablinks = document.getElementsByClassName("tablinks");
     tablinks[2].className+= " active";
+    console.log(this.getUsername());
   }
 
   book(): void{
     this.router.navigate(['/home']);
+  }
+
+
+  getUsername(): String {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser.username;
   }
 }

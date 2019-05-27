@@ -14,14 +14,17 @@ public class BookingCreationDto implements Serializable {
 
     private Long roomId;
 
-    @ApiModelProperty(value = "Customer Id", readOnly = true)
-    private Long customerId;
+    private String customerEmail;
+
+    private String roomCategoryName;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fromTime;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate toTime;
+
+    private Double bookingPrice;
 
     private Boolean roomCleaning;
 
@@ -36,12 +39,20 @@ public class BookingCreationDto implements Serializable {
         this.id = id;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getRoomCategoryName() {
+        return roomCategoryName;
+    }
+
+    public void setRoomCategoryName(String roomCategoryName) {
+        this.roomCategoryName = roomCategoryName;
     }
 
     public Long getRoomId() {
@@ -66,6 +77,14 @@ public class BookingCreationDto implements Serializable {
 
     public void setToTime(LocalDate toTime) {
         this.toTime = toTime;
+    }
+
+    public Double getBookingPrice() {
+        return bookingPrice;
+    }
+
+    public void setBookingPrice(Double bookingPrice) {
+        this.bookingPrice = bookingPrice;
     }
 
     public Boolean getRoomCleaning() {

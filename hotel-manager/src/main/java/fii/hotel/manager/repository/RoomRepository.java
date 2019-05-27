@@ -20,7 +20,12 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     Optional<Room> findByIdFetchBookings(@Param("id") Long id);
 
     @Transactional
-    @Query("SELECT r FROM Room r LEFT JOIN r.bookings b LEFT JOIN FETCH r.category c " +
-            " WHERE (b.fromTime>=:departureDate or b.toTime<=:arrivalDate) or b.id=null ORDER BY r.category")
-    Set<Room> getRoomsAvailableBetweenDates(@Param("arrivalDate") LocalDate arrivalDate, @Param("departureDate")LocalDate departureDate);
+    @Query("SELECT r FROM Room r LEFT JOIN FETCH r.bookings b LEFT JOIN FETCH r.category c " +
+            " ORDER BY r.category")
+    Set<Room> getRoomsFetchingBookingsCategory();
+
+    @Transactional
+    @Query("SELECT r FROM Room r LEFT JOIN FETCH r.bookings b LEFT JOIN FETCH r.category c " +
+            " WHERE c.name=:roomCategory")
+    Set<Room> getRoomsByCategoryAvailableBetweenDates(@Param("roomCategory") String roomCategory);
 }

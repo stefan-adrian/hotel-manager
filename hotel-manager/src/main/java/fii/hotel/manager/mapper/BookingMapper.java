@@ -46,7 +46,8 @@ public class BookingMapper {
         BookingCreationDto bookingCreationDto = new BookingCreationDto();
         bookingCreationDto.setId(booking.getId());
         bookingCreationDto.setRoomId(booking.getRoom().getId());
-        bookingCreationDto.setCustomerId(booking.getCustomer().getId());
+        bookingCreationDto.setCustomerEmail(booking.getCustomer().getEmail());
+        bookingCreationDto.setRoomCategoryName(booking.getRoom().getCategory().getName());
         bookingCreationDto.setFromTime(booking.getFromTime());
         bookingCreationDto.setToTime(booking.getToTime());
         bookingCreationDto.setRoomCleaning(booking.getRoomCleaning());

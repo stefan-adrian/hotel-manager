@@ -2,7 +2,6 @@ package fii.hotel.manager.service;
 
 import fii.hotel.manager.dto.CategoryBookingDto;
 import fii.hotel.manager.exception.NoRoomsAvailableForBookingException;
-import fii.hotel.manager.exception.RoomAlreadyBookedException;
 import fii.hotel.manager.exception.RoomNotFoundException;
 import fii.hotel.manager.mapper.CategoryBookingMapper;
 import fii.hotel.manager.model.Booking;
@@ -75,42 +74,60 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDate startTime, LocalDate endTime) {
+    public boolean checkIfBookingTimeAvailable(Room room, LocalDate startTime, LocalDate endTime) {
         Set<Booking> bookings = room.getBookings();
         for (Booking booking : bookings) {
-            if (checkIfTimeInBetween(booking.getToTime(), startTime, endTime)
-                    || checkIfTimeInBetween(booking.getFromTime(), startTime, endTime)
-                    || checkIfTimeInBetween(startTime, booking.getFromTime(), booking.getToTime())
-                    || checkIfTimeInBetween(endTime, booking.getFromTime(), booking.getToTime())) {
-                logger.error("Room with id " + room.getId() + " cant be booked between " + startTime + " and " + endTime
+            if (checkIfStartTimeAvailable(startTime, booking.getFromTime(), booking.getToTime())
+                    || checkIfEndTimeAvailable(endTime, booking.getFromTime(), booking.getToTime())) {
+                logger.debug("Room with id " + room.getId() + " cant be booked between " + startTime + " and " + endTime
                         + " because is already booked between " + booking.getFromTime() + " and " + booking.getToTime());
-                throw new RoomAlreadyBookedException(startTime, endTime);
+                return false;
             }
         }
+        return true;
 
     }
 
-    private boolean checkIfTimeInBetween(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
-        return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) <= 0;
+    private boolean checkIfStartTimeAvailable(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
+        return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) < 0;
+    }
+
+    private boolean checkIfEndTimeAvailable(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
+        return toCheckDate.compareTo(startTime) > 0 && toCheckDate.compareTo(endTime) <= 0;
     }
 
     @Override
     public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
-        List<CategoryBookingDto> categoryBookingDtos=new ArrayList<>();
-        long bookingDays= DAYS.between(arrivalDate,departureDate);
-        roomRepository.getRoomsAvailableBetweenDates(arrivalDate,departureDate).forEach(room -> {
-            if(categoryBookingDtos.size()==0||!categoryBookingDtos.get(categoryBookingDtos.size()-1).getName().equals(room.getCategory().getName())){
-                CategoryBookingDto categoryBookingDto=categoryBookingMapper.map(room.getCategory());
-                categoryBookingDto.setTotalBookingPrice(room.getCategory().getPrice()*bookingDays);
-                categoryBookingDtos.add(categoryBookingDto);
-            } else {
-                CategoryBookingDto categoryBookingDto=categoryBookingDtos.get(categoryBookingDtos.size()-1);
-                categoryBookingDto.setAvailableRooms(categoryBookingDto.getAvailableRooms()+1);
+        List<CategoryBookingDto> categoryBookingDtos = new ArrayList<>();
+        long bookingDays = DAYS.between(arrivalDate, departureDate);
+        roomRepository.getRoomsFetchingBookingsCategory().forEach(room -> {
+            if (checkIfBookingTimeAvailable(room, arrivalDate, departureDate)) {
+                if (categoryBookingDtos.size() == 0 || !categoryBookingDtos.get(categoryBookingDtos.size() - 1).getName().equals(room.getCategory().getName())) {
+                    CategoryBookingDto categoryBookingDto = categoryBookingMapper.map(room.getCategory());
+                    categoryBookingDto.setTotalBookingPrice(room.getCategory().getPrice() * bookingDays);
+                    categoryBookingDtos.add(categoryBookingDto);
+                } else {
+                    CategoryBookingDto categoryBookingDto = categoryBookingDtos.get(categoryBookingDtos.size() - 1);
+                    categoryBookingDto.setAvailableRooms(categoryBookingDto.getAvailableRooms() + 1);
+                }
             }
         });
-        if(categoryBookingDtos.size()==0){
-            throw new NoRoomsAvailableForBookingException(arrivalDate,departureDate);
+        if (categoryBookingDtos.size() == 0) {
+            logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
+            throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
         }
         return categoryBookingDtos;
+    }
+
+    @Override
+    public Room getRoomByCategoryAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String roomCategory) {
+        Set<Room> rooms = roomRepository.getRoomsByCategoryAvailableBetweenDates(roomCategory);
+        for (Room room : rooms) {
+            if (checkIfBookingTimeAvailable(room, arrivalDate, departureDate)) {
+                return room;
+            }
+        }
+        logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
+        throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
     }
 }

@@ -16,7 +16,9 @@ public interface RoomService {
 
     Room getByIdFetchBookings(Long id);
 
-    void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDate startTime, LocalDate endTime);
+    boolean checkIfBookingTimeAvailable(Room room, LocalDate startTime, LocalDate endTime);
 
     List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate);
+
+    Room getRoomByCategoryAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String roomCategory);
 }
