@@ -1,9 +1,14 @@
-<p>
-  You choose to book a {{categoryBooking.name}} between {{arrival}} and {{departure}}.
-</p>
-<p>
-  Total Price: {{categoryBooking.totalBookingPrice}}$
-</p>
-<a (click)="book()" class="btn btn-secondary">Book</a>
-<p-messages [(value)]="message"></p-messages>
+<div class="confirmation">
+  <p class="confirmation-p">
+    Thanks for choosing to book a {{categoryBooking.name}} between {{arrival}} and {{departure}}.
+  </p>
+  <p class="confirmation-p">
+    The total booking price is show below, if you want to finish the booking press book button.
+  </p>
+  <p class="confirmation-p">
+    Total Price: {{categoryBooking.totalBookingPrice}}$
+  </p>
+  <button (click)="book()" class="btn btn-secondary">Book</button>
+  <p-messages [(value)]="message"></p-messages>
 
+</div>

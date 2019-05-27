@@ -47,7 +47,7 @@ export class ConfirmationComponent implements OnInit {
     booking.customerEmail=this.getUsername();
     this.bookingService.add(booking).pipe(
       map(response=>{
-        // this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       }),
       catchError((err) => {
         this.message = [];
