@@ -1,0 +1,23 @@
+<div class="room-booking" *ngFor="let categoryBooking of categoryBookings">
+  <div class="room-booking-left">
+    <img [src]="'data:image/jpg;base64,'+categoryBooking.image | safeHtml" class="options-image">
+  </div>
+  <div class="room-booking-right">
+    <h1 class="room-booking-h">{{categoryBooking.name}}</h1>
+    <p class="room-booking-p">
+      {{categoryBooking.description}}
+    </p>
+    <div class="amenities-icons">
+      <mat-icon title="Wifi">wifi</mat-icon>
+      <mat-icon title="No smoking">smoke_free</mat-icon>
+      <mat-icon title="Accessible">accessible_forward</mat-icon>
+      <mat-icon> hotel</mat-icon>
+      <mat-icon>plus_one</mat-icon>
+      <mat-icon>ac_unit</mat-icon>
+      <mat-icon>room_service</mat-icon>
+    </div>
+    <h1 class="room-booking-h">Booking price: {{categoryBooking.totalBookingPrice}}$</h1>
+    <br>
+    <button (click)="book(categoryBooking)" class="btn btn-secondary room-booking-btn">Book</button>
+  </div>
+</div>

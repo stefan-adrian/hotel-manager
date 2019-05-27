@@ -1,10 +1,7 @@
 package fii.hotel.manager.controller;
 
 import fii.hotel.manager.config.Utils;
-import fii.hotel.manager.dto.BookingDto;
-import fii.hotel.manager.dto.CarOrderDto;
-import fii.hotel.manager.dto.RoomserviceDto;
-import fii.hotel.manager.dto.SpaEventDto;
+import fii.hotel.manager.dto.*;
 import fii.hotel.manager.model.Roomservice;
 import fii.hotel.manager.service.BookingService;
 import fii.hotel.manager.service.CarOrderService;
@@ -74,5 +71,15 @@ public class BookingController {
     @PostMapping(value = "/{bookingId}/roomservices")
     public RoomserviceDto addRoomserviceForBooking(@PathVariable Long bookingId, @RequestBody RoomserviceDto roomserviceDto) {
         return roomserviceService.add(bookingId, roomserviceDto);
+    }
+
+    @ApiOperation(value = "Add a new booking")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Customer or room not found"),
+            @ApiResponse(code = 200, message = "Booking successfully added")
+    })
+    @PostMapping
+    public BookingCreationDto addBooking(@RequestBody BookingCreationDto bookingCreationDto) {
+        return bookingService.save(bookingCreationDto);
     }
 }

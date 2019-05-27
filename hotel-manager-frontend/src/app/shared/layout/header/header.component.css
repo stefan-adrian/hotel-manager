@@ -1,0 +1,30 @@
+.header {
+  background-color:		#F5F5F5;
+
+  min-height: 80px;
+}
+
+nav .navbar-nav li a{
+  color: 		black;
+  font-family: 'Dekko';
+  font-size: 1.2em;
+}
+
+.logo-image {
+  height: 70px;
+  width: 300px;
+}
+
+.logo{
+  margin-left: 80px;
+}
+
+.text{
+  margin-right: 150px;
+
+}
+
+.account{
+  margin-left: 20px;
+  font-size: 2em;
+}

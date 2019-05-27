@@ -1,7 +1,9 @@
 package fii.hotel.manager.service;
 
-import fii.hotel.manager.exception.RoomAlreadyBookedException;
+import fii.hotel.manager.dto.CategoryBookingDto;
+import fii.hotel.manager.exception.NoRoomsAvailableForBookingException;
 import fii.hotel.manager.exception.RoomNotFoundException;
+import fii.hotel.manager.mapper.CategoryBookingMapper;
 import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Room;
 import fii.hotel.manager.repository.RoomRepository;
@@ -9,23 +11,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class RoomServiceImpl implements RoomService {
 
     private RoomRepository roomRepository;
+    private CategoryBookingMapper categoryBookingMapper;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public RoomServiceImpl(RoomRepository roomRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, CategoryBookingMapper categoryBookingMapper) {
         this.roomRepository = roomRepository;
+        this.categoryBookingMapper = categoryBookingMapper;
     }
 
     @Override
@@ -69,22 +74,66 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void checkThatRoomBookingTimeDoesNotOverlap(Room room, LocalDateTime startTime, LocalDateTime endTime) {
+    public boolean checkIfBookingTimeAvailable(Room room, LocalDate startTime, LocalDate endTime) {
         Set<Booking> bookings = room.getBookings();
         for (Booking booking : bookings) {
-            if (checkIfTimeInBetween(booking.getToTime(), startTime, endTime)
-                    || checkIfTimeInBetween(booking.getFromTime(), startTime, endTime)
-                    || checkIfTimeInBetween(startTime, booking.getFromTime(), booking.getToTime())
-                    || checkIfTimeInBetween(endTime, booking.getFromTime(), booking.getToTime())) {
-                logger.error("Room with id " + room.getId() + " cant be booked between " + startTime + " and " + endTime
+            if (checkIfStartTimeAvailable(startTime, booking.getFromTime(), booking.getToTime())
+                    || checkIfEndTimeAvailable(endTime, booking.getFromTime(), booking.getToTime())
+                    || checkIfBookingDateIsBetweenDates(startTime, endTime, booking)
+                    || startTime.compareTo(endTime) >= 0) {
+                logger.debug("Room with id " + room.getId() + " cant be booked between " + startTime + " and " + endTime
                         + " because is already booked between " + booking.getFromTime() + " and " + booking.getToTime());
-                throw new RoomAlreadyBookedException(startTime, endTime);
+                return false;
             }
         }
+        return true;
 
     }
 
-    private boolean checkIfTimeInBetween(LocalDateTime toCheckDate, LocalDateTime startTime, LocalDateTime endTime) {
-        return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) <= 0;
+    private boolean checkIfStartTimeAvailable(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
+        return toCheckDate.compareTo(startTime) >= 0 && toCheckDate.compareTo(endTime) < 0;
+    }
+
+    private boolean checkIfEndTimeAvailable(LocalDate toCheckDate, LocalDate startTime, LocalDate endTime) {
+        return toCheckDate.compareTo(startTime) > 0 && toCheckDate.compareTo(endTime) <= 0;
+    }
+
+    private boolean checkIfBookingDateIsBetweenDates(LocalDate startDate, LocalDate endDate, Booking booking) {
+        return startDate.compareTo(booking.getFromTime()) <= 0 && endDate.compareTo(booking.getToTime()) >= 0;
+    }
+
+    @Override
+    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
+        List<CategoryBookingDto> categoryBookingDtos = new ArrayList<>();
+        long bookingDays = DAYS.between(arrivalDate, departureDate);
+        roomRepository.getRoomsFetchingBookingsCategory().forEach(room -> {
+            if (checkIfBookingTimeAvailable(room, arrivalDate, departureDate)) {
+                if (categoryBookingDtos.size() == 0 || !categoryBookingDtos.get(categoryBookingDtos.size() - 1).getName().equals(room.getCategory().getName())) {
+                    CategoryBookingDto categoryBookingDto = categoryBookingMapper.map(room.getCategory());
+                    categoryBookingDto.setTotalBookingPrice(room.getCategory().getPrice() * bookingDays);
+                    categoryBookingDtos.add(categoryBookingDto);
+                } else {
+                    CategoryBookingDto categoryBookingDto = categoryBookingDtos.get(categoryBookingDtos.size() - 1);
+                    categoryBookingDto.setAvailableRooms(categoryBookingDto.getAvailableRooms() + 1);
+                }
+            }
+        });
+        if (categoryBookingDtos.size() == 0) {
+            logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
+            throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
+        }
+        return categoryBookingDtos;
+    }
+
+    @Override
+    public Room getRoomByCategoryAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String roomCategory) {
+        Set<Room> rooms = roomRepository.getRoomsByCategoryAvailableBetweenDates(roomCategory);
+        for (Room room : rooms) {
+            if (checkIfBookingTimeAvailable(room, arrivalDate, departureDate)) {
+                return room;
+            }
+        }
+        logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
+        throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
     }
 }

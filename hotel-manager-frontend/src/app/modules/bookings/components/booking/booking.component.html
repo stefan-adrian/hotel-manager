@@ -1,0 +1,13 @@
+<div class="tab">
+  <span class="toolbar-flex"></span>
+
+  <button class="tablinks active" [routerLink]="['/bookings', {outlets: {sub: ['dates']}}]">Select Dates</button>
+  <button class="tablinks" [routerLink]="['/bookings', {outlets: {sub: ['rooms']}}]" [disabled]="!arrival">Select Rooms</button>
+  <button class="tablinks" [routerLink]="['/bookings', {outlets: {sub: ['confirmation']}}]" [disabled]="!categoryBooking">Confirmation</button>
+
+  <span class="toolbar-flex"></span>
+
+</div>
+
+
+<router-outlet name="sub"></router-outlet>

@@ -1,6 +1,9 @@
 package fii.hotel.manager.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,11 +15,15 @@ public class BookingDto implements Serializable {
 
     private RoomDto roomDto;
 
-    private LocalDateTime fromTime;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fromTime;
 
-    private LocalDateTime toTime;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate toTime;
 
     private Boolean roomCleaning;
+
+    private Double price;
 
     private List<CarOrderDto> carOrderDtos;
 
@@ -51,19 +58,19 @@ public class BookingDto implements Serializable {
         this.roomDto = roomDto;
     }
 
-    public LocalDateTime getFromTime() {
+    public LocalDate getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
+    public void setFromTime(LocalDate fromTime) {
         this.fromTime = fromTime;
     }
 
-    public LocalDateTime getToTime() {
+    public LocalDate getToTime() {
         return toTime;
     }
 
-    public void setToTime(LocalDateTime toTime) {
+    public void setToTime(LocalDate toTime) {
         this.toTime = toTime;
     }
 
@@ -73,6 +80,14 @@ public class BookingDto implements Serializable {
 
     public void setRoomCleaning(Boolean roomCleaning) {
         this.roomCleaning = roomCleaning;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public List<CarOrderDto> getCarOrderDtos() {

@@ -1,0 +1,15 @@
+.confirmation{
+  background-color:		#F5F5F5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 450px;
+}
+
+.confirmation-p{
+  font-family: cursive;
+  font-size: 1em;
+  margin-left: 20%;
+  margin-right: 20%;
+}

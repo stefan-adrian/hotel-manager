@@ -1,0 +1,29 @@
+<div class="select-dates">
+
+
+  <form class="form-container" [formGroup]="bookingDatesForm" (ngSubmit)="save()">
+
+    <br>
+    <div class="dates">
+      <div class="date">
+        <h5>Arrival</h5>
+        <br>
+        <p-calendar [inline]="true" [minDate]="minDate" [maxDate]="bookingDatesForm.get('departure').value"
+                    formControlName="arrival"></p-calendar>
+      </div>
+      <div class="date">
+        <h5>Departure</h5>
+        <br>
+        <p-calendar [inline]="true" [minDate]="bookingDatesForm.get('arrival').value||minDate"
+                    formControlName="departure"></p-calendar>
+      </div>
+    </div>
+    <br>
+    <div class="submit-button">
+      <button pButton label="Search" class="btn btn-secondary room-booking-btn" type="submit"
+              [disabled]="!bookingDatesForm.valid"></button>
+    </div>
+    <br>
+  </form>
+
+</div>

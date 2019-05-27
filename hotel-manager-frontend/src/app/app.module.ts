@@ -8,12 +8,20 @@ import {HeaderComponent} from "./shared/layout/header/header.component";
 import {CoreModule} from "./core/core.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FooterComponent} from "./shared/layout/footer/footer.component";
+import {BookingComponent} from "./modules/bookings/components/booking/booking.component";
+import {RoomsComponent} from "./modules/bookings/components/booking/tabs/rooms/rooms.component";
+import {DatesComponent} from "./modules/bookings/components/booking/tabs/dates/dates.component";
+import {ConfirmationComponent} from "./modules/bookings/components/booking/tabs/confirmation/confirmation.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BookingComponent,
+    RoomsComponent,
+    ConfirmationComponent,
+    DatesComponent
   ],
   imports: [
     BrowserModule,

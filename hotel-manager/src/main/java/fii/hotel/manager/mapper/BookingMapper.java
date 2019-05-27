@@ -37,6 +37,7 @@ public class BookingMapper {
         booking.setCustomer(customer);
         booking.setRoom(room);
         booking.setRoomCleaning(bookingCreationDto.getRoomCleaning());
+        booking.setPrice(bookingCreationDto.getBookingPrice());
         booking.setFromTime(bookingCreationDto.getFromTime());
         booking.setToTime(bookingCreationDto.getToTime());
         return booking;
@@ -46,10 +47,12 @@ public class BookingMapper {
         BookingCreationDto bookingCreationDto = new BookingCreationDto();
         bookingCreationDto.setId(booking.getId());
         bookingCreationDto.setRoomId(booking.getRoom().getId());
-        bookingCreationDto.setCustomerId(booking.getCustomer().getId());
+        bookingCreationDto.setCustomerEmail(booking.getCustomer().getEmail());
+        bookingCreationDto.setRoomCategoryName(booking.getRoom().getCategory().getName());
         bookingCreationDto.setFromTime(booking.getFromTime());
         bookingCreationDto.setToTime(booking.getToTime());
         bookingCreationDto.setRoomCleaning(booking.getRoomCleaning());
+        bookingCreationDto.setBookingPrice(booking.getPrice());
         return bookingCreationDto;
     }
 
@@ -59,6 +62,7 @@ public class BookingMapper {
         bookingDto.setRoomCleaning(booking.getRoomCleaning());
         bookingDto.setFromTime(booking.getFromTime());
         bookingDto.setToTime(booking.getToTime());
+        bookingDto.setPrice(booking.getPrice());
         bookingDto.setCustomerDto(customerMapper.map(booking.getCustomer()));
         bookingDto.setRoomDto(roomMapper.map(booking.getRoom()));
         List<CarOrderDto> carOrderDtos = booking.getCarOrders().stream().map(carOrderMapper::map).collect(Collectors.toList());
