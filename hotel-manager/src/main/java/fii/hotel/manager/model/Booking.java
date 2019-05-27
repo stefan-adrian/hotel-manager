@@ -23,6 +23,8 @@ public class Booking {
 
     private Boolean roomCleaning;
 
+    private Double price;
+
     @OneToMany(mappedBy = "booking")
     private Set<Roomservice> roomservices;
 
@@ -81,6 +83,14 @@ public class Booking {
 
     public void setRoomCleaning(Boolean roomCleaning) {
         this.roomCleaning = roomCleaning;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Set<Roomservice> getRoomservices() {

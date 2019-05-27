@@ -23,6 +23,8 @@ public class BookingDto implements Serializable {
 
     private Boolean roomCleaning;
 
+    private Double price;
+
     private List<CarOrderDto> carOrderDtos;
 
     private List<SpaEventDto> spaEventDtos;
@@ -78,6 +80,14 @@ public class BookingDto implements Serializable {
 
     public void setRoomCleaning(Boolean roomCleaning) {
         this.roomCleaning = roomCleaning;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public List<CarOrderDto> getCarOrderDtos() {
