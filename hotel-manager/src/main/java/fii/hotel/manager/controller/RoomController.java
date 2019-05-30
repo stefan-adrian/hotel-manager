@@ -69,12 +69,4 @@ public class RoomController {
         Room room = roomService.getById(id);
         return roomMapper.map(room);
     }
-
-    @ApiOperation(value = "Get list of all rooms available between dates")
-    @ApiResponse(code = 200, message = "List of all rooms available between dates")
-    @GetMapping(value = "/available")
-    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate arrivalDate,
-                                                         @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate departureDate){
-        return roomService.getAllCategoriesAvailableBetweenDates(arrivalDate,departureDate);
-    }
 }

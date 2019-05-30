@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 import {Observable} from "rxjs";
 import {Category} from "../models/category.model";
+import {CategoryBooking} from "../models/category-booking.model";
+import {HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +31,10 @@ export class CategoryService {
       () => {
         this.router.navigate(['/categories']);
       });
+  }
+
+  getAllBetweenDates(arrivalDate: any,departureDate: any) : Observable<CategoryBooking[]>{
+    let params = new HttpParams().append("arrivalDate",arrivalDate).append("departureDate",departureDate);
+    return this.apiService.getWithParams('/categories/available',params);
   }
 }

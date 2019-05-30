@@ -103,32 +103,6 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
-        List<CategoryBookingDto> categoryBookingDtos = new ArrayList<>();
-        roomRepository.getRoomsFetchingBookingsCategory().forEach(room -> {
-            if (checkIfBookingTimeAvailable(room, arrivalDate, departureDate)) {
-                if (categoryBookingDtos.size() == 0 || !categoryBookingDtos.get(categoryBookingDtos.size() - 1).getName().equals(room.getCategory().getName())) {
-                    categoryBookingDtos.add(categoryBookingMapper.map(room.getCategory()));
-                } else {
-                    CategoryBookingDto categoryBookingDto = categoryBookingDtos.get(categoryBookingDtos.size() - 1);
-                    categoryBookingDto.setAvailableRooms(categoryBookingDto.getAvailableRooms() + 1);
-                }
-            }
-        });
-        if (categoryBookingDtos.size() == 0) {
-            logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
-            throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
-        }
-        setCategoryBookingTotalPrice(categoryBookingDtos,arrivalDate,departureDate);
-        return categoryBookingDtos;
-    }
-
-    private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate){
-        long bookingDays = DAYS.between(arrivalDate, departureDate);
-        categoryBookingDtos.forEach(categoryBookingDto -> categoryBookingDto.setTotalBookingPrice(categoryBookingDto.getCategoryBasicPrice()*bookingDays));
-    }
-
-    @Override
     public Room getRoomByCategoryAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String roomCategory) {
         Set<Room> rooms = roomRepository.getRoomsByCategoryAvailableBetweenDates(roomCategory);
         for (Room room : rooms) {
@@ -138,5 +112,10 @@ public class RoomServiceImpl implements RoomService {
         }
         logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
         throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
+    }
+
+    @Override
+    public Integer getNumberOfAvailableRoomsBetweenDates(Set<Room> rooms,LocalDate arrivalDate,LocalDate departureDate) {
+        return (int) rooms.stream().filter(room -> checkIfBookingTimeAvailable(room, arrivalDate, departureDate)).count();
     }
 }

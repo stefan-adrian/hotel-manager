@@ -1,6 +1,9 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.CategoryBookingDto;
 import fii.hotel.manager.exception.CategoryNotFoundException;
+import fii.hotel.manager.exception.NoRoomsAvailableForBookingException;
+import fii.hotel.manager.mapper.CategoryBookingMapper;
 import fii.hotel.manager.model.Category;
 import fii.hotel.manager.repository.CategoryRepository;
 import org.slf4j.Logger;
@@ -10,22 +13,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
     private PriceService priceService;
+    private CategoryBookingMapper categoryBookingMapper;
+    private RoomService roomService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository, PriceService priceService) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, PriceService priceService, CategoryBookingMapper categoryBookingMapper, RoomService roomService) {
         this.categoryRepository = categoryRepository;
         this.priceService = priceService;
+        this.categoryBookingMapper = categoryBookingMapper;
+        this.roomService = roomService;
     }
 
     @Override
@@ -63,5 +73,27 @@ public class CategoryServiceImpl implements CategoryService {
             logger.error("Category with id " + id + " was not found in the database.");
             throw new CategoryNotFoundException(id);
         }
+    }
+
+    @Override
+    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
+        List<CategoryBookingDto> categoryBookingDtos = new ArrayList<>();
+        categoryRepository.findAllCategoriesFetchingRoomsFetchingBookings().forEach(category -> {
+            Integer categoryAvailableRooms=roomService.getNumberOfAvailableRoomsBetweenDates(category.getRooms(),arrivalDate,departureDate);
+            if(categoryAvailableRooms>0) {
+                categoryBookingDtos.add(categoryBookingMapper.map(category, categoryAvailableRooms));
+            }
+        });
+        if (categoryBookingDtos.size() == 0) {
+            logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
+            throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
+        }
+        setCategoryBookingTotalPrice(categoryBookingDtos,arrivalDate,departureDate);
+        return categoryBookingDtos;
+    }
+
+    private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate){
+        long bookingDays = DAYS.between(arrivalDate, departureDate);
+        categoryBookingDtos.forEach(categoryBookingDto -> categoryBookingDto.setTotalBookingPrice(categoryBookingDto.getCategoryBasicPrice()*bookingDays));
     }
 }

@@ -28,9 +28,4 @@ export class RoomService {
   add(room: Room): Observable<Room> {
     return this.apiService.post('/rooms', room);
   }
-
-  getAllBetweenDates(arrivalDate: any,departureDate: any) : Observable<CategoryBooking[]>{
-    let params = new HttpParams().append("arrivalDate",arrivalDate).append("departureDate",departureDate);
-    return this.apiService.getWithParams('/rooms/available',params);
-  }
 }
