@@ -19,7 +19,7 @@ public class Category {
 
     private Integer size;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String description;
 
     @Lob
