@@ -1,24 +1,21 @@
 package fii.hotel.manager.service;
 
-import fii.hotel.manager.model.Category;
-import fii.hotel.manager.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import fii.hotel.manager.dto.CategoryBookingDto;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PriceServiceImpl implements  PriceService{
 
-    private CategoryRepository categoryRepository;
+    private Map<String,Double> categoriesPrices=new HashMap<>();
 
-    @Autowired
-    public PriceServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 
     @Override
-    public Set<Category> getAllCategoriesFetchingRoomsFetchingBookings() {
-        return categoryRepository.findAllCategoriesFetchingRoomsFetchingBookings();
+    public Map<String, Double> getCategoriesPricesBetweenDates(List<CategoryBookingDto> categoryBookingDtos, LocalDate arrivalDate, LocalDate departureDate) {
+        return null;
     }
 }

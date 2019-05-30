@@ -1,10 +1,12 @@
 package fii.hotel.manager.service;
 
-import fii.hotel.manager.model.Category;
+import fii.hotel.manager.dto.CategoryBookingDto;
 
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 public interface PriceService {
 
-    Set<Category> getAllCategoriesFetchingRoomsFetchingBookings();
+    Map<String,Double> getCategoriesPricesBetweenDates(List<CategoryBookingDto> categoryBookingDtos, LocalDate arrivalDate, LocalDate departureDate);
 }
