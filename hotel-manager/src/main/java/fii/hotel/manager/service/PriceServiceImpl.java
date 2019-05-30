@@ -1,6 +1,7 @@
 package fii.hotel.manager.service;
 
 import fii.hotel.manager.dto.CategoryBookingDto;
+import fii.hotel.manager.model.CategoryOccupancy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,6 +25,23 @@ public class PriceServiceImpl implements  PriceService{
     }
 
     private Double calculateCategoryPrice(CategoryBookingDto categoryBookingDto,LocalDate arrivalDate,LocalDate departureDate){
-        return 0.0;
+        Double priceByOccupancy=getPriceByRoomsOccupancy(categoryBookingDto);
+        return priceByOccupancy;
+    }
+
+    public Double getPriceByRoomsOccupancy(CategoryBookingDto categoryBookingDto){
+        Integer totalRooms=categoryBookingDto.getTotalRooms();
+        Integer availableRooms=categoryBookingDto.getAvailableRooms();
+        Double occupancyPercentage = Double.valueOf(totalRooms-availableRooms)/totalRooms;
+        for(CategoryOccupancy categoryOccupancy:CategoryOccupancy.values()){
+            if(occupancyPercentage>=categoryOccupancy.getPercent()){
+                return categoryBookingDto.getCategoryBasicPrice()*categoryOccupancy.getMultiplyValue();
+            }
+        }
+        if(occupancyPercentage<=0.1){
+            return categoryBookingDto.getCategoryBasicPrice()*0.9;
+        }
+        return categoryBookingDto.getCategoryBasicPrice();
+
     }
 }

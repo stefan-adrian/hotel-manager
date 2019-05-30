@@ -9,4 +9,6 @@ import java.util.Map;
 public interface PriceService {
 
     Map<String,Double> getCategoriesPricesBetweenDates(List<CategoryBookingDto> categoryBookingDtos, LocalDate arrivalDate, LocalDate departureDate);
+
+    Double getPriceByRoomsOccupancy(CategoryBookingDto categoryBookingDto);
 }
