@@ -13,7 +13,7 @@ public class Room {
 
     private Integer floor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 

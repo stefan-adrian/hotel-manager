@@ -5,21 +5,27 @@ import fii.hotel.manager.model.Category;
 import fii.hotel.manager.repository.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
+    private PriceService priceService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    @Autowired
+    public CategoryServiceImpl(CategoryRepository categoryRepository, PriceService priceService) {
         this.categoryRepository = categoryRepository;
+        this.priceService = priceService;
     }
 
     @Override
