@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -86,5 +87,11 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto getBookingDtoById(Long id) {
         Booking booking = getByIdFetchCarOrders(id);
         return bookingMapper.map(booking);
+    }
+
+    @Override
+    public Integer getNumberOfBookingsIn24HoursIntervalBeforeNow() {
+        LocalDateTime oneDayBeforeNow=LocalDateTime.now().minusDays(1);
+        return bookingRepository.getNumberOfBookingsAfterDate(oneDayBeforeNow);
     }
 }

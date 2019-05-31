@@ -25,6 +25,8 @@ public class Booking {
 
     private Double price;
 
+    private LocalDateTime bookingTime;
+
     @OneToMany(mappedBy = "booking")
     private Set<Roomservice> roomservices;
 
@@ -91,6 +93,14 @@ public class Booking {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public LocalDateTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
     }
 
     public Set<Roomservice> getRoomservices() {

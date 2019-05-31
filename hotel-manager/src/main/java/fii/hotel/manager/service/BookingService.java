@@ -12,4 +12,6 @@ public interface BookingService {
     Booking getById(Long id);
 
     BookingDto getBookingDtoById(Long id);
+
+    Integer getNumberOfBookingsIn24HoursIntervalBeforeNow();
 }

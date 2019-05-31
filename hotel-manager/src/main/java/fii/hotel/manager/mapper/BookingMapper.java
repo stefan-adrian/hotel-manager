@@ -7,6 +7,7 @@ import fii.hotel.manager.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,7 @@ public class BookingMapper {
         booking.setPrice(bookingCreationDto.getBookingPrice());
         booking.setFromTime(bookingCreationDto.getFromTime());
         booking.setToTime(bookingCreationDto.getToTime());
+        booking.setBookingTime(LocalDateTime.now());
         return booking;
     }
 
@@ -53,6 +55,7 @@ public class BookingMapper {
         bookingCreationDto.setToTime(booking.getToTime());
         bookingCreationDto.setRoomCleaning(booking.getRoomCleaning());
         bookingCreationDto.setBookingPrice(booking.getPrice());
+        bookingCreationDto.setBookingTime(booking.getBookingTime());
         return bookingCreationDto;
     }
 
@@ -71,6 +74,7 @@ public class BookingMapper {
         bookingDto.setSpaEventDtos(spaEventDtos);
         List<RoomserviceDto> roomserviceDtos = booking.getRoomservices().stream().map(roomserviceMapper::map).collect(Collectors.toList());
         bookingDto.setRoomserviceDtos(roomserviceDtos);
+        bookingDto.setBookingTime(booking.getBookingTime());
         return bookingDto;
     }
 }

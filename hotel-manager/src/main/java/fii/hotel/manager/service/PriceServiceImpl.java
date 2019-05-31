@@ -19,10 +19,12 @@ public class PriceServiceImpl implements  PriceService{
 
     private Map<String,Double> categoriesPrices=new HashMap<>();
     private RoomService roomService;
+    private BookingService bookingService;
 
     @Autowired
-    public PriceServiceImpl(RoomService roomService) {
+    public PriceServiceImpl(RoomService roomService, BookingService bookingService) {
         this.roomService = roomService;
+        this.bookingService = bookingService;
     }
 
     @Override
@@ -43,6 +45,7 @@ public class PriceServiceImpl implements  PriceService{
             totalPrice+=getBookingPriceForDayByCategory(category,date);
         }
         totalPrice*= getPriceRemainingPercentageByNumberOfBookingDays(arrivalDate,departureDate);
+        totalPrice*=getPriceIncreasePercentageByNumberOfBookingInLastDay();
         return totalPrice;
     }
 
@@ -84,6 +87,14 @@ public class PriceServiceImpl implements  PriceService{
             if(bookingDays>=numberOfDaysDiscounts.getNumberOfDays()){
                 return 1.0-numberOfDaysDiscounts.getDiscountPercentage();
             }
+        }
+        return 1.0;
+    }
+
+    private Double getPriceIncreasePercentageByNumberOfBookingInLastDay(){
+        Integer numberOfBookings=bookingService.getNumberOfBookingsIn24HoursIntervalBeforeNow();
+        if(numberOfBookings>=100){
+            return 1.1;
         }
         return 1.0;
     }
