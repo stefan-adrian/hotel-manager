@@ -22,14 +22,18 @@ public class PriceServiceImplTest {
     private Set<Category> categories;
     private Category category1;
     private Set<Room> rooms1;
+    private String email;
     @Mock
     private RoomServiceImpl roomService;
+    @Mock
+    private BookingServiceImpl bookingService;
     @InjectMocks
     private PriceServiceImpl priceService;
 
 
     @Before
     public void setup() {
+        email="stefandx9726@gmail.com";
         categories=new HashSet<>();
         category1 = new Category();
         category1.setName("Category1");
@@ -52,7 +56,7 @@ public class PriceServiceImplTest {
         //when
         Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(rooms1, arrivalDate, arrivalDate.plusDays(1))).thenReturn(2);
         Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(rooms1, arrivalDate.plusDays(1), departureDate)).thenReturn(1);
-        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
+        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
         //then
         Map<String,Double> expectedMap=new HashMap<>();
         Double fiftyPercentage=CategoryOccupancy.valueOf("FIFTY_PERCENT").getMultiplyValue();
@@ -70,7 +74,7 @@ public class PriceServiceImplTest {
         //when
         Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(rooms1, arrivalDate, arrivalDate.plusDays(1))).thenReturn(2);
         Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(rooms1, arrivalDate.plusDays(1), departureDate)).thenReturn(1);
-        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
+        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
         //then
         Map<String,Double> expectedMap=new HashMap<>();
         Double fiftyPercentage=CategoryOccupancy.valueOf("FIFTY_PERCENT").getMultiplyValue();
@@ -89,7 +93,7 @@ public class PriceServiceImplTest {
         LocalDate departureDate = LocalDate.of(2019, 7, 31);
         //when
         Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(Mockito.anySet(), Mockito.any(LocalDate.class),Mockito.any(LocalDate.class))).thenReturn(4);
-        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
+        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
         //then
         Map<String,Double> expectedMap=new HashMap<>();
         Double discountPercentage= NumberOfDaysDiscounts.valueOf("THIRTY").getDiscountPercentage();

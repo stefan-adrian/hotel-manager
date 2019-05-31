@@ -34,7 +34,12 @@ export class CategoryService {
   }
 
   getAllBetweenDates(arrivalDate: any,departureDate: any) : Observable<CategoryBooking[]>{
-    let params = new HttpParams().append("arrivalDate",arrivalDate).append("departureDate",departureDate);
+    let params = new HttpParams().append("arrivalDate",arrivalDate).append("departureDate",departureDate).append("email",this.getUsername());
     return this.apiService.getWithParams('/categories/available',params);
+  }
+
+  getUsername(): string {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser.username;
   }
 }

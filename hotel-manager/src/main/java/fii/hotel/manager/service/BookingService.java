@@ -4,6 +4,8 @@ import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.model.Booking;
 
+import java.util.List;
+
 public interface BookingService {
     BookingCreationDto save(Long customerId, BookingCreationDto bookingCreationDto);
 
@@ -14,4 +16,6 @@ public interface BookingService {
     BookingDto getBookingDtoById(Long id);
 
     Integer getNumberOfBookingsIn24HoursIntervalBeforeNow();
+
+    List<Booking> getBookingsByCustomerEmail(String email);
 }

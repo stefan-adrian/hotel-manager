@@ -89,7 +89,8 @@ public class CategoryController {
     @ApiResponse(code = 200, message = "List of all rooms available between dates")
     @GetMapping(value = "/available")
     public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate arrivalDate,
-                                                                          @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate departureDate){
-        return categoryService.getAllCategoriesAvailableBetweenDates(arrivalDate,departureDate);
+                                                                          @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate departureDate,
+                                                                          @RequestParam String email){
+        return categoryService.getAllCategoriesAvailableBetweenDates(arrivalDate,departureDate,email);
     }
 }

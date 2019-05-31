@@ -73,7 +73,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
+    public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate,String email) {
         List<CategoryBookingDto> categoryBookingDtos = new ArrayList<>();
         Set<Category> categories=categoryRepository.findAllCategoriesFetchingRoomsFetchingBookings();
         categories.forEach(category -> {
@@ -86,12 +86,13 @@ public class CategoryServiceImpl implements CategoryService {
             logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
             throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
         }
-        setCategoryBookingTotalPrice(categoryBookingDtos,arrivalDate,departureDate,categories);
+        setCategoryBookingTotalPrice(categoryBookingDtos,arrivalDate,departureDate,categories,email);
         return categoryBookingDtos;
     }
 
-    private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate,Set<Category> categories){
-        Map<String,Double> categoriesPrices=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
+    private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate,
+                                              Set<Category> categories, String email){
+        Map<String,Double> categoriesPrices=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
         categoryBookingDtos.forEach(categoryBookingDto -> categoryBookingDto.setTotalBookingPrice(categoriesPrices.get(categoryBookingDto.getName())));
     }
 }

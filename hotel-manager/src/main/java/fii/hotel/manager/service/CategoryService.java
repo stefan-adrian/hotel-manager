@@ -16,5 +16,5 @@ public interface CategoryService {
 
     Category getById(Long id);
 
-    List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate);
+    List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String email);
 }

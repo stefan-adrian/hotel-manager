@@ -1,16 +1,11 @@
 package fii.hotel.manager.service;
 
-import fii.hotel.manager.model.Category;
-import fii.hotel.manager.model.CategoryOccupancy;
-import fii.hotel.manager.model.DateRates;
-import fii.hotel.manager.model.NumberOfDaysDiscounts;
+import fii.hotel.manager.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -28,24 +23,25 @@ public class PriceServiceImpl implements  PriceService{
     }
 
     @Override
-    public Map<String, Double> getCategoriesPrices(Set<Category> categories,LocalDate arrivalDate, LocalDate departureDate){
-        calculateCategoriesPrices(categories,arrivalDate,departureDate);
+    public Map<String, Double> getCategoriesPrices(Set<Category> categories,LocalDate arrivalDate, LocalDate departureDate,String email){
+        calculateCategoriesPrices(categories,arrivalDate,departureDate,email);
         return categoriesPrices;
     }
 
-    private void calculateCategoriesPrices(Set<Category> categories, LocalDate arrivalDate, LocalDate departureDate) {
+    private void calculateCategoriesPrices(Set<Category> categories, LocalDate arrivalDate, LocalDate departureDate,String email) {
         categories.forEach(category ->
-            categoriesPrices.put(category.getName(),calculateCategoryTotalBookingPrice(category,arrivalDate,departureDate))
+            categoriesPrices.put(category.getName(),calculateCategoryTotalBookingPrice(category,arrivalDate,departureDate,email))
         );
     }
 
-    private Double calculateCategoryTotalBookingPrice(Category category,LocalDate arrivalDate,LocalDate departureDate){
+    private Double calculateCategoryTotalBookingPrice(Category category,LocalDate arrivalDate,LocalDate departureDate,String email){
         Double totalPrice=0.0;
         for(LocalDate date=arrivalDate;date.isBefore(departureDate);date=date.plusDays(1)){
             totalPrice+=getBookingPriceForDayByCategory(category,date);
         }
         totalPrice*= getPriceRemainingPercentageByNumberOfBookingDays(arrivalDate,departureDate);
         totalPrice*=getPriceIncreasePercentageByNumberOfBookingInLastDay();
+        totalPrice*=getPriceDiscountPercentageByCustomerPreviousBookings(email);
         return totalPrice;
     }
 
@@ -99,4 +95,22 @@ public class PriceServiceImpl implements  PriceService{
         return 1.0;
     }
 
+    private Double getPriceDiscountPercentageByCustomerPreviousBookings(String email){
+        List<Booking> bookings=bookingService.getBookingsByCustomerEmail(email);
+        Integer numberOfBookings=bookings.size();
+        Double totalBookingsPrice=bookings.stream().mapToDouble(Booking::getPrice).sum();
+        if(totalBookingsPrice>=50000.0){
+            return 0.7;
+        }
+        if(numberOfBookings>=10){
+            return 0.8;
+        }
+        if(numberOfBookings>=5){
+            return 0.9;
+        }
+        if(numberOfBookings>=2){
+            return 0.95;
+        }
+        return 1.0;
+    }
 }

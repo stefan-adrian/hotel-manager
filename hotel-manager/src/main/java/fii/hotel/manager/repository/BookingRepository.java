@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,4 +22,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query("SELECT count(b) FROM Booking b WHERE b.bookingTime >= :givenDate")
     Integer getNumberOfBookingsAfterDate(@Param("givenDate") LocalDateTime givenDate);
+
+    @Transactional
+    @Query("SELECT b FROM Booking b JOIN b.customer c WHERE c.email= :email")
+    List<Booking> getBookingsByCustomerEmail(@Param("email") String email);
 }
