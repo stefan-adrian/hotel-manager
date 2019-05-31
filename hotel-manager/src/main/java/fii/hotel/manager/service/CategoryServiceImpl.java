@@ -14,10 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -94,8 +91,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate,Set<Category> categories){
-        long bookingDays = DAYS.between(arrivalDate, departureDate);
-        priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
-        categoryBookingDtos.forEach(categoryBookingDto -> categoryBookingDto.setTotalBookingPrice(categoryBookingDto.getCategoryBasicPrice()*bookingDays));
+        Map<String,Double> categoriesPrices=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
+        categoryBookingDtos.forEach(categoryBookingDto -> categoryBookingDto.setTotalBookingPrice(categoriesPrices.get(categoryBookingDto.getName())));
     }
 }
