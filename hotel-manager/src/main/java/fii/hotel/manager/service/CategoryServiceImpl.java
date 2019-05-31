@@ -78,7 +78,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate) {
         List<CategoryBookingDto> categoryBookingDtos = new ArrayList<>();
-        categoryRepository.findAllCategoriesFetchingRoomsFetchingBookings().forEach(category -> {
+        Set<Category> categories=categoryRepository.findAllCategoriesFetchingRoomsFetchingBookings();
+        categories.forEach(category -> {
             Integer categoryAvailableRooms=roomService.getNumberOfAvailableRoomsBetweenDates(category.getRooms(),arrivalDate,departureDate);
             if(categoryAvailableRooms>0) {
                 categoryBookingDtos.add(categoryBookingMapper.map(category, categoryAvailableRooms));
@@ -88,12 +89,13 @@ public class CategoryServiceImpl implements CategoryService {
             logger.error("There are no rooms available for booking between " + arrivalDate + " and " + departureDate);
             throw new NoRoomsAvailableForBookingException(arrivalDate, departureDate);
         }
-        setCategoryBookingTotalPrice(categoryBookingDtos,arrivalDate,departureDate);
+        setCategoryBookingTotalPrice(categoryBookingDtos,arrivalDate,departureDate,categories);
         return categoryBookingDtos;
     }
 
-    private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate){
+    private void setCategoryBookingTotalPrice(List<CategoryBookingDto> categoryBookingDtos,LocalDate arrivalDate, LocalDate departureDate,Set<Category> categories){
         long bookingDays = DAYS.between(arrivalDate, departureDate);
+        priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
         categoryBookingDtos.forEach(categoryBookingDto -> categoryBookingDto.setTotalBookingPrice(categoryBookingDto.getCategoryBasicPrice()*bookingDays));
     }
 }
