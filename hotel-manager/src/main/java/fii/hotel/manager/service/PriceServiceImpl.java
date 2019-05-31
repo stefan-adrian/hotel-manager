@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Service
 public class PriceServiceImpl implements  PriceService{
 
@@ -58,7 +60,7 @@ public class PriceServiceImpl implements  PriceService{
                 return category.getPrice()*categoryOccupancy.getMultiplyValue();
             }
         }
-        if(occupancyPercentage<=0.1){
+        if(occupancyPercentage<=0.1&&DAYS.between(LocalDate.now(), date)<=1){
             return category.getPrice()*(-0.1);
         }
         return 0.0;

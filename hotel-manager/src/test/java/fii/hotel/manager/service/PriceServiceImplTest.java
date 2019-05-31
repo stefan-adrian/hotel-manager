@@ -65,22 +65,6 @@ public class PriceServiceImplTest {
     }
 
     @Test
-    public void getCategoriesPrices_whenOccupancyPercentageIsUnder10() {
-        //given
-        LocalDate arrivalDate = LocalDate.of(2019, 7, 1);
-        LocalDate departureDate = LocalDate.of(2019, 7, 3);
-        //when
-        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(rooms1, arrivalDate, arrivalDate.plusDays(1))).thenReturn(4);
-        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(rooms1, arrivalDate.plusDays(1), departureDate)).thenReturn(4);
-        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
-        //then
-        Map<String,Double> expectedMap=new HashMap<>();
-        Double categoryPrice=category1.getPrice();
-        expectedMap.put(category1.getName(),categoryPrice*2-0.1*categoryPrice-0.1*categoryPrice);
-        Assert.assertEquals(expectedMap,returnValue);
-    }
-
-    @Test
     public void getCategoriesPrices_whenOccupancyPercentageIs50PercentAnd75AndOneDayIsChristmasEve() {
         //given
         LocalDate arrivalDate = LocalDate.of(2019, 12, 23);
