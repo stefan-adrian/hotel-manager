@@ -1,9 +1,7 @@
 package fii.hotel.manager.service;
 
-import fii.hotel.manager.model.Category;
-import fii.hotel.manager.model.CategoryOccupancy;
-import fii.hotel.manager.model.DateRates;
-import fii.hotel.manager.model.Room;
+import fii.hotel.manager.model.*;
+import org.apache.tomcat.jni.Local;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,6 +79,22 @@ public class PriceServiceImplTest {
         Double categoryPrice=category1.getPrice();
         expectedMap.put(category1.getName(),categoryPrice*2+fiftyPercentage*categoryPrice
                 +seventyPercentage*categoryPrice+christmasEvePercentage*categoryPrice);
+        Assert.assertEquals(expectedMap,returnValue);
+    }
+
+    @Test
+    public void getCategoriesPrices() {
+        //given
+        LocalDate arrivalDate = LocalDate.of(2019, 7, 1);
+        LocalDate departureDate = LocalDate.of(2019, 7, 31);
+        //when
+        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(Mockito.anySet(), Mockito.any(LocalDate.class),Mockito.any(LocalDate.class))).thenReturn(4);
+        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate);
+        //then
+        Map<String,Double> expectedMap=new HashMap<>();
+        Double discountPercentage= NumberOfDaysDiscounts.valueOf("THIRTY").getDiscountPercentage();
+        Double categoryPrice=category1.getPrice();
+        expectedMap.put(category1.getName(),(categoryPrice*30)*(1.0-discountPercentage));
         Assert.assertEquals(expectedMap,returnValue);
     }
 }

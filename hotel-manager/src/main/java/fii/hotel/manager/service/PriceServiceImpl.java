@@ -3,6 +3,7 @@ package fii.hotel.manager.service;
 import fii.hotel.manager.model.Category;
 import fii.hotel.manager.model.CategoryOccupancy;
 import fii.hotel.manager.model.DateRates;
+import fii.hotel.manager.model.NumberOfDaysDiscounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,7 @@ public class PriceServiceImpl implements  PriceService{
         for(LocalDate date=arrivalDate;date.isBefore(departureDate);date=date.plusDays(1)){
             totalPrice+=getBookingPriceForDayByCategory(category,date);
         }
+        totalPrice*= getPriceRemainingPercentageByNumberOfBookingDays(arrivalDate,departureDate);
         return totalPrice;
     }
 
@@ -74,6 +76,16 @@ public class PriceServiceImpl implements  PriceService{
             }
         }
         return 0.0;
+    }
+
+    private Double getPriceRemainingPercentageByNumberOfBookingDays(LocalDate arrivalDate, LocalDate departureDate){
+        long bookingDays=DAYS.between(arrivalDate,departureDate);
+        for(NumberOfDaysDiscounts numberOfDaysDiscounts:NumberOfDaysDiscounts.values()){
+            if(bookingDays>=numberOfDaysDiscounts.getNumberOfDays()){
+                return 1.0-numberOfDaysDiscounts.getDiscountPercentage();
+            }
+        }
+        return 1.0;
     }
 
 }
