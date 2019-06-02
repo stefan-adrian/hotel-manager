@@ -19,6 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CalendarModule} from 'primeng/calendar';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatTabsModule,
     CalendarModule,
     MatSidenavModule,
+    MatListModule
   ],
   exports: [
     HttpClientModule,
@@ -66,6 +69,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatTabsModule,
     CalendarModule,
     MatSidenavModule,
+    MatListModule,
 
     SafeHtml
 
