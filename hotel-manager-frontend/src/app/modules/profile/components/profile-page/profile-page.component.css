@@ -1,0 +1,12 @@
+.example-container {
+  height: 500px;
+}
+
+.side-bar{
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(148,150,152);
+}

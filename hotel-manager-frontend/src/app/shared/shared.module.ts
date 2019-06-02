@@ -18,6 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CalendarModule} from 'primeng/calendar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
 
 @NgModule({
   declarations: [SafeHtml],
@@ -40,7 +42,8 @@ import {CalendarModule} from 'primeng/calendar';
     InputTextModule,
     MatIconModule,
     MatTabsModule,
-    CalendarModule
+    CalendarModule,
+    MatSidenavModule,
   ],
   exports: [
     HttpClientModule,
@@ -62,6 +65,7 @@ import {CalendarModule} from 'primeng/calendar';
     MatSelectModule,
     MatTabsModule,
     CalendarModule,
+    MatSidenavModule,
 
     SafeHtml
 
