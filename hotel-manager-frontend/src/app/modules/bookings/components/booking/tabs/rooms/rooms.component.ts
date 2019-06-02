@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../../../../../shared/services/data.service";
-import {RoomService} from "../../../../../../core/services/room.service";
 import {DateFormat} from "../../../../../../shared/pipes/date-format";
 import {CategoryBooking} from "../../../../../../core/models/category-booking.model";
 import {Router} from "@angular/router";
+import {CategoryService} from "../../../../../../core/services/category.service";
 
 @Component({
   selector: 'app-rooms',
@@ -19,7 +19,7 @@ export class RoomsComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private roomService: RoomService,
+    private categoryService: CategoryService,
     private router: Router,
     private dateFormat: DateFormat
   ) { }
@@ -34,7 +34,7 @@ export class RoomsComponent implements OnInit {
   }
 
   getRoomsBetweenDates(): void {
-    this.roomService.getAllBetweenDates(this.arrival,this.departure)
+    this.categoryService.getAllBetweenDates(this.arrival,this.departure)
       .subscribe(categoryBookings => this.categoryBookings = categoryBookings);
   }
 

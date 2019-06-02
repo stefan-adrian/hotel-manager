@@ -25,6 +25,8 @@ public class BookingDto implements Serializable {
 
     private Double price;
 
+    private LocalDateTime bookingTime;
+
     private List<CarOrderDto> carOrderDtos;
 
     private List<SpaEventDto> spaEventDtos;
@@ -88,6 +90,14 @@ public class BookingDto implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public LocalDateTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
     }
 
     public List<CarOrderDto> getCarOrderDtos() {

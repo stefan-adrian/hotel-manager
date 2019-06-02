@@ -28,6 +28,8 @@ public class BookingCreationDto implements Serializable {
 
     private Boolean roomCleaning;
 
+    private LocalDateTime bookingTime;
+
     public BookingCreationDto() {
     }
 
@@ -93,5 +95,13 @@ public class BookingCreationDto implements Serializable {
 
     public void setRoomCleaning(Boolean roomCleaning) {
         this.roomCleaning = roomCleaning;
+    }
+
+    public LocalDateTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
     }
 }

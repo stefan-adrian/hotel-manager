@@ -9,6 +9,7 @@ public class CategoryBookingDto implements Serializable {
     private Double categoryBasicPrice;
     private Double totalBookingPrice;
     private Integer availableRooms;
+    private Integer totalRooms;
     private byte[] image;
     private Integer size;
     private String description;
@@ -63,6 +64,14 @@ public class CategoryBookingDto implements Serializable {
 
     public void setAvailableRooms(Integer availableRooms) {
         this.availableRooms = availableRooms;
+    }
+
+    public Integer getTotalRooms() {
+        return totalRooms;
+    }
+
+    public void setTotalRooms(Integer totalRooms) {
+        this.totalRooms = totalRooms;
     }
 
     public byte[] getImage() {

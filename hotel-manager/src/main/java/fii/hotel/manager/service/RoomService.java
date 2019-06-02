@@ -5,6 +5,7 @@ import fii.hotel.manager.model.Room;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public interface RoomService {
 
@@ -18,7 +19,7 @@ public interface RoomService {
 
     boolean checkIfBookingTimeAvailable(Room room, LocalDate startTime, LocalDate endTime);
 
-    List<CategoryBookingDto> getAllCategoriesAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate);
-
     Room getRoomByCategoryAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String roomCategory);
+
+    Integer getNumberOfAvailableRoomsBetweenDates(Set<Room> rooms,LocalDate arrivalDate,LocalDate departureDate);
 }

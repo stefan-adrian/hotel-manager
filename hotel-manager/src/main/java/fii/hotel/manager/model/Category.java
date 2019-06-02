@@ -1,6 +1,7 @@
 package fii.hotel.manager.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -19,11 +20,14 @@ public class Category {
 
     private Integer size;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String description;
 
     @Lob
     private byte[] image;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Room> rooms;
 
     public Category() {
     }
@@ -90,5 +94,13 @@ public class Category {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 }
