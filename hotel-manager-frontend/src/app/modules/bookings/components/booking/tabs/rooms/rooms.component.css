@@ -36,6 +36,12 @@
   font-family: "PT Serif";
 }
 
+.room-booking-a {
+  font-size: 1.1em;
+  font-family: "PT Serif";
+  font-weight: bold;
+}
+
 @media only screen and (min-width: 450px) {
 
   .room-booking-h {
@@ -44,6 +50,10 @@
 
   .room-booking-p {
     font-size: 1.2em;
+  }
+
+  .room-booking-a {
+    font-size: 1.4em;
   }
 
 }
@@ -81,8 +91,17 @@
     margin-right: 10%;
   }
 
+  .room-booking-a {
+    margin-right: 10%;
+    color: red;
+  }
+
   .room-booking-btn {
     margin-right: 10%;
+  }
+
+  .btn-size{
+    font-size: 1.2em;
   }
 
   .amenities-icons{

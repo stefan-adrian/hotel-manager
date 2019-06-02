@@ -1,6 +1,7 @@
 package fii.hotel.manager.service;
 
 import fii.hotel.manager.model.*;
+import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class PriceServiceImpl implements  PriceService{
         totalPrice*= getPriceRemainingPercentageByNumberOfBookingDays(arrivalDate,departureDate);
         totalPrice*=getPriceIncreasePercentageByNumberOfBookingInLastDay();
         totalPrice*=getPriceDiscountPercentageByCustomerPreviousBookings(email);
-        return totalPrice;
+        return Precision.round(totalPrice,2);
     }
 
     private Double getBookingPriceForDayByCategory(Category category,LocalDate date){
