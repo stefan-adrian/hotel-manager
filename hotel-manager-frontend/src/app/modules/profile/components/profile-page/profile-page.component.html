@@ -1,14 +1,20 @@
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened class="side-bar">
     <mat-nav-list class="test2">
-      <a>  <mat-icon class="icon">account_circle</mat-icon></a>
+      <a>
+        <mat-icon class="icon">account_circle</mat-icon>
+      </a>
 
-      <a class="side-nav-link" mat-list-item routerLink="/" >General information</a>
-      <a class="side-nav-link" mat-list-item routerLink="/" >Bookings</a>
-      <a class="side-nav-link" mat-list-item routerLink="/" >Credit card</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">General information</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">Bookings</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">Credit card</a>
 
 
     </mat-nav-list>
   </mat-drawer>
-  <mat-drawer-content>Main content</mat-drawer-content>
+  <mat-drawer-content class="right-side">
+    <div class="title">
+      <h2 class="title-h2">General profile</h2>
+    </div>
+  </mat-drawer-content>
 </mat-drawer-container>
