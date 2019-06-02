@@ -4,16 +4,81 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 450px;
 }
 
 .confirmation-p{
   font-family: cursive;
   font-size: 1.2em;
-  margin-left: 20%;
-  margin-right: 20%;
 }
 
-.btn-size{
-  font-size: 1.2em;
+
+.room-booking {
+  display: flex;
+  flex-direction: column;
+  background-color:		#F5F5F5;
+
+}
+
+.room-booking-left {
+  text-align: center;
+  width: 100%;
+}
+
+.options-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  /*max-width: 600px;*/
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.room-booking-right {
+  text-align: center;
+  width: 100%;
+}
+
+
+@media only screen and (min-width: 450px) {
+
+}
+
+@media only screen and (min-width: 800px) {
+
+  .room-booking {
+    display: table;
+    width: 100%;
+  }
+
+  .room-booking-left {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 55%;
+  }
+
+  .options-image {
+    width: 85%;
+  }
+
+  .room-booking-right {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 45%;
+  }
+
+
+  .btn-size{
+    font-size: 1.2em;
+  }
+
+  .confirmation{
+    margin-right: 10%;
+    min-height: 450px;
+  }
+
+
 }

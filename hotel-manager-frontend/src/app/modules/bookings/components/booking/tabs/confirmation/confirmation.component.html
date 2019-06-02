@@ -1,14 +1,21 @@
-<div class="confirmation">
-  <p class="confirmation-p">
-    Thanks for choosing to book a {{categoryBooking.name}} between {{arrival}} and {{departure}}.
-  </p>
-  <p class="confirmation-p">
-    The total booking price is show below, if you want to finish the booking press book button.
-  </p>
-  <p class="confirmation-p">
-    Total Price: {{categoryBooking.totalBookingPrice}}$
-  </p>
-  <button (click)="book()" class="btn btn-secondary btn-size">Finish Booking</button>
-  <p-messages [(value)]="message"></p-messages>
+<div class="room-booking">
+  <div class="room-booking-left">
+    <img [src]="'data:image/jpg;base64,'+categoryBooking.image | safeHtml" class="options-image">
+  </div>
 
+  <div class="room-booking-right">
+    <div class="confirmation">
+      <p class="confirmation-p">
+        Thank you for choosing to book a {{categoryBooking.name}} between {{arrival}} and {{departure}}.
+      </p>
+      <p class="confirmation-p">
+        The total booking price is show below, if you want to finish the booking press book button.
+      </p>
+      <p class="confirmation-p">
+        Total Price: {{categoryBooking.totalBookingPrice}}$
+      </p>
+      <button (click)="book()" class="btn btn-secondary btn-size">Finish Booking</button>
+      <p-messages [(value)]="message"></p-messages>
+    </div>
+  </div>
 </div>
