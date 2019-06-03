@@ -20,6 +20,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {CalendarModule} from 'primeng/calendar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -46,7 +48,9 @@ import {MatListModule} from '@angular/material/list';
     MatTabsModule,
     CalendarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatButtonModule
   ],
   exports: [
     HttpClientModule,
@@ -70,6 +74,8 @@ import {MatListModule} from '@angular/material/list';
     CalendarModule,
     MatSidenavModule,
     MatListModule,
+    MatCardModule,
+    MatButtonModule,
 
     SafeHtml
 
