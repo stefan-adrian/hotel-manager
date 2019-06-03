@@ -4,7 +4,7 @@
 
 .side-bar{
   width: 15%;
-  background-color: rgb(148,150,152);
+  background-color: #E3E3E3;
 }
 
 .side-nav-link{
@@ -24,7 +24,7 @@
   margin-top: 30px;
   margin-left: 40px;
   font-weight: bold;
-  border-bottom:2px solid rgba(100,100,100,0.3);
+  border-bottom:1.5px solid rgba(100,100,100,0.3);
 
 }
 
@@ -34,6 +34,5 @@
 }
 
 .right-side{
-  /*background-color: rgb(248,248,248);*/
-  background-color: #D3D3D3;
+  background-color: #FAFAFA;
 }
