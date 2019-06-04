@@ -26,4 +26,11 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Transactional
     @Query("SELECT b FROM Booking b JOIN b.customer c WHERE c.email= :email")
     List<Booking> getBookingsByCustomerEmail(@Param("email") String email);
+
+    @Transactional
+    @Query("SELECT b FROM Booking b JOIN b.customer c LEFT JOIN FETCH b.room" +
+            " LEFT JOIN FETCH b.carOrders co LEFT JOIN FETCH b.spaEvents se" +
+            " LEFT JOIN FETCH b.roomservices rs LEFT JOIN FETCH rs.aliments" +
+            " WHERE c.email= :email ")
+    List<Booking> getBookingsFetchingRoomByCustomerEmail(@Param("email") String email);
 }

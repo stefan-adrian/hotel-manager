@@ -18,4 +18,6 @@ public interface BookingService {
     Integer getNumberOfBookingsIn24HoursIntervalBeforeNow();
 
     List<Booking> getBookingsByCustomerEmail(String email);
+
+    List<BookingDto> getBookingDtosByCustomerEmail(String email);
 }
