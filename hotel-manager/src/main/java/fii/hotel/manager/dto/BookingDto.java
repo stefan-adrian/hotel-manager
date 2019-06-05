@@ -1,6 +1,7 @@
 package fii.hotel.manager.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class BookingDto implements Serializable {
 
     private CustomerDto customerDto;
 
+    @JsonProperty("room")
     private RoomDto roomDto;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -25,6 +27,7 @@ public class BookingDto implements Serializable {
 
     private Double price;
 
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     private LocalDateTime bookingTime;
 
     private List<CarOrderDto> carOrderDtos;
