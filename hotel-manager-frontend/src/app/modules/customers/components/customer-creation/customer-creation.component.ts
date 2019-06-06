@@ -20,10 +20,10 @@ export interface Role {
 })
 export class CustomerCreationComponent implements OnInit {
 
-  customerCreationForm: FormGroup;
-  message: Message[] = [];
-  hide = true;
-  roles: Role[] = [
+  private customerCreationForm: FormGroup;
+  private message: Message[] = [];
+  private hide = true;
+  private roles: Role[] = [
     {value: 'ROLE_USER', viewValue: 'User'},
     {value: 'ROLE_ADMIN', viewValue: 'Admin'}
   ];
@@ -41,7 +41,7 @@ export class CustomerCreationComponent implements OnInit {
     this.authenticationService.logout();
   }
 
-  createFormGroup(): FormGroup {
+  private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: [null, Validators.required],
@@ -51,11 +51,11 @@ export class CustomerCreationComponent implements OnInit {
     });
   }
 
-  revertFormGroup() {
+  private revertFormGroup() {
     this.customerCreationForm = this.createFormGroup();
   }
 
-  save() {
+  private save() {
     const customerToCreate: Customer = Object.assign({},
       this.customerCreationForm.value);
     this.customerService.add(customerToCreate).pipe(

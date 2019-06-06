@@ -11,15 +11,15 @@ import {SelectItem} from "primeng/api";
 })
 export class AlimentListComponent implements OnInit {
 
-  aliments: Aliment[];
+  private aliments: Aliment[];
 
-  sortOrder: number;
+  private sortOrder: number;
 
-  sortOptions: SelectItem[];
+  private sortOptions: SelectItem[];
 
-  sortField: string;
+  private sortField: string;
 
-  sortKey: string;
+  private sortKey: string;
 
   constructor(
     private alimentService: AlimentService
@@ -35,14 +35,14 @@ export class AlimentListComponent implements OnInit {
     ];
   }
 
-  getAliments(): void {
+  private getAliments(): void {
     this.alimentService.getAll()
       .subscribe(aliments => {
         this.aliments = aliments;
       });
   }
 
-  onSortChange(event) {
+  private onSortChange(event) {
     let value = event.value;
 
     if (value.indexOf('!') === 0) {

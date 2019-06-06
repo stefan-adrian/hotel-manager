@@ -10,7 +10,7 @@ import {RoomService} from "../../../../core/services/room.service";
 })
 export class RoomDetailComponent implements OnInit {
 
-  room: Room;
+  private room: Room;
 
   constructor(
     private route:ActivatedRoute,
@@ -21,7 +21,7 @@ export class RoomDetailComponent implements OnInit {
     this.getRoom();
   }
 
-  getRoom(): void{
+  private getRoom(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.roomService.getById(id)
       .subscribe(room=>this.room=room);

@@ -20,7 +20,7 @@ export class ConfirmationComponent implements OnInit {
   private arrival:Date;
   private departure: Date;
   private categoryBooking: CategoryBooking;
-  message: Message[] = [];
+  private message: Message[] = [];
 
   constructor(
     private dataService: DataService,
@@ -38,7 +38,7 @@ export class ConfirmationComponent implements OnInit {
     tablinks[2].className+= " active";
   }
 
-  book(): void{
+  private book(): void{
     let booking=new BookingCreation();
     booking.fromTime=this.arrival;
     booking.toTime=this.departure;
@@ -58,7 +58,7 @@ export class ConfirmationComponent implements OnInit {
   }
 
 
-  getUsername(): string {
+  private getUsername(): string {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.username;
   }

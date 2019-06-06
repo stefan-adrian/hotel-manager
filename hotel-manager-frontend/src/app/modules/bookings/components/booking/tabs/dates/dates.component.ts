@@ -11,11 +11,11 @@ import {DataService} from "../../../../../../shared/services/data.service";
 })
 export class DatesComponent implements OnInit {
 
-  dates: Date[];
+  private dates: Date[];
 
-  minDate: Date;
+  private minDate: Date;
 
-  bookingDatesForm: FormGroup;
+  private bookingDatesForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +30,7 @@ export class DatesComponent implements OnInit {
     this.bookingDatesForm=this.createFormGroup();
   }
 
-  createFormGroup(): FormGroup{
+  private createFormGroup(): FormGroup{
     return this.formBuilder.group({
       arrival:[null,Validators.required],
       departure:[null,Validators.required]
@@ -43,7 +43,7 @@ export class DatesComponent implements OnInit {
     );
   }
 
-  save(){
+  private save(){
     this.dataService.setArrivalDate(this.bookingDatesForm.get('arrival').value);
     this.dataService.setDepartureDate(this.bookingDatesForm.get('departure').value);
     this.router.navigate(['/bookings', {outlets: {sub: ['rooms']}}]);
