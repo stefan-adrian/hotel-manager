@@ -9,7 +9,7 @@ import {Category} from "../../../../core/models/category.model";
 })
 export class CategoryListComponent implements OnInit {
 
-  categories: Category[];
+  private categories: Category[];
 
   constructor(
     private categoryService: CategoryService
@@ -20,7 +20,7 @@ export class CategoryListComponent implements OnInit {
     this.getCategories();
   }
 
-  getCategories(): void{
+  private getCategories(): void{
     this.categoryService.getAll()
       .subscribe(categories=>this.categories=categories);
   }

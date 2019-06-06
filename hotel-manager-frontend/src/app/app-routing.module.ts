@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: './modules/categories/categories.module#CategoriesModule'
   },
   {
+    path: 'profile',
+    loadChildren: './modules/profile/profile.module#ProfileModule'
+  },
+  {
     path: 'bookings',
     component: BookingComponent,
     children: [

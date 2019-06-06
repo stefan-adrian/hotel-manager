@@ -12,9 +12,9 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  message: Message[] = [];
-  hide = true;
+  private loginForm: FormGroup;
+  private message: Message[] = [];
+  private hide = true;
 
   constructor(
     private router: Router,
@@ -28,18 +28,18 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
   }
 
-  createFormGroup(): FormGroup {
+  private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
       password: [null, Validators.required]
     });
   }
 
-  revertFormGroup() {
+  private revertFormGroup() {
     this.loginForm = this.createFormGroup();
   }
 
-  login() {
+  private login() {
     const loginModel: LoginModel = Object.assign({},
       this.loginForm.value);
     this.authenticationService.authenticate(loginModel).subscribe(result=>{

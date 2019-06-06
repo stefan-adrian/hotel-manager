@@ -15,7 +15,7 @@ export class RoomsComponent implements OnInit {
 
   private arrival:Date;
   private departure: Date;
-  categoryBookings: CategoryBooking[];
+  private categoryBookings: CategoryBooking[];
 
   constructor(
     private dataService: DataService,
@@ -33,12 +33,12 @@ export class RoomsComponent implements OnInit {
     this.getRoomsBetweenDates();
   }
 
-  getRoomsBetweenDates(): void {
+  private getRoomsBetweenDates(): void {
     this.categoryService.getAllBetweenDates(this.arrival,this.departure)
       .subscribe(categoryBookings => this.categoryBookings = categoryBookings);
   }
 
-  book(categoryBooking: CategoryBooking): void{
+  private book(categoryBooking: CategoryBooking): void{
     this.dataService.setCategoryBooking(categoryBooking);
     this.router.navigate(['/bookings', {outlets: {sub: ['confirmation']}}]);
   }

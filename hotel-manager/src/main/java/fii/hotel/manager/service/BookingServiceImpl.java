@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -99,5 +100,18 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingsByCustomerEmail(String email) {
         return bookingRepository.getBookingsByCustomerEmail(email);
+    }
+
+    @Override
+    public List<BookingDto> getBookingDtosByCustomerEmail(String email){
+        List<Booking> bookings=bookingRepository.getBookingsFetchingRoomByCustomerEmail(email);
+        return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public BookingDto getCustomerNextBookingDto(String email){
+        List<Booking> bookings=bookingRepository.getBookingsAfterCurrentDateFetchingRoomByCustomerEmail(email);
+        return bookingMapper.map(bookings.get(0));
+
     }
 }

@@ -1,0 +1,89 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened class="side-bar">
+    <mat-nav-list class="test2">
+      <a>
+        <mat-icon class="icon">account_circle</mat-icon>
+      </a>
+
+      <a href="/profile" class="side-nav-link" mat-list-item>General information</a>
+      <a href="/profile/bookings" class="side-nav-link" mat-list-item>Bookings</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">Credit card</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">Room Service</a>
+
+
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="right-side">
+    <div class="title">
+      <h2 class="title-h2">General profile</h2>
+    </div>
+    <div class="cards">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Profile</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <mat-card-subtitle>
+            Email
+          </mat-card-subtitle>
+          <p>
+            stefandx9726@gmail.com
+          </p>
+          <mat-card-subtitle>
+            First name
+          </mat-card-subtitle>
+          <p>
+            Adrian
+          </p>
+          <mat-card-subtitle>
+            Last name
+          </mat-card-subtitle>
+          <p>
+            Stefan
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="profile-button">
+          <button mat-button>EDIT PROFILE</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Next scheduled booking</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <mat-card-subtitle>
+            Booking time
+          </mat-card-subtitle>
+          <p>
+            {{booking.fromTime}} - {{booking.toTime}}
+          </p>
+          <mat-card-subtitle>
+            Name
+          </mat-card-subtitle>
+          <p>
+            {{booking.room.name}}
+          </p>
+          <mat-card-subtitle>
+            Category
+          </mat-card-subtitle>
+          <p>
+            {{booking.room.category.name}}
+          </p>
+          <mat-card-subtitle>
+            Price
+          </mat-card-subtitle>
+          <p>
+            {{booking.price}}
+          </p>
+          <mat-card-subtitle>
+            Floor
+          </mat-card-subtitle>
+          <p>
+            {{booking.room.floor}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -2,7 +2,6 @@ package fii.hotel.manager.controller;
 
 import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.*;
-import fii.hotel.manager.model.Roomservice;
 import fii.hotel.manager.service.BookingService;
 import fii.hotel.manager.service.CarOrderService;
 import fii.hotel.manager.service.RoomserviceService;
@@ -12,7 +11,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bookings")
@@ -81,5 +83,19 @@ public class BookingController {
     @PostMapping
     public BookingCreationDto addBooking(@RequestBody BookingCreationDto bookingCreationDto) {
         return bookingService.save(bookingCreationDto);
+    }
+
+    @ApiOperation(value = "Get list of all customer bookings")
+    @ApiResponse(code = 200, message = "List of all customer bookings")
+    @GetMapping(value="/customer")
+    public List<BookingDto> getAllCustomerBookings(@RequestParam String email) {
+        return bookingService.getBookingDtosByCustomerEmail(email);
+    }
+
+    @ApiOperation(value = "Get next booking for customer")
+    @ApiResponse(code = 200, message = "Next booking for customer")
+    @GetMapping(value="/customer-next")
+    public BookingDto getNextCustomerBooking(@RequestParam String email) {
+        return bookingService.getCustomerNextBookingDto(email);
     }
 }

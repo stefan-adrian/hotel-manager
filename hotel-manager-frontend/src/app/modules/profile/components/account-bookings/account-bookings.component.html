@@ -1,0 +1,58 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened class="side-bar">
+    <mat-nav-list class="test2">
+      <a>
+        <mat-icon class="icon">account_circle</mat-icon>
+      </a>
+
+      <a href="/profile" class="side-nav-link" mat-list-item>General information</a>
+      <a href="/profile/bookings" class="side-nav-link" mat-list-item>Bookings</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">Credit card</a>
+      <a class="side-nav-link" mat-list-item routerLink="/">Room Service</a>
+
+
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="right-side">
+
+    <p-dataView #dv [value]="bookings" [paginator]="true" [rows]="2" paginatorPosition="both">
+      <p-header>
+        <div class="ui-helper-clearfix title-booking">
+              <h4>
+                Bookings
+              </h4>
+        </div>
+      </p-header>
+      <ng-template let-booking pTemplate="listItem">
+        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+          <div class="ui-g-12 ui-lg-5 ui-md-6 ui-sm-12" style="text-align:center">
+            <img class="options-image" [src]="'data:image/jpg;base64,'+booking.room.category.image | safeHtml" />
+          </div>
+          <div class="ui-g-12 ui-lg-7 ui-md-6 ui-sm-12 car-details">
+            <div class="ui-g">
+
+              <div class="ui-g-2 ui-sm-6">Booking time: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{booking.fromTime}} - {{booking.toTime}}</b></div>
+
+              <div class="ui-g-2 ui-sm-6">Name: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{booking.room.name}}</b></div>
+
+              <div class="ui-g-2 ui-sm-6">Category: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{booking.room.category.name}}</b></div>
+
+              <div class="ui-g-2 ui-sm-6">Price: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{booking.price}}</b></div>
+
+              <div class="ui-g-2 ui-sm-6">Floor: </div>
+              <div class="ui-g-10 ui-sm-6"><b>{{booking.room.floor}}</b></div>
+
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+
+
+
+  </mat-drawer-content>
+</mat-drawer-container>

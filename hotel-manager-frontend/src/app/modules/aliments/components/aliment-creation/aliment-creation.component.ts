@@ -12,10 +12,10 @@ import {Router} from "@angular/router";
 })
 export class AlimentCreationComponent implements OnInit {
 
-  alimentCreationForm: FormGroup;
-  uploadFile: any;
-  imageForm: any;
-  message: Message[] = [];
+  private alimentCreationForm: FormGroup;
+  private uploadFile: any;
+  private imageForm: any;
+  private message: Message[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,20 +27,20 @@ export class AlimentCreationComponent implements OnInit {
     this.alimentCreationForm = this.createFormGroup();
   }
 
-  createFormGroup(): FormGroup {
+  private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       name: [null, Validators.required],
       price: [null, Validators.required]
     });
   }
 
-  revertFormGroup() {
+  private revertFormGroup() {
     this.uploadFile = null;
     this.alimentCreationForm = this.createFormGroup();
     this.imageForm.clear();
   }
 
-  save() {
+  private save() {
     const alimentToCreate: Aliment = Object.assign({},
       this.alimentCreationForm.value);
     this.alimentService.add(alimentToCreate).subscribe(result=>
@@ -51,14 +51,14 @@ export class AlimentCreationComponent implements OnInit {
   }
 
 
-  onUpload(event,form){
+  private onUpload(event,form){
     for(let file of event.files){
       this.uploadFile=file;
     }
     this.imageForm=form;
   }
 
-  showSuccess() {
+  private showSuccess() {
     this.message = [];
     this.message.push({severity:'info', summary:'Aliment Created'});
   }

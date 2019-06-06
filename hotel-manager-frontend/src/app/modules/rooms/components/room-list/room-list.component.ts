@@ -10,15 +10,15 @@ import {SelectItem} from "primeng/api";
 })
 export class RoomListComponent implements OnInit {
 
-  rooms: Room[];
+  private rooms: Room[];
 
-  sortOrder: number;
+  private sortOrder: number;
 
-  sortOptions: SelectItem[];
+  private sortOptions: SelectItem[];
 
-  sortField: string;
+  private sortField: string;
 
-  sortKey: string;
+  private sortKey: string;
 
   constructor(
     private roomService: RoomService
@@ -34,12 +34,12 @@ export class RoomListComponent implements OnInit {
     ];
   }
 
-  getRooms(): void {
+  private getRooms(): void {
     this.roomService.getAll()
       .subscribe(rooms => this.rooms = rooms);
   }
 
-  onSortChange(event) {
+  private onSortChange(event) {
     let value = event.value;
 
     if (value.indexOf('!') === 0) {

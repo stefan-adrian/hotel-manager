@@ -1,0 +1,63 @@
+.example-container {
+  height: 700px;
+}
+
+.side-bar{
+  width: 15%;
+  background-color: #E3E3E3;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .side-bar{
+    display:none;
+  }
+}
+
+.side-nav-link{
+  color:black;
+  list-style:none;
+  padding:15px 10px;
+  border-bottom:1px solid rgba(100,100,100,0.3);
+  height: 100px;
+}
+
+.icon{
+  font-size: 5em;
+  margin-left: 60px;
+}
+
+.title{
+  margin-top: 30px;
+  margin-left: 40px;
+  font-weight: bold;
+  border-bottom:1.5px solid rgba(100,100,100,0.3);
+
+}
+
+.title-h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 1.5em;
+}
+
+.right-side{
+  background-color: #FAFAFA;
+}
+
+.example-card {
+  width: 350px;
+  margin-top: 50px;
+}
+
+.card-content{
+  margin-left: 20px;
+}
+
+.profile-button{
+  text-align: center;
+}
+
+.cards{
+  display: flex;
+  justify-content: space-around;
+}

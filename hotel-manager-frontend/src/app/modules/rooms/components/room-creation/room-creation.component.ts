@@ -14,9 +14,9 @@ import {Category} from "../../../../core/models/category.model";
 })
 export class RoomCreationComponent implements OnInit {
 
-  roomCreationForm: FormGroup;
-  message: Message[] = [];
-  categories: Category[];
+  private roomCreationForm: FormGroup;
+  private message: Message[] = [];
+  private categories: Category[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,12 +31,12 @@ export class RoomCreationComponent implements OnInit {
     this.roomCreationForm = this.createFormGroup();
   }
 
-  getCategories(): void{
+  private getCategories(): void{
     this.categoryService.getAll()
       .subscribe(categories=>this.categories=categories);
   }
 
-  createFormGroup(): FormGroup {
+  private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       name: [null, Validators.required],
       floor: [null, Validators.required],
@@ -45,7 +45,7 @@ export class RoomCreationComponent implements OnInit {
 
   }
 
-  save() {
+  private save() {
     const roomToCreate: Room = Object.assign({},
       this.roomCreationForm.value);
     this.roomService.add(roomToCreate).subscribe(result=>
@@ -55,7 +55,7 @@ export class RoomCreationComponent implements OnInit {
     });
   }
 
-  showSuccess() {
+  private showSuccess() {
     this.message = [];
     this.message.push({severity:'info', summary:'Room Created'});
   }

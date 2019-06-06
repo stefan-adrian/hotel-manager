@@ -10,9 +10,9 @@ import {Category} from "../../../../core/models/category.model";
 })
 export class CategoryCreationComponent implements OnInit {
 
-  categoryCreationForm: FormGroup;
-  uploadFile: any;
-  imageForm: any;
+  private categoryCreationForm: FormGroup;
+  private uploadFile: any;
+  private imageForm: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +23,7 @@ export class CategoryCreationComponent implements OnInit {
     this.categoryCreationForm = this.createFormGroup();
   }
 
-  createFormGroup(): FormGroup {
+  private createFormGroup(): FormGroup {
     return this.formBuilder.group({
       name: [null, Validators.required],
       beds: [null, Validators.required],
@@ -35,7 +35,7 @@ export class CategoryCreationComponent implements OnInit {
 
   }
 
-  save() {
+  private save() {
     const categoryToCreate: Category = Object.assign({},
       this.categoryCreationForm.value);
     this.categoryService.add(categoryToCreate).subscribe(result=>
@@ -45,7 +45,7 @@ export class CategoryCreationComponent implements OnInit {
     });
   }
 
-  onUpload(event,form) {
+  private onUpload(event,form) {
     for (let file of event.files) {
       this.uploadFile = file;
     }
