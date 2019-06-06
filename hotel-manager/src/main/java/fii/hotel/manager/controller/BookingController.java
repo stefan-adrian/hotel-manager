@@ -91,4 +91,11 @@ public class BookingController {
     public List<BookingDto> getAllCustomerBookings(@RequestParam String email) {
         return bookingService.getBookingDtosByCustomerEmail(email);
     }
+
+    @ApiOperation(value = "Get next booking for customer")
+    @ApiResponse(code = 200, message = "Next booking for customer")
+    @GetMapping(value="/customer-next")
+    public BookingDto getNextCustomerBooking(@RequestParam String email) {
+        return bookingService.getCustomerNextBookingDto(email);
+    }
 }

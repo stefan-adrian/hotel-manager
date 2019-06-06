@@ -23,6 +23,11 @@ export class BookingService {
     return this.apiService.getWithParams('/bookings/customer',params);
   }
 
+  getCustomerNextBooking(): Observable<Booking>{
+    let params = new HttpParams().append("email",this.getUsername());
+    return this.apiService.getWithParams('/bookings/customer-next',params);
+  }
+
   getUsername(): string {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.username;

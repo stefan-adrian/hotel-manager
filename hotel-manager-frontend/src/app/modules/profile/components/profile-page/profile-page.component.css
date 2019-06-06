@@ -45,9 +45,8 @@
 }
 
 .example-card {
-  max-width: 350px;
-  margin-left: 40px;
-  margin-top: 40px;
+  width: 350px;
+  margin-top: 50px;
 }
 
 .card-content{
@@ -56,4 +55,9 @@
 
 .profile-button{
   text-align: center;
+}
+
+.cards{
+  display: flex;
+  justify-content: space-around;
 }
