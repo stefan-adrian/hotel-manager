@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {RoleGuard} from "../../core/guards/role-guard";
 import {CategoryCreationComponent} from "./components/category-creation/category-creation.component";
 import {CategoryListComponent} from "./components/category-list/category-list.component";
+import {CategoryDetailsComponent} from "./components/category-details/category-details.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
     data: {
       expectedRole: 'ROLE_ADMIN'
     }
+  },
+  {
+    path: ':id',
+    component: CategoryDetailsComponent
   }
 ];
 

@@ -3,8 +3,10 @@ package fii.hotel.manager.controller;
 import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.CategoryBookingDto;
 import fii.hotel.manager.dto.CategoryDto;
+import fii.hotel.manager.dto.RoomDto;
 import fii.hotel.manager.mapper.CategoryMapper;
 import fii.hotel.manager.model.Category;
+import fii.hotel.manager.model.Room;
 import fii.hotel.manager.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,6 +51,18 @@ public class CategoryController {
         category = categoryService.save(category);
         return categoryMapper.map(category);
     }
+
+    @ApiOperation(value = "Get category with specified id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Category not found"),
+            @ApiResponse(code = 200, message = "Retrieved category with the asked id")
+    })
+    @GetMapping(value = "/{id}")
+    public CategoryDto getById(@PathVariable Long id) {
+        Category category = categoryService.getById(id);
+        return categoryMapper.map(category);
+    }
+
 
     @ApiOperation(value = "Get list of all categories")
     @ApiResponse(code = 200, message = "List of all categories")
