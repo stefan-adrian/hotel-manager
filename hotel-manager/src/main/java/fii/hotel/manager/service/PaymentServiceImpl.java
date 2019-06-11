@@ -3,6 +3,8 @@ package fii.hotel.manager.service;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import fii.hotel.manager.config.Utils;
+import fii.hotel.manager.dto.PaymentCreationDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,27 +17,27 @@ public class PaymentServiceImpl implements PaymentService {
     private final String RECEIVER_ACCOUNT_SECRET = "ED7j7RfByjIquagJd0priGVxqdUPwil6xPrIlXi0mxi9hx0ju5PjLTcPuEXEpWFPnP67T9TvrF09QTeN";
     private final String EXECUTION_MODE = "sandbox";
 
-    private Payment definePaymet() {
+    private Payment definePaymet(PaymentCreationDto paymentCreationDto) {
         // Set payer details
         Payer payer = new Payer();
         payer.setPaymentMethod("paypal");
 
         // Set redirect URLs
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:3000/cancel");
-        redirectUrls.setReturnUrl("http://localhost:4200/home");
+        redirectUrls.setCancelUrl(Utils.REQUEST_SOURCE + "/home");
+        redirectUrls.setReturnUrl(Utils.REQUEST_SOURCE + "/profile/bookings");
 
         // Set payment details
         Details details = new Details();
-        details.setShipping("1");
-        details.setSubtotal("5");
-        details.setTax("1");
+        details.setShipping("0");
+        details.setSubtotal(paymentCreationDto.getAmount().toString());
+        details.setTax("0");
 
         // Payment amount
         Amount amount = new Amount();
         amount.setCurrency("USD");
         // Total must be equal to sum of shipping, tax and subtotal.
-        amount.setTotal("7");
+        amount.setTotal(paymentCreationDto.getAmount().toString());
         amount.setDetails(details);
 
 
@@ -43,10 +45,10 @@ public class PaymentServiceImpl implements PaymentService {
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
         transaction
-                .setDescription("This is the payment transaction description.");
+                .setDescription("Payment for " + paymentCreationDto.getItemName() + ".");
 
         // Add transaction to a list
-        List<Transaction> transactions = new ArrayList<Transaction>();
+        List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
 
         // Add payment details
@@ -59,8 +61,8 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public String createPayment() {
-        Payment payment = definePaymet();
+    public String createPayment(PaymentCreationDto paymentCreationDto) {
+        Payment payment = definePaymet(paymentCreationDto);
         APIContext apiContext = new APIContext(RECEIVER_ACCOUNT_ID, RECEIVER_ACCOUNT_SECRET, EXECUTION_MODE);
 
         // Create payment
@@ -82,21 +84,17 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void doPay() {
+    public void executePay(String paymentId, String payerId) throws PayPalRESTException {
         APIContext apiContext = new APIContext(RECEIVER_ACCOUNT_ID, RECEIVER_ACCOUNT_SECRET, EXECUTION_MODE);
 
         Payment payment = new Payment();
-        payment.setId("PAYID-LT76JDY9VY41865FK8309742");
+        payment.setId(paymentId);
 
         PaymentExecution paymentExecution = new PaymentExecution();
-        paymentExecution.setPayerId("CET8YXJG7FUEQ");
+        paymentExecution.setPayerId(payerId);
         Payment createdPayment;
-        try {
 
-            createdPayment = payment.execute(apiContext, paymentExecution);
-        } catch (PayPalRESTException e) {
-            System.out.println("Exceptie");
-        }
+        createdPayment = payment.execute(apiContext, paymentExecution);
     }
 
 }

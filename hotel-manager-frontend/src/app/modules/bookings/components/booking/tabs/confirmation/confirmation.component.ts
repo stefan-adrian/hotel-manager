@@ -8,6 +8,8 @@ import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs";
 import {BookingService} from "../../../../../../core/services/booking.service";
 import {Message} from "primeng/api";
+import {Payment} from "../../../../../../core/models/payment.model";
+import {PaymentService} from "../../../../../../core/services/payment.service";
 
 @Component({
   selector: 'app-confirmation',
@@ -26,7 +28,8 @@ export class ConfirmationComponent implements OnInit {
     private dataService: DataService,
     private router: Router,
     private dateFormat: DateFormat,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private paymentService: PaymentService
   ) { }
 
   ngOnInit() {
@@ -45,16 +48,18 @@ export class ConfirmationComponent implements OnInit {
     booking.roomCategoryName=this.categoryBooking.name;
     booking.bookingPrice=this.categoryBooking.totalBookingPrice;
     booking.customerEmail=this.getUsername();
-    this.bookingService.add(booking).pipe(
-      map(response=>{
-        this.router.navigate(['/profile/bookings']);
-      }),
-      catchError((err) => {
-        this.message = [];
-        this.message.push({severity: 'error', summary: err.message});
-        return of();
-      }))
-      .subscribe();
+    localStorage.setItem('bookingDetails', JSON.stringify(booking));
+
+
+    let payment=new Payment();
+    payment.amount=this.categoryBooking.totalBookingPrice;
+    payment.itemName=this.categoryBooking.name;
+    console.log(payment);
+    this.paymentService.createPayment(payment).subscribe(result=>{
+      let paymentLink=JSON.parse(JSON.stringify(result));
+      window.location.href = paymentLink.link;
+
+    });
   }
 
 

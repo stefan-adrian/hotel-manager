@@ -110,16 +110,4 @@ public class CategoryController {
                                                                           @RequestParam String email){
         return categoryService.getAllCategoriesAvailableBetweenDates(arrivalDate,departureDate,email);
     }
-
-
-    @GetMapping(value = "/test")
-    public String test(){
-        return paymentService.createPayment();
-    }
-
-    @GetMapping(value = "/test2")
-    public void test2(){
-        paymentService.doPay();
-    }
-
 }

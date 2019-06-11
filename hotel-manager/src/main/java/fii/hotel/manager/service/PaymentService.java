@@ -1,9 +1,12 @@
 package fii.hotel.manager.service;
 
+import com.paypal.base.rest.PayPalRESTException;
+import fii.hotel.manager.dto.PaymentCreationDto;
+
 public interface PaymentService {
 
-    String createPayment();
+    String createPayment(PaymentCreationDto paymentCreationDto);
 
-    void doPay();
+    void executePay(String paymentId,String payerId) throws PayPalRESTException;
 
 }
