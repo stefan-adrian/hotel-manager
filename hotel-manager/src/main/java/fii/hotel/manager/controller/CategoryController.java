@@ -8,6 +8,7 @@ import fii.hotel.manager.mapper.CategoryMapper;
 import fii.hotel.manager.model.Category;
 import fii.hotel.manager.model.Room;
 import fii.hotel.manager.service.CategoryService;
+import fii.hotel.manager.service.PaymentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,11 +36,13 @@ import java.util.stream.Collectors;
 public class CategoryController {
     private CategoryMapper categoryMapper;
     private CategoryService categoryService;
+    private PaymentService paymentService;
 
     @Autowired
-    public CategoryController(CategoryMapper categoryMapper, CategoryService categoryService) {
+    public CategoryController(CategoryMapper categoryMapper, CategoryService categoryService, PaymentService paymentService) {
         this.categoryMapper = categoryMapper;
         this.categoryService = categoryService;
+        this.paymentService = paymentService;
     }
 
     @ApiOperation(value = "Add a new category")
@@ -107,4 +110,16 @@ public class CategoryController {
                                                                           @RequestParam String email){
         return categoryService.getAllCategoriesAvailableBetweenDates(arrivalDate,departureDate,email);
     }
+
+
+    @GetMapping(value = "/test")
+    public String test(){
+        return paymentService.createPayment();
+    }
+
+    @GetMapping(value = "/test2")
+    public void test2(){
+        paymentService.doPay();
+    }
+
 }
