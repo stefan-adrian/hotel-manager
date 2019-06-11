@@ -22,7 +22,7 @@ export class CategoryListComponent implements OnInit {
 
   private getCategories(): void{
     this.categoryService.getAll()
-      .subscribe(categories=>this.categories=categories);
+      .subscribe(categories=>{this.categories=categories;console.log(this.categories);});
   }
 
 }

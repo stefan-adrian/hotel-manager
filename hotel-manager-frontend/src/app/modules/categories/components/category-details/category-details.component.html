@@ -1,0 +1,20 @@
+<div class="category-details">
+  <h1 class="category-details-header">{{category.name}}</h1>
+
+  <div>
+    <img [src]="'data:image/jpg;base64,'+category.image | safeHtml" class="category-image">
+  </div>
+
+  <p class="category-description">
+    {{category.description}}
+  </p>
+
+  <div>
+    <h2 class="features">Features</h2>
+    <ul class="list-group category-list">
+      <li class="list-group-item">Beds: {{category.beds}}</li>
+      <li class="list-group-item">TV: {{category.tv}}</li>
+      <li class="list-group-item">Size: {{category.size}} square feet</li>
+    </ul>
+  </div>
+</div>
