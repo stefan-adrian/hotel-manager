@@ -42,4 +42,8 @@ export class CategoryService {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.username;
   }
+
+  getById(id: number): Observable<Category>{
+    return this.apiService.get(`/categories/${id}`);
+  }
 }

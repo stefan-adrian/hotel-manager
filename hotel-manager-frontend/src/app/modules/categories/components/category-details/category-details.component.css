@@ -1,0 +1,41 @@
+.category-details{
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.category-details-header{
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size: 4em;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.category-image{
+ width: 100%;
+  height: auto;
+  max-height: 500px;
+}
+
+
+.category-description{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 1.2em;
+  font-family: "PT Serif";
+}
+
+.features{
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: "PT Serif";
+}
+
+
+.category-list{
+  margin-top: 20px;
+  margin-bottom: 40px;
+
+  font-size: 1.2em;
+  font-family: "PT Serif";
+}
