@@ -13,6 +13,27 @@
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content class="right-side">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let roomservice of roomservices" (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Room: {{roomservice.roomName}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Order time: {{roomservice.timeOfOrder}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let aliment of roomservice.aliments">
+          <p>
+            {{aliment.name}} {{aliment.price}}$
+          </p>
+        </div>
+        <p>
+          Total price: {{roomservice.totalCommandPrice}}$
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
 
   </mat-drawer-content>
 </mat-drawer-container>

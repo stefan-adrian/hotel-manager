@@ -24,6 +24,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [SafeHtml],
@@ -52,7 +53,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatButtonModule,
     MatBadgeModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   exports: [
     HttpClientModule,
@@ -80,6 +82,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatButtonModule,
     MatBadgeModule,
     MatDialogModule,
+    MatExpansionModule,
 
     SafeHtml
 

@@ -10,6 +10,7 @@ import {RoomserviceService} from "../../../../core/services/roomservice.service"
 export class AccountRoomservicesComponent implements OnInit {
 
   private roomservices: RoomserviceCreation[];
+  private panelOpenState = false;
 
   constructor(
     private roomserviceService:RoomserviceService
