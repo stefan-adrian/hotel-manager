@@ -5,9 +5,10 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import {SharedModule} from "../../shared/shared.module";
 import { AccountBookingsComponent } from './components/account-bookings/account-bookings.component';
+import { AccountRoomservicesComponent } from './components/account-roomservices/account-roomservices.component';
 
 @NgModule({
-  declarations: [ProfilePageComponent, AccountBookingsComponent],
+  declarations: [ProfilePageComponent, AccountBookingsComponent, AccountRoomservicesComponent],
   imports: [
     CommonModule,
     SharedModule,
