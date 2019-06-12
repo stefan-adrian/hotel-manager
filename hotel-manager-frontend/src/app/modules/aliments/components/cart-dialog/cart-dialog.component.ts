@@ -4,6 +4,9 @@ import {MAT_DIALOG_DATA} from "@angular/material";
 import {DialogData} from "../aliment-list/aliment-list.component";
 import {Booking} from "../../../../core/models/booking.model";
 import {BookingService} from "../../../../core/services/booking.service";
+import {RoomserviceCreation} from "../../../../core/models/roomservice-creation.model";
+import {RoomserviceService} from "../../../../core/services/roomservice.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart-dialog',
@@ -19,7 +22,9 @@ export class CartDialogComponent implements OnInit {
 
   constructor(
     private bookingService: BookingService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    private roomserviceService:RoomserviceService,
+    private router: Router,
+  @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
   ngOnInit() {
@@ -43,7 +48,12 @@ export class CartDialogComponent implements OnInit {
     }
   }
   private order(): void{
-    console.log(this.selectedBooking);
+    let roomserviceCreation=new RoomserviceCreation();
+    roomserviceCreation.aliments=this.aliments;
+    roomserviceCreation.bookingId=this.selectedBooking.id;
+    this.roomserviceService.add(roomserviceCreation).subscribe(result=>{
+      this.router.navigate(['/profile']);
+    });
   }
 
 }

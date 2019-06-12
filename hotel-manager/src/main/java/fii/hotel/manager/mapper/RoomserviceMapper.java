@@ -8,6 +8,7 @@ import fii.hotel.manager.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class RoomserviceMapper {
     public Roomservice map(RoomserviceDto roomserviceDto) {
         Roomservice roomservice = new Roomservice();
         roomservice.setId(roomserviceDto.getId());
-        roomservice.setTimeOfOrder(roomserviceDto.getTimeOfOrder());
+        roomservice.setTimeOfOrder(LocalDateTime.now());
         roomservice.setTotalCommandPrice(roomserviceDto.getTotalCommandPrice());
         List<Aliment> aliments = roomserviceDto.getAlimentDtos().stream().map(alimentMapper::map).collect(Collectors.toList());
         roomservice.setAliments(aliments);
