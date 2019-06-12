@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Aliment} from "../../../../core/models/aliment.model";
 import {AlimentService} from "../../../../core/services/aliment.service";
 import {SelectItem} from "primeng/api";
+import {MatDialog} from "@angular/material";
+import {CartDialogComponent} from "../cart-dialog/cart-dialog.component";
 
 
 @Component({
@@ -22,7 +24,8 @@ export class AlimentListComponent implements OnInit {
   private sortKey: string;
 
   constructor(
-    private alimentService: AlimentService
+    private alimentService: AlimentService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -53,5 +56,12 @@ export class AlimentListComponent implements OnInit {
       this.sortOrder = 1;
       this.sortField = value;
     }
+  }
+
+  openDialog():void{
+    const dialogRefrence=this.dialog.open(CartDialogComponent,{
+      width:'250px'
+    });
+
   }
 }
