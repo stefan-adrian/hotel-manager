@@ -32,7 +32,7 @@ export class AccountBookingsComponent implements OnInit {
     this.bookingService.getAllCustomerBookings().subscribe(bookings => {
       this.bookings = bookings;
     });
-  }
+  };
 
   verifyIfPaymentAndBookingNeeded(){
     let paymentId;
