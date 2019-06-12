@@ -23,6 +23,11 @@ export class BookingService {
     return this.apiService.getWithParams('/bookings/customer',params);
   }
 
+  getAllCustomerActiveBookings(): Observable<Booking[]>{
+    let params = new HttpParams().append("email",this.getUsername());
+    return this.apiService.getWithParams('/bookings/customer-active',params);
+  }
+
   getCustomerNextBooking(): Observable<Booking>{
     let params = new HttpParams().append("email",this.getUsername());
     return this.apiService.getWithParams('/bookings/customer-next',params);

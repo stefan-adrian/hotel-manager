@@ -107,6 +107,12 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<BookingDto> getActiveBookingDtosByCustomerEmail(String email){
+        List<Booking> bookings=bookingRepository.getActiveBookingsFetchingRoomByCustomerEmail(email);
+        return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
     public BookingDto getCustomerNextBookingDto(String email){
         List<Booking> bookings=bookingRepository.getBookingsAfterCurrentDateFetchingRoomByCustomerEmail(email);
         return bookingMapper.map(bookings.get(0));

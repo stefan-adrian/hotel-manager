@@ -92,6 +92,13 @@ public class BookingController {
         return bookingService.getBookingDtosByCustomerEmail(email);
     }
 
+    @ApiOperation(value = "Get list of all customer active bookings")
+    @ApiResponse(code = 200, message = "List of all customer active bookings")
+    @GetMapping(value="/customer-active")
+    public List<BookingDto> getAllCustomerActiveBookings(@RequestParam String email) {
+        return bookingService.getActiveBookingDtosByCustomerEmail(email);
+    }
+
     @ApiOperation(value = "Get next booking for customer")
     @ApiResponse(code = 200, message = "Next booking for customer")
     @GetMapping(value="/customer-next")
