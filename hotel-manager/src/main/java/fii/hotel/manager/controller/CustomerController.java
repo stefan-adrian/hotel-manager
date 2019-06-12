@@ -3,11 +3,13 @@ package fii.hotel.manager.controller;
 import fii.hotel.manager.config.Utils;
 import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.dto.CustomerDto;
+import fii.hotel.manager.dto.RoomserviceDto;
 import fii.hotel.manager.mapper.CustomerMapper;
 import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.service.BookingService;
 import fii.hotel.manager.service.CustomerService;
+import fii.hotel.manager.service.RoomserviceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/customers")
 @CrossOrigin(origins = Utils.REQUEST_SOURCE)
@@ -23,13 +27,13 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
     private CustomerService customerService;
     private CustomerMapper customerMapper;
-    private BookingService bookingService;
+    private RoomserviceService roomserviceService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, CustomerMapper customerMapper, BookingService bookingService) {
+    public CustomerController(CustomerService customerService, CustomerMapper customerMapper, RoomserviceService roomserviceService) {
         this.customerService = customerService;
         this.customerMapper = customerMapper;
-        this.bookingService = bookingService;
+        this.roomserviceService = roomserviceService;
     }
 
     @ApiOperation(value = "Add a new customer")
@@ -61,5 +65,15 @@ public class CustomerController {
     public CustomerDto getByEmail(@RequestParam String email) {
         Customer customer = customerService.getByEmail(email);
         return customerMapper.map(customer);
+    }
+
+    @ApiOperation(value = "Get room services for customer with specified email")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Customer not found"),
+            @ApiResponse(code = 200, message = "Retrieved room services for customer with the asked email")
+    })
+    @GetMapping(value = "/room-services")
+    public List<RoomserviceDto> getRoomServicesForCustomerByEmail(@RequestParam String email) {
+        return roomserviceService.getAllRoomservicesDtosForCustomerByEmail(email);
     }
 }
