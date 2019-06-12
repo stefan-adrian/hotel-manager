@@ -25,21 +25,25 @@
             Email
           </mat-card-subtitle>
           <p>
-            stefandx9726@gmail.com
+            {{customer.email}}
           </p>
           <mat-card-subtitle>
             First name
           </mat-card-subtitle>
           <p>
-            Adrian
+            {{customer.surname}}
           </p>
           <mat-card-subtitle>
             Last name
           </mat-card-subtitle>
           <p>
-            Stefan
+            {{customer.name}}
           </p>
         </mat-card-content>
+
+        <mat-card-actions class="profile-button">
+          <button (click)="getBarcode()" mat-button>GET ENTRY BARCODE</button>
+        </mat-card-actions>
         <mat-card-actions class="profile-button">
           <button mat-button>EDIT PROFILE</button>
         </mat-card-actions>

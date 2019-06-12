@@ -1,9 +1,6 @@
 package fii.hotel.manager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +19,9 @@ public class Customer {
     private String surname;
 
     private Role role;
+
+    @Lob
+    private byte[] qrCode;
 
     @OneToMany(mappedBy = "customer")
     private Set<Booking> bookings;
@@ -85,6 +85,14 @@ public class Customer {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public byte[] getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(byte[] qrCode) {
+        this.qrCode = qrCode;
     }
 
     public Set<Booking> getBookings() {

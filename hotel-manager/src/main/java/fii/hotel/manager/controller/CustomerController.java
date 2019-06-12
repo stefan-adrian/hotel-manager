@@ -51,4 +51,15 @@ public class CustomerController {
         Customer customer = customerService.getById(id);
         return customerMapper.map(customer);
     }
+
+    @ApiOperation(value = "Get customer with specified email")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Customer not found"),
+            @ApiResponse(code = 200, message = "Retrieved customer with the asked email")
+    })
+    @GetMapping(value = "/email")
+    public CustomerDto getByEmail(@RequestParam String email) {
+        Customer customer = customerService.getByEmail(email);
+        return customerMapper.map(customer);
+    }
 }
