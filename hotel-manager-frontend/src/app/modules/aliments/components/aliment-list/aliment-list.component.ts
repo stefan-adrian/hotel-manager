@@ -67,7 +67,7 @@ export class AlimentListComponent implements OnInit {
 
   openDialog():void{
     const dialogRefrence=this.dialog.open(CartDialogComponent,{
-      width:'350px',
+      width:'400px',
       data: {
         aliments: this.cartAliments
       }

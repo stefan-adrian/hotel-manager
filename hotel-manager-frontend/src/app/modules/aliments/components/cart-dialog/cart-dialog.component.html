@@ -1,7 +1,12 @@
 <h1 mat-dialog-title>Room service order</h1>
+
 <div mat-dialog-content>
   <ul class="list-group aliments-list" *ngFor="let aliment of aliments">
-    <li class="list-group-item">{{aliment.name}}   {{aliment.price}}$ </li>
+    <li class="list-group-item">{{aliment.name}}   {{aliment.price}}$</li>
   </ul>
   <p class="order-price">Total order price: {{orderPrice}}$</p>
+</div>
+
+<div mat-dialog-actions>
+    <button pButton (click)="order()" class="btn btn-secondary" label="Order"></button>
 </div>

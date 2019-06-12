@@ -28,5 +28,8 @@ export class CartDialogComponent implements OnInit {
       this.orderPrice+=aliment.price;
     }
   }
+  private order(): void{
+
+  }
 
 }
