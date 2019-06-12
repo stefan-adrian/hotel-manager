@@ -2,7 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Aliment} from "../../../../core/models/aliment.model";
 import {AlimentService} from "../../../../core/services/aliment.service";
 import {SelectItem} from "primeng/api";
+import {MatDialog} from "@angular/material";
+import {CartDialogComponent} from "../cart-dialog/cart-dialog.component";
 
+
+
+export interface DialogData {
+  aliments: Aliment[];
+}
 
 @Component({
   selector: 'app-aliment-list',
@@ -21,8 +28,11 @@ export class AlimentListComponent implements OnInit {
 
   private sortKey: string;
 
+  private cartAliments: Aliment[]=[];
+
   constructor(
-    private alimentService: AlimentService
+    private alimentService: AlimentService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -53,5 +63,18 @@ export class AlimentListComponent implements OnInit {
       this.sortOrder = 1;
       this.sortField = value;
     }
+  }
+
+  openDialog():void{
+    const dialogRefrence=this.dialog.open(CartDialogComponent,{
+      width:'400px',
+      data: {
+        aliments: this.cartAliments
+      }
+    });
+  }
+
+  addAlimentToCart(aliment): void{
+    this.cartAliments.push(aliment);
   }
 }

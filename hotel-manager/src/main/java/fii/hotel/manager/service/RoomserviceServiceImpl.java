@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomserviceServiceImpl implements RoomserviceService {
@@ -43,5 +45,11 @@ public class RoomserviceServiceImpl implements RoomserviceService {
 
     private Double calculateTotalAlimentsPrice(List<Aliment> aliments) {
         return aliments.stream().mapToDouble(aliment -> aliment.getPrice()).sum();
+    }
+
+    @Override
+    public List<RoomserviceDto> getAllRoomservicesDtosForCustomerByEmail(String email) {
+        Set<Roomservice> roomservices=roomserviceRepository.getRoomserviceByCustomerEmail(email);
+        return roomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList());
     }
 }

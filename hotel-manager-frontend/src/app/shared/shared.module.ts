@@ -22,8 +22,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-
-
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [SafeHtml],
@@ -50,7 +51,10 @@ import {MatButtonModule} from '@angular/material/button';
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   exports: [
     HttpClientModule,
@@ -76,6 +80,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     MatCardModule,
     MatButtonModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatExpansionModule,
 
     SafeHtml
 

@@ -19,5 +19,7 @@ public interface BookingService {
 
     List<BookingDto> getBookingDtosByCustomerEmail(String email);
 
+    List<BookingDto> getActiveBookingDtosByCustomerEmail(String email);
+
     BookingDto getCustomerNextBookingDto(String email);
 }

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Room service order</h1>
+
+<div mat-dialog-content>
+  <ul class="list-group aliments-list" *ngFor="let aliment of aliments">
+    <li class="list-group-item">{{aliment.name}}   {{aliment.price}}$</li>
+  </ul>
+  <p class="order-price">Total order price: {{orderPrice}}$</p>
+
+  <mat-form-field>
+    <mat-label>Room</mat-label>
+    <mat-select [(value)]="selectedBooking">
+      <!--<mat-option value="option1">Option 1</mat-option>
+      <mat-option value="option2">Option 2</mat-option>
+      <mat-option value="option3">Option 3</mat-option>-->
+      <mat-option *ngFor="let booking of bookings" [value]="booking">
+        {{booking.room.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button [disabled]="selectedBooking==null" pButton (click)="order()" class="btn btn-secondary" label="Order"></button>
+</div>
