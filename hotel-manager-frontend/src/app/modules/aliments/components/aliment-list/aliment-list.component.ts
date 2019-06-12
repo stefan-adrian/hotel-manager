@@ -6,6 +6,11 @@ import {MatDialog} from "@angular/material";
 import {CartDialogComponent} from "../cart-dialog/cart-dialog.component";
 
 
+
+export interface DialogData {
+  aliments: Aliment[];
+}
+
 @Component({
   selector: 'app-aliment-list',
   templateUrl: './aliment-list.component.html',
@@ -22,6 +27,8 @@ export class AlimentListComponent implements OnInit {
   private sortField: string;
 
   private sortKey: string;
+
+  private cartAliments: Aliment[]=[];
 
   constructor(
     private alimentService: AlimentService,
@@ -60,8 +67,14 @@ export class AlimentListComponent implements OnInit {
 
   openDialog():void{
     const dialogRefrence=this.dialog.open(CartDialogComponent,{
-      width:'250px'
+      width:'350px',
+      data: {
+        aliments: this.cartAliments
+      }
     });
+  }
 
+  addAlimentToCart(aliment): void{
+    this.cartAliments.push(aliment);
   }
 }

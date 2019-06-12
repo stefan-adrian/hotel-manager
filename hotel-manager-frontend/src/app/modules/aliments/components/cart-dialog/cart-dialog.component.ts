@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Aliment} from "../../../../core/models/aliment.model";
+import {MAT_DIALOG_DATA} from "@angular/material";
+import {DialogData} from "../aliment-list/aliment-list.component";
 
 @Component({
   selector: 'app-cart-dialog',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartDialogComponent implements OnInit {
 
-  constructor() { }
+  private aliments:Aliment[];
+  private orderPrice: number;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
 
   ngOnInit() {
+    this.aliments=this.data.aliments;
+    this.calculateOrderPrice();
+  }
+
+  private calculateOrderPrice():void{
+    this.orderPrice=0;
+    for(let aliment of this.aliments){
+      this.orderPrice+=aliment.price;
+    }
   }
 
 }

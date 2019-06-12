@@ -16,7 +16,7 @@
           <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         </div>
         <div class="ui-g-6 ui-md-1">
-          <mat-icon (click)="openDialog()" matBadge="15" matBadgeColor="warn">shopping_cart</mat-icon>
+          <mat-icon (click)="openDialog()" matBadge="{{cartAliments.length.toString()}}" matBadgeColor="warn">shopping_cart</mat-icon>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
       <div class="ui-g-12 ui-md-3" style="text-align:center">
         <img class="smaller" [src]="'data:image/jpg;base64,'+aliment.image | safeHtml" />
       </div>
-      <div class="ui-g-12 ui-md-8 car-details">
+      <div class="ui-g-12 ui-md-6 car-details">
         <div class="ui-g">
           <div class="ui-g-2 ui-sm-6">Name: </div>
           <div class="ui-g-10 ui-sm-6"><b>{{aliment.name}}</b></div>
@@ -35,6 +35,9 @@
           <div class="ui-g-10 ui-sm-6"><b>{{aliment.price}}</b></div>
 
         </div>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <button pButton (click)="addAlimentToCart(aliment)" label="Add to cart" class="btn btn-secondary"></button>
       </div>
     </div>
   </ng-template>
