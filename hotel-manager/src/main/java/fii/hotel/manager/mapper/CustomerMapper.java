@@ -31,6 +31,7 @@ public class CustomerMapper {
         customerDto.setName(customer.getName());
         customerDto.setSurname(customer.getSurname());
         customerDto.setRole(customer.getRole());
+        customerDto.setQrCode(customer.getQrCode());
         return customerDto;
     }
 }

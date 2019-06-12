@@ -20,6 +20,8 @@ public class CustomerDto implements Serializable {
 
     private Role role;
 
+    private byte[] qrCode;
+
     public CustomerDto() {
     }
 
@@ -69,5 +71,13 @@ public class CustomerDto implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public byte[] getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(byte[] qrCode) {
+        this.qrCode = qrCode;
     }
 }

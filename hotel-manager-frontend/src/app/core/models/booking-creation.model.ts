@@ -7,4 +7,6 @@ export class BookingCreation{
   toTime: Date;
   bookingPrice: number;
   roomCleaning: boolean;
+  payerId: string;
+  paymentId: string;
 }

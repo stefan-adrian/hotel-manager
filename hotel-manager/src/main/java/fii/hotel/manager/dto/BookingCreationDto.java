@@ -30,6 +30,10 @@ public class BookingCreationDto implements Serializable {
 
     private LocalDateTime bookingTime;
 
+    private String payerId;
+
+    private String paymentId;
+
     public BookingCreationDto() {
     }
 
@@ -103,5 +107,21 @@ public class BookingCreationDto implements Serializable {
 
     public void setBookingTime(LocalDateTime bookingTime) {
         this.bookingTime = bookingTime;
+    }
+
+    public String getPayerId() {
+        return payerId;
+    }
+
+    public void setPayerId(String payerId) {
+        this.payerId = payerId;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 }

@@ -1,5 +1,6 @@
 package fii.hotel.manager.service;
 
+import com.paypal.base.rest.PayPalRESTException;
 import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.exception.BookingNotFoundException;
@@ -26,12 +27,14 @@ public class BookingServiceImpl implements BookingService {
     private CustomerService customerService;
     private RoomService roomService;
     private BookingMapper bookingMapper;
+    private PaymentService paymentService;
 
     @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService) {
+    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService, PaymentService paymentService) {
         this.bookingRepository = bookingRepository;
         this.customerService = customerService;
         this.roomService = roomService;
+        this.paymentService = paymentService;
     }
 
     @Autowired
@@ -40,24 +43,19 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingCreationDto save(Long customerId, BookingCreationDto bookingCreationDto) {
-        Customer customer = customerService.getById(customerId);
-        Room room = roomService.getByIdFetchBookings(bookingCreationDto.getRoomId());
-        roomService.checkIfBookingTimeAvailable(room, bookingCreationDto.getFromTime(), bookingCreationDto.getToTime());
-        Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
-        Booking savedBooking = bookingRepository.save(booking);
-        logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
-        return bookingMapper.mapToCreationDto(savedBooking);
-    }
-
-    @Override
     public BookingCreationDto save(BookingCreationDto bookingCreationDto) {
         Customer customer = customerService.getByEmail(bookingCreationDto.getCustomerEmail());
         Room room = roomService.getRoomByCategoryAvailableBetweenDates(bookingCreationDto.getFromTime(), bookingCreationDto.getToTime(),bookingCreationDto.getRoomCategoryName());
         Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
-        Booking savedBooking = bookingRepository.save(booking);
-        logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
-        return bookingMapper.mapToCreationDto(savedBooking);
+        try {
+            paymentService.executePay(bookingCreationDto.getPaymentId(), bookingCreationDto.getPayerId());
+            Booking savedBooking = bookingRepository.save(booking);
+            logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
+            return bookingMapper.mapToCreationDto(savedBooking);
+        }catch (PayPalRESTException e){
+            System.err.println(e.getDetails());
+        }
+        return null;
     }
 
     @Override

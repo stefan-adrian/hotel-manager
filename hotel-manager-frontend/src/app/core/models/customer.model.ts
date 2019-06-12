@@ -5,4 +5,5 @@ export class Customer {
   name: string;
   surname: string;
   role: string;
+  qrCode: ArrayBuffer;
 }
