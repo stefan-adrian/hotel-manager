@@ -20,6 +20,8 @@ public class RoomserviceDto implements Serializable {
 
     private Long bookingId;
 
+    private String roomName;
+
     public RoomserviceDto() {
     }
 
@@ -61,5 +63,13 @@ public class RoomserviceDto implements Serializable {
 
     public void setBookingId(Long bookingId) {
         this.bookingId = bookingId;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }

@@ -6,4 +6,5 @@ export class RoomserviceCreation{
   aliments: Aliment[];
   totalCommandPrice: number;
   bookingId: number;
+  roomName: string;
 }

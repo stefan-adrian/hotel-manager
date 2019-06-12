@@ -43,6 +43,7 @@ public class RoomserviceMapper {
         List<AlimentDto> alimentDtos = roomservice.getAliments().stream().map(alimentMapper::map).collect(Collectors.toList());
         roomserviceDto.setAlimentDtos(alimentDtos);
         roomserviceDto.setBookingId(roomservice.getBooking().getId());
+        roomserviceDto.setRoomName(roomservice.getBooking().getRoom().getName());
         return roomserviceDto;
     }
 }
