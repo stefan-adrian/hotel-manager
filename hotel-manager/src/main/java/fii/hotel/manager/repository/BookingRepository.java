@@ -40,7 +40,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             " LEFT JOIN FETCH b.carOrders co LEFT JOIN FETCH b.spaEvents se" +
             " LEFT JOIN FETCH b.roomservices rs LEFT JOIN FETCH rs.aliments" +
             " WHERE c.email= :email and b.fromTime <= CURRENT_DATE and b.toTime >= CURRENT_DATE ")
-    List<Booking> getActiveBookingsFetchingRoomByCustomerEmail(@Param("email") String email);
+    Set<Booking> getActiveBookingsFetchingRoomByCustomerEmail(@Param("email") String email);
 
     @Transactional
     @Query("SELECT b FROM Booking b JOIN b.customer c LEFT JOIN FETCH b.room" +
