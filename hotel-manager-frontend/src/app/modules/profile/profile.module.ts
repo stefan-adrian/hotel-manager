@@ -7,9 +7,10 @@ import {SharedModule} from "../../shared/shared.module";
 import { AccountBookingsComponent } from './components/account-bookings/account-bookings.component';
 import { AccountRoomservicesComponent } from './components/account-roomservices/account-roomservices.component';
 import { AllRoomservicesComponent } from './components/all-roomservices/all-roomservices.component';
+import { AllBookingsComponent } from './components/all-bookings/all-bookings.component';
 
 @NgModule({
-  declarations: [ProfilePageComponent, AccountBookingsComponent, AccountRoomservicesComponent, AllRoomservicesComponent],
+  declarations: [ProfilePageComponent, AccountBookingsComponent, AccountRoomservicesComponent, AllRoomservicesComponent, AllBookingsComponent],
   imports: [
     CommonModule,
     SharedModule,
