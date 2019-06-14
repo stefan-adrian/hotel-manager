@@ -12,31 +12,45 @@
       <a href="/profile/all-bookings" class="side-nav-link" mat-list-item>All bookings</a>
 
 
+
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content class="right-side">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let roomservice of roomservices" (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
+      <mat-expansion-panel *ngFor="let booking of bookings">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Room: {{roomservice.roomName}}
+            Room: {{booking.room.name}}
           </mat-panel-title>
           <mat-panel-description>
-            STATUS: {{roomservice.commandStatus}}
+            {{booking.fromTime}} - {{booking.toTime}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <p>
-          Order time: {{roomservice.timeOfOrder}}
+          Booking time: {{booking.bookingTime}}
         </p>
-        <div *ngFor="let aliment of roomservice.aliments">
-          <p>
-            {{aliment.name}} {{aliment.price}}$
-          </p>
-        </div>
         <p>
-          Total price: {{roomservice.totalCommandPrice}}$
+          Booking price: {{booking.price}}$
         </p>
+        <p>
+          Customer name: {{booking.customer.name}} {{booking.customer.surname}}
+        </p>
+        <p>
+          Customer birthday: {{booking.customer.birthday}}
+        </p>
+        <p>
+          Nationality: {{booking.customer.nationality}}
+        </p>
+        <p>
+          Address: {{booking.customer.address}}
+        </p>
+        <p>
+          Identification number: {{booking.customer.identificationNumber}}
+        </p>
+        <p>
+          Email: {{booking.customer.email}}
+        </p>
+
       </mat-expansion-panel>
     </mat-accordion>
 

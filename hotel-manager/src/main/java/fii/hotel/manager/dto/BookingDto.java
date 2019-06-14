@@ -12,6 +12,7 @@ public class BookingDto implements Serializable {
 
     private Long id;
 
+    @JsonProperty("customer")
     private CustomerDto customerDto;
 
     @JsonProperty("room")

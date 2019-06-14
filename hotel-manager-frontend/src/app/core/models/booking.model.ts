@@ -1,4 +1,5 @@
 import {Room} from "./room.model";
+import {Customer} from "./customer.model";
 
 export class Booking{
 
@@ -9,4 +10,5 @@ export class Booking{
   price: number;
   bookingTime:string;
   room: Room;
+  customer: Customer;
 }

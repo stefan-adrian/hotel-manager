@@ -4,6 +4,7 @@ import {ProfilePageComponent} from "./components/profile-page/profile-page.compo
 import {AccountBookingsComponent} from "./components/account-bookings/account-bookings.component";
 import {AccountRoomservicesComponent} from "./components/account-roomservices/account-roomservices.component";
 import {AllRoomservicesComponent} from "./components/all-roomservices/all-roomservices.component";
+import {AllBookingsComponent} from "./components/all-bookings/all-bookings.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'all-orders',
     component: AllRoomservicesComponent
+  },
+  {
+    path: 'all-bookings',
+    component: AllBookingsComponent
   }
 
 

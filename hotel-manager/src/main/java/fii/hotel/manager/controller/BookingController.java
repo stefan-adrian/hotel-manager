@@ -105,4 +105,9 @@ public class BookingController {
     public BookingDto getNextCustomerBooking(@RequestParam String email) {
         return bookingService.getCustomerNextBookingDto(email);
     }
+
+    @GetMapping()
+    public List<BookingDto> getAllBookings() {
+        return bookingService.getAllBookingDtos();
+    }
 }

@@ -33,6 +33,10 @@ export class BookingService {
     return this.apiService.getWithParams('/bookings/customer-next',params);
   }
 
+  getAll():Observable<Booking[]>{
+    return this.apiService.get('/bookings');
+  }
+
   getUsername(): string {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.username;
