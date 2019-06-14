@@ -6,9 +6,10 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import {SharedModule} from "../../shared/shared.module";
 import { AccountBookingsComponent } from './components/account-bookings/account-bookings.component';
 import { AccountRoomservicesComponent } from './components/account-roomservices/account-roomservices.component';
+import { AllRoomservicesComponent } from './components/all-roomservices/all-roomservices.component';
 
 @NgModule({
-  declarations: [ProfilePageComponent, AccountBookingsComponent, AccountRoomservicesComponent],
+  declarations: [ProfilePageComponent, AccountBookingsComponent, AccountRoomservicesComponent, AllRoomservicesComponent],
   imports: [
     CommonModule,
     SharedModule,

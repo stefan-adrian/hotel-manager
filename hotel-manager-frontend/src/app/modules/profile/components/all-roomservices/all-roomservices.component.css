@@ -1,0 +1,33 @@
+.example-container {
+  height: 700px;
+}
+
+.side-bar{
+  width: 15%;
+  background-color: #E3E3E3;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .side-bar{
+    display:none;
+  }
+}
+
+.side-nav-link{
+  color:black;
+  list-style:none;
+  padding:15px 10px;
+  border-bottom:1px solid rgba(100,100,100,0.3);
+  height: 100px;
+}
+
+.icon{
+  font-size: 5em;
+  margin-left: 60px;
+}
+
+.right-side{
+  background-color: #FAFAFA;
+}
+

@@ -17,6 +17,8 @@ public class Roomservice {
 
     private Double totalCommandPrice;
 
+    private CommandStatus commandStatus;
+
     @ManyToOne
     private Booking booking;
 
@@ -53,6 +55,14 @@ public class Roomservice {
 
     public void setTotalCommandPrice(Double totalCommandPrice) {
         this.totalCommandPrice = totalCommandPrice;
+    }
+
+    public CommandStatus getCommandStatus() {
+        return commandStatus;
+    }
+
+    public void setCommandStatus(CommandStatus commandStatus) {
+        this.commandStatus = commandStatus;
     }
 
     public Booking getBooking() {

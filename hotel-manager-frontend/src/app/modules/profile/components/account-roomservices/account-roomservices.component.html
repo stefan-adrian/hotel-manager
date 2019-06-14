@@ -8,6 +8,7 @@
       <a href="/profile" class="side-nav-link" mat-list-item>General information</a>
       <a href="/profile/bookings" class="side-nav-link" mat-list-item>Bookings</a>
       <a href="/profile/orders" class="side-nav-link" mat-list-item>Room service orders</a>
+      <a href="/profile/all-orders" class="side-nav-link" mat-list-item>All room service orders</a>
 
 
     </mat-nav-list>
@@ -21,9 +22,12 @@
             Room: {{roomservice.roomName}}
           </mat-panel-title>
           <mat-panel-description>
-            Order time: {{roomservice.timeOfOrder}}
+            STATUS: {{roomservice.commandStatus}}
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <p>
+          Order time: {{roomservice.timeOfOrder}}
+        </p>
         <div *ngFor="let aliment of roomservice.aliments">
           <p>
             {{aliment.name}} {{aliment.price}}$

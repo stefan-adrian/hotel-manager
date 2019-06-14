@@ -1,8 +1,10 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.AllRoomservicesDto;
 import fii.hotel.manager.dto.RoomserviceDto;
 import fii.hotel.manager.mapper.RoomserviceMapper;
 import fii.hotel.manager.model.Aliment;
+import fii.hotel.manager.model.CommandStatus;
 import fii.hotel.manager.model.Roomservice;
 import fii.hotel.manager.model.SpaEvent;
 import fii.hotel.manager.repository.RoomserviceRepository;
@@ -39,6 +41,7 @@ public class RoomserviceServiceImpl implements RoomserviceService {
         roomserviceDto.setBookingId(bookingId);
         Roomservice roomservice = roomserviceMapper.map(roomserviceDto);
         roomservice.setTotalCommandPrice(calculateTotalAlimentsPrice(roomservice.getAliments()));
+        roomservice.setCommandStatus(CommandStatus.RECEIVED);
         Roomservice roomserviceSaved = save(roomservice);
         return roomserviceMapper.map(roomserviceSaved);
     }
@@ -49,7 +52,39 @@ public class RoomserviceServiceImpl implements RoomserviceService {
 
     @Override
     public List<RoomserviceDto> getAllRoomservicesDtosForCustomerByEmail(String email) {
-        Set<Roomservice> roomservices=roomserviceRepository.getRoomserviceByCustomerEmail(email);
+        Set<Roomservice> roomservices = roomserviceRepository.getRoomserviceByCustomerEmail(email);
         return roomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public AllRoomservicesDto getAllRoomservices() {
+        Set<Roomservice> inactiveRoomservices = roomserviceRepository.getAllRoomservicesByStatus(CommandStatus.DELIVERED);
+        Set<Roomservice> activeRoomservices = roomserviceRepository.getAllRoomservicesByStatusNegation(CommandStatus.DELIVERED);
+        AllRoomservicesDto allRoomservicesDto = new AllRoomservicesDto();
+        allRoomservicesDto.setInactiveRoomservice(inactiveRoomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList()));
+        allRoomservicesDto.setActiveRoomservice(activeRoomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList()));
+        return allRoomservicesDto;
+    }
+
+    @Override
+    public void actualizeRoomserviceOrderToNextStep(Long id) {
+        Roomservice roomservice = roomserviceRepository.findById(id).get();
+        roomservice = takeRoomserviceOrderToNextStep(roomservice);
+        roomserviceRepository.save(roomservice);
+    }
+
+    private Roomservice takeRoomserviceOrderToNextStep(Roomservice roomservice) {
+        String roomserviceStatus=roomservice.getCommandStatus().getStatus();
+        int ok=0;
+        for(CommandStatus commandStatus:CommandStatus.values()){
+            if(ok==1){
+                roomservice.setCommandStatus(commandStatus);
+                return roomservice;
+            }
+            if(commandStatus.equals(roomservice.getCommandStatus())){
+                ok=1;
+            }
+        }
+        return roomservice;
     }
 }

@@ -32,6 +32,7 @@ public class RoomserviceMapper {
         List<Aliment> aliments = roomserviceDto.getAlimentDtos().stream().map(alimentMapper::map).collect(Collectors.toList());
         roomservice.setAliments(aliments);
         roomservice.setBooking(bookingService.getById(roomserviceDto.getBookingId()));
+        roomservice.setCommandStatus(roomserviceDto.getCommandStatus());
         return roomservice;
     }
 
@@ -44,6 +45,7 @@ public class RoomserviceMapper {
         roomserviceDto.setAlimentDtos(alimentDtos);
         roomserviceDto.setBookingId(roomservice.getBooking().getId());
         roomserviceDto.setRoomName(roomservice.getBooking().getRoom().getName());
+        roomserviceDto.setCommandStatus(roomservice.getCommandStatus());
         return roomserviceDto;
     }
 }

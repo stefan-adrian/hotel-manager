@@ -60,4 +60,9 @@ export class ApiService {
     return this.httpClient.patch(BASE_URL + path, form, this.optionsFile);
   }
 
+
+  public patchSimple(path: string): Observable<any> {
+    return this.httpClient.patch(BASE_URL + path,this.options);
+  }
+
 }

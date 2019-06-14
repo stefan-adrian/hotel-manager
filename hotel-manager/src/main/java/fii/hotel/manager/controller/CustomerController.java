@@ -27,13 +27,11 @@ import java.util.List;
 public class CustomerController {
     private CustomerService customerService;
     private CustomerMapper customerMapper;
-    private RoomserviceService roomserviceService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, CustomerMapper customerMapper, RoomserviceService roomserviceService) {
+    public CustomerController(CustomerService customerService, CustomerMapper customerMapper) {
         this.customerService = customerService;
         this.customerMapper = customerMapper;
-        this.roomserviceService = roomserviceService;
     }
 
     @ApiOperation(value = "Add a new customer")
@@ -63,15 +61,5 @@ public class CustomerController {
     public CustomerDto getByEmail(@RequestParam String email) {
         Customer customer = customerService.getByEmail(email);
         return customerMapper.map(customer);
-    }
-
-    @ApiOperation(value = "Get room services for customer with specified email")
-    @ApiResponses(value = {
-            @ApiResponse(code = 404, message = "Customer not found"),
-            @ApiResponse(code = 200, message = "Retrieved room services for customer with the asked email")
-    })
-    @GetMapping(value = "/room-services")
-    public List<RoomserviceDto> getRoomServicesForCustomerByEmail(@RequestParam String email) {
-        return roomserviceService.getAllRoomservicesDtosForCustomerByEmail(email);
     }
 }

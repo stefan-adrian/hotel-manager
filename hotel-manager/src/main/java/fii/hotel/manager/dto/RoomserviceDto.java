@@ -2,6 +2,7 @@ package fii.hotel.manager.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fii.hotel.manager.model.CommandStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +22,8 @@ public class RoomserviceDto implements Serializable {
     private Long bookingId;
 
     private String roomName;
+
+    private CommandStatus commandStatus;
 
     public RoomserviceDto() {
     }
@@ -71,5 +74,13 @@ public class RoomserviceDto implements Serializable {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+
+    public CommandStatus getCommandStatus() {
+        return commandStatus;
+    }
+
+    public void setCommandStatus(CommandStatus commandStatus) {
+        this.commandStatus = commandStatus;
     }
 }
