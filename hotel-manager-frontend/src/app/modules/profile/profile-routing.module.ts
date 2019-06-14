@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
 import {AccountBookingsComponent} from "./components/account-bookings/account-bookings.component";
 import {AccountRoomservicesComponent} from "./components/account-roomservices/account-roomservices.component";
+import {AllRoomservicesComponent} from "./components/all-roomservices/all-roomservices.component";
 
 const routes: Routes = [
   {
@@ -16,7 +17,12 @@ const routes: Routes = [
   {
     path: 'orders',
     component: AccountRoomservicesComponent
+  },
+  {
+    path: 'all-orders',
+    component: AllRoomservicesComponent
   }
+
 
 
 ];

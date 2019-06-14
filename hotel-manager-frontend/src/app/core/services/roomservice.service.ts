@@ -17,6 +17,10 @@ export class RoomserviceService {
     return this.apiService.post('/bookings/'+roomservice.bookingId+'/roomservices',roomservice);
   }
 
+  getAll():Observable<any>{
+    return this.apiService.get('/room-services/all');
+  }
+
   getAllCustomerRoomservices(): Observable<RoomserviceCreation[]>{
     let params = new HttpParams().append("email",this.getUsername());
     return this.apiService.getWithParams('/room-services',params);

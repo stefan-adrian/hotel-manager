@@ -23,8 +23,6 @@ export class AccountRoomservicesComponent implements OnInit {
   private getUserRoomservices():void{
     this.roomserviceService.getAllCustomerRoomservices().subscribe(roomservices=>{
       this.roomservices=roomservices;
-      console.log(this.roomservices);
-      console.log(this.roomservices[0].aliments[0].name);
 
     });
   }

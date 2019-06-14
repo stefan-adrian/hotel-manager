@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AllRoomservice} from "../../../../core/models/all-roomservice.model";
+import {RoomserviceService} from "../../../../core/services/roomservice.service";
+import {RoomserviceCreation} from "../../../../core/models/roomservice-creation.model";
 
 @Component({
   selector: 'app-all-roomservices',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllRoomservicesComponent implements OnInit {
 
-  constructor() { }
+  private allRoomService: any;
+
+  constructor(
+    private roomserviceService: RoomserviceService
+  ) { }
 
   ngOnInit() {
+    this.getAllRoomservices();
   }
 
+  private getAllRoomservices():void{
+    this.roomserviceService.getAll().subscribe(allRoomServices=>{
+      this.allRoomService=allRoomServices;
+      console.log(allRoomServices);
+      console.log("ACI");
+    });
+  }
 }

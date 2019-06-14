@@ -1,3 +1,73 @@
-<p>
-  all-roomservices works!
-</p>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened class="side-bar">
+    <mat-nav-list class="test2">
+      <a>
+        <mat-icon class="icon">account_circle</mat-icon>
+      </a>
+
+      <a href="/profile" class="side-nav-link" mat-list-item>General information</a>
+      <a href="/profile/bookings" class="side-nav-link" mat-list-item>Bookings</a>
+      <a href="/profile/orders" class="side-nav-link" mat-list-item>Room service orders</a>
+      <a href="/profile/all-orders" class="side-nav-link" mat-list-item>All room service orders</a>
+
+
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="right-side">
+    <mat-tab-group>
+      <mat-tab label="Active">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let roomservice of allRoomService.activeRoomservice">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Room: {{roomservice.roomName}}
+              </mat-panel-title>
+              <mat-panel-description>
+                STATUS: {{roomservice.commandStatus}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>
+              Order time: {{roomservice.timeOfOrder}}
+            </p>
+            <div *ngFor="let aliment of roomservice.aliments">
+              <p>
+                {{aliment.name}} {{aliment.price}}$
+              </p>
+            </div>
+            <p>
+              Total price: {{roomservice.totalCommandPrice}}$
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-tab>
+
+      <mat-tab label="Inactive">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let roomservice of allRoomService.inactiveRoomservice">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Room: {{roomservice.roomName}}
+              </mat-panel-title>
+              <mat-panel-description>
+                STATUS: {{roomservice.commandStatus}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>
+              Order time: {{roomservice.timeOfOrder}}
+            </p>
+            <div *ngFor="let aliment of roomservice.aliments">
+              <p>
+                {{aliment.name}} {{aliment.price}}$
+              </p>
+            </div>
+            <p>
+              Total price: {{roomservice.totalCommandPrice}}$
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-drawer-content>
+</mat-drawer-container>
