@@ -12,7 +12,10 @@ public class CategoryMapper {
         category.setId(categoryDto.getId());
         category.setName(categoryDto.getName());
         category.setBeds(categoryDto.getBeds());
-        category.setTv(categoryDto.getTv());
+        category.setOccupancy(categoryDto.getOccupancy());
+        category.setKitchen(categoryDto.getKitchen());
+        category.setCoffeeMaker(categoryDto.getCoffeeMaker());
+        category.setSafe(categoryDto.getSafe());
         category.setPrice(categoryDto.getPrice());
         category.setSize(categoryDto.getSize());
         category.setDescription(categoryDto.getDescription());
@@ -25,7 +28,10 @@ public class CategoryMapper {
         categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
         categoryDto.setBeds(category.getBeds());
-        categoryDto.setTv(category.getTv());
+        categoryDto.setOccupancy(category.getOccupancy());
+        categoryDto.setKitchen(category.getKitchen());
+        categoryDto.setCoffeeMaker(category.getCoffeeMaker());
+        categoryDto.setSafe(category.getSafe());
         categoryDto.setPrice(category.getPrice());
         categoryDto.setSize(category.getSize());
         categoryDto.setDescription(category.getDescription());

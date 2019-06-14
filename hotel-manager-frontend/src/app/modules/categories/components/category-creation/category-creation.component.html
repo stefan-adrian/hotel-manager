@@ -13,18 +13,26 @@
       </mat-form-field>
 
       <mat-form-field>
+        <input matInput type="number" placeholder="Maximum occupancy" formControlName="occupancy">
+      </mat-form-field>
+
+      <mat-form-field>
         <input matInput type="number" placeholder="Price" formControlName="price">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="number" placeholder="Size" formControlName="size">
+        <input matInput type="number" placeholder="Size in square feet" formControlName="size">
       </mat-form-field>
 
       <mat-form-field>
         <input matInput type="text" placeholder="Description" formControlName="description">
       </mat-form-field>
 
-      <p-checkbox binary="true" label="TV" formControlName="tv"></p-checkbox>
+      <div class="checkboxes">
+        <p-checkbox binary="true" label="Coffee maker" formControlName="coffeeMaker"></p-checkbox>
+        <p-checkbox binary="true" label="Safe" formControlName="safe"></p-checkbox>
+        <p-checkbox binary="true" label="Kitchen" formControlName="kitchen"></p-checkbox>
+      </div>
       <br>
 
       <h5>Add image</h5>

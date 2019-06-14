@@ -27,7 +27,10 @@ export class CategoryCreationComponent implements OnInit {
     return this.formBuilder.group({
       name: [null, Validators.required],
       beds: [null, Validators.required],
-      tv: [false],
+      occupancy: [null, Validators.required],
+      coffeeMaker: [false],
+      safe: [false],
+      kitchen: [false],
       price: [null, Validators.required],
       size: [null, Validators.required],
       description: [null, Validators.required]

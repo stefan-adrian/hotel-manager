@@ -11,7 +11,6 @@ public class CategoryBookingMapper {
         CategoryBookingDto categoryBookingDto=new CategoryBookingDto();
         categoryBookingDto.setName(category.getName());
         categoryBookingDto.setBeds(category.getBeds());
-        categoryBookingDto.setTv(category.getTv());
         categoryBookingDto.setCategoryBasicPrice(category.getPrice());
         categoryBookingDto.setImage(category.getImage());
         categoryBookingDto.setSize(category.getSize());

@@ -14,7 +14,13 @@ public class Category {
 
     private Integer beds;
 
-    private Boolean tv;
+    private Integer occupancy;
+
+    private Boolean safe;
+
+    private Boolean coffeeMaker;
+
+    private Boolean kitchen;
 
     private Double price;
 
@@ -56,12 +62,36 @@ public class Category {
         this.beds = beds;
     }
 
-    public Boolean getTv() {
-        return tv;
+    public Integer getOccupancy() {
+        return occupancy;
     }
 
-    public void setTv(Boolean tv) {
-        this.tv = tv;
+    public void setOccupancy(Integer occupancy) {
+        this.occupancy = occupancy;
+    }
+
+    public Boolean getSafe() {
+        return safe;
+    }
+
+    public void setSafe(Boolean safe) {
+        this.safe = safe;
+    }
+
+    public Boolean getCoffeeMaker() {
+        return coffeeMaker;
+    }
+
+    public void setCoffeeMaker(Boolean coffeeMaker) {
+        this.coffeeMaker = coffeeMaker;
+    }
+
+    public Boolean getKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(Boolean kitchen) {
+        this.kitchen = kitchen;
     }
 
     public Double getPrice() {

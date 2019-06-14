@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class CategoryBookingDto implements Serializable {
     private String name;
     private Integer beds;
-    private Boolean tv;
     private Double categoryBasicPrice;
     private Double totalBookingPrice;
     private Integer availableRooms;
@@ -32,14 +31,6 @@ public class CategoryBookingDto implements Serializable {
 
     public void setBeds(Integer beds) {
         this.beds = beds;
-    }
-
-    public Boolean getTv() {
-        return tv;
-    }
-
-    public void setTv(Boolean tv) {
-        this.tv = tv;
     }
 
     public Double getCategoryBasicPrice() {

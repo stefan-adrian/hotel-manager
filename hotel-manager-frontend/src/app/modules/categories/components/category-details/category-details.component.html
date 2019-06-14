@@ -12,9 +12,15 @@
   <div>
     <h2 class="features">Features</h2>
     <ul class="list-group category-list">
+      <li class="list-group-item">Maximum occupancy: {{category.occupancy}}</li>
       <li class="list-group-item">Beds: {{category.beds}}</li>
-      <li class="list-group-item">TV: {{category.tv}}</li>
       <li class="list-group-item">Size: {{category.size}} square feet</li>
+      <li class="list-group-item">Smart TV</li>
+      <li class="list-group-item">Wireless internet access </li>
+      <li class="list-group-item">Air conditioner </li>
+      <li class="list-group-item" *ngIf="category.coffeeMaker">Coffee Maker </li>
+      <li class="list-group-item" *ngIf="category.kitchen">Kitchen </li>
+      <li class="list-group-item" *ngIf="category.safe">In-room safe </li>
     </ul>
   </div>
 
