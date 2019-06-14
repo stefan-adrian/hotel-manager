@@ -21,9 +21,12 @@
             Room: {{roomservice.roomName}}
           </mat-panel-title>
           <mat-panel-description>
-            Order time: {{roomservice.timeOfOrder}}
+            STATUS: {{roomservice.commandStatus}}
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <p>
+          Order time: {{roomservice.timeOfOrder}}
+        </p>
         <div *ngFor="let aliment of roomservice.aliments">
           <p>
             {{aliment.name}} {{aliment.price}}$

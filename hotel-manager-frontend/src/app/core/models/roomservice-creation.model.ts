@@ -7,4 +7,5 @@ export class RoomserviceCreation{
   totalCommandPrice: number;
   bookingId: number;
   roomName: string;
+  commandStatus: string;
 }

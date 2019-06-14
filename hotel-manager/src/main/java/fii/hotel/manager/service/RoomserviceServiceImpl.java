@@ -3,6 +3,7 @@ package fii.hotel.manager.service;
 import fii.hotel.manager.dto.RoomserviceDto;
 import fii.hotel.manager.mapper.RoomserviceMapper;
 import fii.hotel.manager.model.Aliment;
+import fii.hotel.manager.model.CommandStatus;
 import fii.hotel.manager.model.Roomservice;
 import fii.hotel.manager.model.SpaEvent;
 import fii.hotel.manager.repository.RoomserviceRepository;
@@ -39,6 +40,7 @@ public class RoomserviceServiceImpl implements RoomserviceService {
         roomserviceDto.setBookingId(bookingId);
         Roomservice roomservice = roomserviceMapper.map(roomserviceDto);
         roomservice.setTotalCommandPrice(calculateTotalAlimentsPrice(roomservice.getAliments()));
+        roomservice.setCommandStatus(CommandStatus.RECEIVED);
         Roomservice roomserviceSaved = save(roomservice);
         return roomserviceMapper.map(roomserviceSaved);
     }
