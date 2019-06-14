@@ -30,4 +30,8 @@ export class RoomserviceService {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return currentUser.username;
   }
+
+  takeOrderToNextStep(roomserviceId:number):Observable<any>{
+    return this.apiService.patchSimple(`/room-services/${roomserviceId}/next-step`);
+  }
 }

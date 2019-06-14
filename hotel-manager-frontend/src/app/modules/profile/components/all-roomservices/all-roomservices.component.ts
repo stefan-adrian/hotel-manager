@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {AllRoomservice} from "../../../../core/models/all-roomservice.model";
+import {Component, OnInit} from '@angular/core';
 import {RoomserviceService} from "../../../../core/services/roomservice.service";
-import {RoomserviceCreation} from "../../../../core/models/roomservice-creation.model";
 
 @Component({
   selector: 'app-all-roomservices',
@@ -27,6 +25,6 @@ export class AllRoomservicesComponent implements OnInit {
   }
 
   private nextOrderStep(roomServiceId: number):void{
-    console.log("Merge");
+    this.roomserviceService.takeOrderToNextStep(roomServiceId).subscribe(result=>this.getAllRoomservices());
   }
 }
