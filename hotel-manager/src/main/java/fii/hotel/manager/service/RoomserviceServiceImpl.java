@@ -1,5 +1,6 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.AllRoomservicesDto;
 import fii.hotel.manager.dto.RoomserviceDto;
 import fii.hotel.manager.mapper.RoomserviceMapper;
 import fii.hotel.manager.model.Aliment;
@@ -53,5 +54,15 @@ public class RoomserviceServiceImpl implements RoomserviceService {
     public List<RoomserviceDto> getAllRoomservicesDtosForCustomerByEmail(String email) {
         Set<Roomservice> roomservices=roomserviceRepository.getRoomserviceByCustomerEmail(email);
         return roomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public AllRoomservicesDto getAllRoomservices() {
+        Set<Roomservice> inactiveRoomservices=roomserviceRepository.getAllRoomservicesByStatus(CommandStatus.DELIVERED);
+        Set<Roomservice> activeRoomservices=roomserviceRepository.getAllRoomservicesByStatusNegation(CommandStatus.DELIVERED);
+        AllRoomservicesDto allRoomservicesDto=new AllRoomservicesDto();
+        allRoomservicesDto.setInactiveRoomservice(inactiveRoomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList()));
+        allRoomservicesDto.setActiveRoomservice(activeRoomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList()));
+        return allRoomservicesDto;
     }
 }

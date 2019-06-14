@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
 import {RoomserviceCreation} from "../models/roomservice-creation.model";
 import {Observable} from "rxjs";
-import {Booking} from "../models/booking.model";
 import {HttpParams} from "@angular/common/http";
 
 @Injectable({
@@ -20,7 +19,7 @@ export class RoomserviceService {
 
   getAllCustomerRoomservices(): Observable<RoomserviceCreation[]>{
     let params = new HttpParams().append("email",this.getUsername());
-    return this.apiService.getWithParams('/customers/room-services',params);
+    return this.apiService.getWithParams('/room-services',params);
   }
 
   getUsername(): string {
