@@ -1,6 +1,7 @@
 package fii.hotel.manager.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,14 @@ public class Customer {
 
     @Lob
     private byte[] qrCode;
+
+    private String nationality;
+
+    private String address;
+
+    private String identificationNumber;
+
+    private LocalDate birthday;
 
     @OneToMany(mappedBy = "customer")
     private Set<Booking> bookings;
@@ -95,11 +104,43 @@ public class Customer {
         this.qrCode = qrCode;
     }
 
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
     public Set<Booking> getBookings() {
         return bookings;
     }
 
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }

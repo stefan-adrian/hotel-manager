@@ -20,6 +20,10 @@ public class CustomerMapper {
         customer.setName(customerDto.getName());
         customer.setSurname(customerDto.getSurname());
         customer.setRole(customerDto.getRole());
+        customer.setNationality(customerDto.getNationality());
+        customer.setAddress(customerDto.getAddress());
+        customer.setIdentificationNumber(customerDto.getIdentificationNumber());
+        customer.setBirthday(customerDto.getBirthday());
         return customer;
     }
 
@@ -32,6 +36,10 @@ public class CustomerMapper {
         customerDto.setSurname(customer.getSurname());
         customerDto.setRole(customer.getRole());
         customerDto.setQrCode(customer.getQrCode());
+        customerDto.setNationality(customer.getNationality());
+        customerDto.setAddress(customer.getAddress());
+        customerDto.setIdentificationNumber(customer.getIdentificationNumber());
+        customerDto.setBirthday(customer.getBirthday());
         return customerDto;
     }
 }

@@ -7,6 +7,7 @@ import {AuthenticationService} from "../../../../core/services/authentication.se
 import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs";
 import {Router} from "@angular/router";
+import {DateFormat} from "../../../../shared/pipes/date-format";
 
 export interface Role {
   value: string;
@@ -16,7 +17,8 @@ export interface Role {
 @Component({
   selector: 'app-customer-creation',
   templateUrl: './customer-creation.component.html',
-  styleUrls: ['./customer-creation.component.css']
+  styleUrls: ['./customer-creation.component.css'],
+  providers: [DateFormat]
 })
 export class CustomerCreationComponent implements OnInit {
 
@@ -27,16 +29,19 @@ export class CustomerCreationComponent implements OnInit {
     {value: 'ROLE_USER', viewValue: 'User'},
     {value: 'ROLE_ADMIN', viewValue: 'Admin'}
   ];
+  private maxDate = new Date();
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private dateFormat: DateFormat,
     private customerService: CustomerService,
     private authenticationService: AuthenticationService
   ) {
   }
 
   ngOnInit() {
+    this.maxDate.setFullYear(this.maxDate.getFullYear()-18);
     this.customerCreationForm = this.createFormGroup();
     this.authenticationService.logout();
   }
@@ -47,6 +52,10 @@ export class CustomerCreationComponent implements OnInit {
       password: [null, Validators.required],
       name: [null, Validators.required],
       surname: [null, Validators.required],
+      nationality: [null, Validators.required],
+      address: [null, Validators.required],
+      identificationNumber: [null, Validators.required],
+      birthday: [null, Validators.required],
       role: [null, Validators.required]
     });
   }
@@ -58,6 +67,7 @@ export class CustomerCreationComponent implements OnInit {
   private save() {
     const customerToCreate: Customer = Object.assign({},
       this.customerCreationForm.value);
+    customerToCreate.birthday=this.dateFormat.transform(customerToCreate.birthday);
     this.customerService.add(customerToCreate).pipe(
       map(response=>{
         this.message = [];

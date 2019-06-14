@@ -6,4 +6,8 @@ export class Customer {
   surname: string;
   role: string;
   qrCode: ArrayBuffer;
+  nationality: string;
+  address: string;
+  identificationNumber: string;
+  birthday: Date;
 }

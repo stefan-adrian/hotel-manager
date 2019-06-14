@@ -25,6 +25,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from "@angular/material";
 
 @NgModule({
   declarations: [SafeHtml],
@@ -54,7 +56,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatButtonModule,
     MatBadgeModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     HttpClientModule,
@@ -83,6 +87,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatBadgeModule,
     MatDialogModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
     SafeHtml
 
