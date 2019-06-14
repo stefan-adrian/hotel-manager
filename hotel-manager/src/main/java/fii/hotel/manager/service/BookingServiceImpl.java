@@ -119,4 +119,10 @@ public class BookingServiceImpl implements BookingService {
         return bookingMapper.map(bookings.get(0));
 
     }
+
+    @Override
+    public List<BookingDto> getAllBookingDtos() {
+        Set<Booking> bookings=bookingRepository.getAllBookings();
+        return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
+    }
 }
