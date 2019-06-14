@@ -48,7 +48,8 @@
         </mat-select>
       </mat-form-field>
 
-      <p-checkbox binary="true" label="I agree with Terms and Conditions" formControlName="terms"></p-checkbox>
+
+      <p-checkbox (click)="openTermsAndConditions()" binary="true" label="I agree with Terms and Conditions" formControlName="terms"></p-checkbox>
       <br>
 
       <button pButton label="Save" class="ui-button-info" type="submit"

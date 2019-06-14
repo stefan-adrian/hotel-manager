@@ -8,6 +8,9 @@ import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs";
 import {Router} from "@angular/router";
 import {DateFormat} from "../../../../shared/pipes/date-format";
+import {CartDialogComponent} from "../../../aliments/components/cart-dialog/cart-dialog.component";
+import {MatDialog} from "@angular/material";
+import {TermsAndConditionsComponent} from "../terms-and-conditions/terms-and-conditions.component";
 
 export interface Role {
   value: string;
@@ -35,7 +38,8 @@ export class CustomerCreationComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private dateFormat: DateFormat,
-    private customerService: CustomerService,
+    public dialog: MatDialog,
+  private customerService: CustomerService,
     private authenticationService: AuthenticationService
   ) {
   }
@@ -82,5 +86,13 @@ export class CustomerCreationComponent implements OnInit {
         return of();
       }))
     .subscribe();
+  }
+
+  private openTermsAndConditions():void{
+    if(this.customerCreationForm.get('terms').value==true) {
+      const dialogRefrence = this.dialog.open(TermsAndConditionsComponent, {
+        width: '400px'
+      });
+    }
   }
 }
