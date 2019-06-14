@@ -11,4 +11,6 @@ public interface RoomserviceService {
     List<RoomserviceDto> getAllRoomservicesDtosForCustomerByEmail(String email);
 
     AllRoomservicesDto getAllRoomservices();
+
+    void actualizeRoomserviceOrderToNextStep(Long id);
 }

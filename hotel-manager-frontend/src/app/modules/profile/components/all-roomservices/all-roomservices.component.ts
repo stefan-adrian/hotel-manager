@@ -23,8 +23,10 @@ export class AllRoomservicesComponent implements OnInit {
   private getAllRoomservices():void{
     this.roomserviceService.getAll().subscribe(allRoomServices=>{
       this.allRoomService=allRoomServices;
-      console.log(allRoomServices);
-      console.log("ACI");
     });
+  }
+
+  private nextOrderStep(roomServiceId: number):void{
+    console.log("Merge");
   }
 }

@@ -46,4 +46,10 @@ public class RoomserviceController {
     public AllRoomservicesDto getAllRoomservices() {
         return roomserviceService.getAllRoomservices();
     }
+
+
+    @PatchMapping(value = "/{id}/next-step")
+    public void takeRoomserviceOrderToNextStep(@PathVariable Long id){
+        roomserviceService.actualizeRoomserviceOrderToNextStep(id);
+    }
 }

@@ -37,6 +37,8 @@
             <p>
               Total price: {{roomservice.totalCommandPrice}}$
             </p>
+            <button pButton (click)="nextOrderStep(roomservice.id)" class="btn btn-secondary" label="NEXT"></button>
+
           </mat-expansion-panel>
         </mat-accordion>
       </mat-tab>

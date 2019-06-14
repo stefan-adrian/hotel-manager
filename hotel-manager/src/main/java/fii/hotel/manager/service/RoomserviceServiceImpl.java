@@ -52,17 +52,39 @@ public class RoomserviceServiceImpl implements RoomserviceService {
 
     @Override
     public List<RoomserviceDto> getAllRoomservicesDtosForCustomerByEmail(String email) {
-        Set<Roomservice> roomservices=roomserviceRepository.getRoomserviceByCustomerEmail(email);
+        Set<Roomservice> roomservices = roomserviceRepository.getRoomserviceByCustomerEmail(email);
         return roomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList());
     }
 
     @Override
     public AllRoomservicesDto getAllRoomservices() {
-        Set<Roomservice> inactiveRoomservices=roomserviceRepository.getAllRoomservicesByStatus(CommandStatus.DELIVERED);
-        Set<Roomservice> activeRoomservices=roomserviceRepository.getAllRoomservicesByStatusNegation(CommandStatus.DELIVERED);
-        AllRoomservicesDto allRoomservicesDto=new AllRoomservicesDto();
+        Set<Roomservice> inactiveRoomservices = roomserviceRepository.getAllRoomservicesByStatus(CommandStatus.DELIVERED);
+        Set<Roomservice> activeRoomservices = roomserviceRepository.getAllRoomservicesByStatusNegation(CommandStatus.DELIVERED);
+        AllRoomservicesDto allRoomservicesDto = new AllRoomservicesDto();
         allRoomservicesDto.setInactiveRoomservice(inactiveRoomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList()));
         allRoomservicesDto.setActiveRoomservice(activeRoomservices.stream().map(roomserviceMapper::map).collect(Collectors.toList()));
         return allRoomservicesDto;
+    }
+
+    @Override
+    public void actualizeRoomserviceOrderToNextStep(Long id) {
+        Roomservice roomservice = roomserviceRepository.findById(id).get();
+        roomservice = takeRoomserviceOrderToNextStep(roomservice);
+        roomserviceRepository.save(roomservice);
+    }
+
+    private Roomservice takeRoomserviceOrderToNextStep(Roomservice roomservice) {
+        String roomserviceStatus=roomservice.getCommandStatus().getStatus();
+        int ok=0;
+        for(CommandStatus commandStatus:CommandStatus.values()){
+            if(ok==1){
+                roomservice.setCommandStatus(commandStatus);
+                return roomservice;
+            }
+            if(commandStatus.equals(roomservice.getCommandStatus())){
+                ok=1;
+            }
+        }
+        return roomservice;
     }
 }
