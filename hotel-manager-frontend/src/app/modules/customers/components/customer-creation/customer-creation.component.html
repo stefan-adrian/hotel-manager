@@ -47,10 +47,12 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <p-checkbox binary="true" label="I agree with Terms and Conditions" formControlName="terms"></p-checkbox>
       <br>
 
       <button pButton label="Save" class="ui-button-info" type="submit"
-              [disabled]="!customerCreationForm.valid"></button>
+              [disabled]="!customerCreationForm.valid||customerCreationForm.get('terms').value != true"></button>
       <p-messages [(value)]="message"></p-messages>
     </form>
 

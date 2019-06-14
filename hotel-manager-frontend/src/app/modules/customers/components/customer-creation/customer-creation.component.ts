@@ -56,7 +56,8 @@ export class CustomerCreationComponent implements OnInit {
       address: [null, Validators.required],
       identificationNumber: [null, Validators.required],
       birthday: [null, Validators.required],
-      role: [null, Validators.required]
+      role: [null, Validators.required],
+      terms: [false]
     });
   }
 
