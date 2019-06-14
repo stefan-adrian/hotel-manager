@@ -5,8 +5,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import fii.hotel.manager.dto.CustomerDto;
 import fii.hotel.manager.exception.CustomerAlreadyExistsException;
 import fii.hotel.manager.exception.CustomerNotFoundException;
+import fii.hotel.manager.mapper.CustomerMapper;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.repository.CustomerRepository;
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
     private EmailService emailService;
+    private CustomerMapper customerMapper;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -32,13 +35,13 @@ public class CustomerServiceImpl implements CustomerService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository, EmailService emailService) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, EmailService emailService, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.emailService = emailService;
+        this.customerMapper = customerMapper;
     }
 
-    @Override
-    public Customer save(Customer customer) {
+    private Customer save(Customer customer) {
         Optional<Customer> customerOptional = customerRepository.findByEmail(customer.getEmail());
         if(customerOptional.isPresent()){
             logger.error("Customer with email " + customer.getEmail() + " already is in the database.");
@@ -46,9 +49,16 @@ public class CustomerServiceImpl implements CustomerService {
         }
         customer.setQrCode(geenerateQRCodeImage(customer.getEmail(),350,350));
         Customer customerSaved = customerRepository.save(customer);
-        emailService.sendSimpleWelcomeMail(customer);
         logger.debug("Customer with email " + customerSaved.getEmail() + " and id " + customerSaved.getId() + " was saved in the database.");
         return customerSaved;
+    }
+
+    @Override
+    public CustomerDto add(CustomerDto customerDto){
+        Customer customerSaved=save(customerMapper.map(customerDto));
+        customerDto=customerMapper.map(customerSaved);
+        emailService.sendSimpleWelcomeMail(customerDto);
+        return customerDto;
     }
 
     private byte[] geenerateQRCodeImage(String text, int width, int height) {

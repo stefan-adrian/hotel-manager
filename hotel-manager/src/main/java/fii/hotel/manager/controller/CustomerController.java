@@ -40,9 +40,7 @@ public class CustomerController {
     @ApiResponse(code = 200, message = "Customer successfully added")
     @PostMapping
     public CustomerDto add(@RequestBody CustomerDto customerDto) {
-        Customer customer = customerMapper.map(customerDto);
-        customer = customerService.save(customer);
-        return customerMapper.map(customer);
+        return customerService.add(customerDto);
     }
 
     @ApiOperation(value = "Get customer with specified id")

@@ -1,9 +1,10 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.CustomerDto;
 import fii.hotel.manager.model.Customer;
 
 public interface CustomerService {
-    Customer save(Customer customer);
+    CustomerDto add(CustomerDto customerDto);
 
     Customer getById(Long id);
 

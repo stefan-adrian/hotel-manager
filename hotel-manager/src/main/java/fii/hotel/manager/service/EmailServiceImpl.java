@@ -1,5 +1,6 @@
 package fii.hotel.manager.service;
 
+import fii.hotel.manager.dto.CustomerDto;
 import fii.hotel.manager.model.Customer;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -56,11 +57,13 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendSimpleWelcomeMail(Customer customer) {
+    public void sendSimpleWelcomeMail(CustomerDto customerDto) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(customer.getEmail());
+        message.setTo(customerDto.getEmail());
         message.setSubject("Welcome to our community!");
-        message.setText("Hello " + customer.getName());
+        String stringMessage="Hello " + customerDto.getName()+",\n\n";
+        stringMessage+="Thank you for registering to our site!";
+        message.setText(stringMessage);
         createNewThreadAndSendMail(message);
     }
 
