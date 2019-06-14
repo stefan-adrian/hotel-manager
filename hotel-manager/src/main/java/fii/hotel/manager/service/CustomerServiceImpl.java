@@ -41,7 +41,6 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer save(Customer customer) {
         Optional<Customer> customerOptional = customerRepository.findByEmail(customer.getEmail());
         if(customerOptional.isPresent()){
-            System.out.println(passwordEncoder.encode(customerOptional.get().getPassword()));
             logger.error("Customer with email " + customer.getEmail() + " already is in the database.");
             throw new CustomerAlreadyExistsException(customer.getEmail());
         }

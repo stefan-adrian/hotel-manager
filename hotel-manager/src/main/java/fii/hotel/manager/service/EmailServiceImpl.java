@@ -21,20 +21,20 @@ import java.util.Map;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    private JavaMailSender emailSender;
+    private JavaMailSender javaMailSender;
 
     private Configuration freemarkerConfig;
 
     @Autowired
-    public EmailServiceImpl(JavaMailSender emailSender, Configuration freemarkerConfig) {
-        this.emailSender = emailSender;
+    public EmailServiceImpl(JavaMailSender javaMailSender, Configuration freemarkerConfig) {
+        this.javaMailSender = javaMailSender;
         this.freemarkerConfig = freemarkerConfig;
     }
 
     @Override
     public void sendWelcomeMail(Customer customer) {
         try {
-            MimeMessage mail = emailSender.createMimeMessage();
+            MimeMessage mail = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail,
                     MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
@@ -46,7 +46,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setText(htmlMessage, true);
             helper.setSubject("Welcome to our community!");
 
-            emailSender.send(mail);
+            javaMailSender.send(mail);
 
         } catch (IOException | TemplateException | MessagingException e) {
             e.printStackTrace();
@@ -61,6 +61,11 @@ public class EmailServiceImpl implements EmailService {
         message.setTo(customer.getEmail());
         message.setSubject("Welcome to our community!");
         message.setText("Hello " + customer.getName());
-        emailSender.send(message);
+        createNewThreadAndSendMail(message);
+    }
+
+    private void createNewThreadAndSendMail(SimpleMailMessage simpleMailMessage){
+        EmailSender emailSender=new EmailSender(simpleMailMessage,javaMailSender);
+        new Thread(emailSender).start();
     }
 }
