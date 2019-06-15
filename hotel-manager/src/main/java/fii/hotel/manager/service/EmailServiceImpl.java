@@ -1,6 +1,7 @@
 package fii.hotel.manager.service;
 
 import fii.hotel.manager.dto.CustomerDto;
+import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Customer;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -63,6 +64,26 @@ public class EmailServiceImpl implements EmailService {
         message.setSubject("Welcome to our community!");
         String stringMessage="Hello " + customerDto.getName()+",\n\n";
         stringMessage+="Thank you for registering to our site!";
+        message.setText(stringMessage);
+        createNewThreadAndSendMail(message);
+    }
+
+    @Override
+    public void sendNewBookingMail(CustomerDto customerDto, Booking booking) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("hotel.mng2019@gmail.com");
+        message.setSubject("New booking!");
+        String stringMessage="Hello,\n\n";
+        stringMessage+="A new booking has been made by "+customerDto.getEmail()+".\n";
+        stringMessage+="This are the booking informations:\n";
+        stringMessage+="Booking period:"+booking.getToTime()+" - "+booking.getFromTime()+"\n";
+        stringMessage+="Booking price:"+booking.getPrice()+"\n";
+        stringMessage+="Booking room:"+booking.getRoom()+"\n";
+        stringMessage+="Customer full name:"+customerDto.getSurname()+" "+customerDto.getName()+"\n";
+        stringMessage+="Customer Nationality:"+customerDto.getNationality()+"\n";
+        stringMessage+="Customer Address:"+customerDto.getAddress()+"\n";
+        stringMessage+="Customer Identification Number:"+customerDto.getIdentificationNumber()+"\n";
+        stringMessage+="Customer birthday:"+customerDto.getBirthday()+"\n";
         message.setText(stringMessage);
         createNewThreadAndSendMail(message);
     }

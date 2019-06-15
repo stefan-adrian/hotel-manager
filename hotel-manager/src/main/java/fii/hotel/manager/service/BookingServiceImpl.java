@@ -5,6 +5,7 @@ import fii.hotel.manager.dto.BookingCreationDto;
 import fii.hotel.manager.dto.BookingDto;
 import fii.hotel.manager.exception.BookingNotFoundException;
 import fii.hotel.manager.mapper.BookingMapper;
+import fii.hotel.manager.mapper.CustomerMapper;
 import fii.hotel.manager.model.Booking;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.model.Room;
@@ -29,13 +30,17 @@ public class BookingServiceImpl implements BookingService {
     private RoomService roomService;
     private BookingMapper bookingMapper;
     private PaymentService paymentService;
+    private CustomerMapper customerMapper;
+    private EmailService emailService;
 
-    @Autowired
-    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService, PaymentService paymentService) {
+    public BookingServiceImpl(BookingRepository bookingRepository, CustomerService customerService, RoomService roomService,
+                              PaymentService paymentService, CustomerMapper customerMapper, EmailService emailService) {
         this.bookingRepository = bookingRepository;
         this.customerService = customerService;
         this.roomService = roomService;
         this.paymentService = paymentService;
+        this.customerMapper = customerMapper;
+        this.emailService = emailService;
     }
 
     @Autowired
@@ -53,6 +58,7 @@ public class BookingServiceImpl implements BookingService {
                 paymentService.executePay(bookingCreationDto.getPaymentId(), bookingCreationDto.getPayerId());
             }
             Booking savedBooking = bookingRepository.save(booking);
+            emailService.sendNewBookingMail(customerMapper.map(customer),savedBooking);
             logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
             return bookingMapper.mapToCreationDto(savedBooking);
         }catch (PayPalRESTException e){
