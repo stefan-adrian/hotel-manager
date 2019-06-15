@@ -5,6 +5,8 @@ import {AccountBookingsComponent} from "./components/account-bookings/account-bo
 import {AccountRoomservicesComponent} from "./components/account-roomservices/account-roomservices.component";
 import {AllRoomservicesComponent} from "./components/all-roomservices/all-roomservices.component";
 import {AllBookingsComponent} from "./components/all-bookings/all-bookings.component";
+import {AlimentCreationComponent} from "../aliments/components/aliment-creation/aliment-creation.component";
+import {RoleGuard} from "../../core/guards/role-guard";
 
 const routes: Routes = [
   {
@@ -25,7 +27,11 @@ const routes: Routes = [
   },
   {
     path: 'all-bookings',
-    component: AllBookingsComponent
+    component: AllBookingsComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'ROLE_EMPLOYEE'
+    }
   }
 
 
