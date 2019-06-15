@@ -13,7 +13,7 @@
         <a class="nav-link" href="/categories">Accommodations</a>
       </li>
       <li *ngIf="authenticationService.isLoggedIn()" class="nav-item">
-        <a class="nav-link" href="/aliments">Aliments</a>
+        <a class="nav-link" href="/aliments">Room-service</a>
       </li>
       <li class="nav-item" *ngIf="authenticationService.getUserRole()==='ROLE_ADMIN'">
         <a class="nav-link" href="/rooms">Rooms</a>
