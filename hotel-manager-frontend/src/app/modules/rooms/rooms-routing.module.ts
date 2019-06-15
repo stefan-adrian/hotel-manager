@@ -8,7 +8,11 @@ import {RoleGuard} from "../../core/guards/role-guard";
 const routes: Routes = [
   {
     path: '',
-    component: RoomListComponent
+    component: RoomListComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'ROLE_ADMIN',
+    }
   },
   {
     path: 'add',
@@ -20,7 +24,11 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: RoomDetailComponent
+    component: RoomDetailComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'ROLE_ADMIN',
+    }
   }
 ];
 

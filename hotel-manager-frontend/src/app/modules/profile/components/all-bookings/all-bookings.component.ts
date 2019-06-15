@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BookingService} from "../../../../core/services/booking.service";
 import {Booking} from "../../../../core/models/booking.model";
+import {AuthenticationService} from "../../../../core/services/authentication.service";
 
 @Component({
   selector: 'app-all-bookings',
@@ -12,7 +13,9 @@ export class AllBookingsComponent implements OnInit {
   private bookings: Booking[];
 
   constructor(
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private authenticationService: AuthenticationService
+
   ) { }
 
   ngOnInit() {

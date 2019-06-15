@@ -4,6 +4,7 @@ import {Booking} from "../../../../core/models/booking.model";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {Customer} from "../../../../core/models/customer.model";
 import {saveAs} from "file-saver";
+import {AuthenticationService} from "../../../../core/services/authentication.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -17,7 +18,9 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(
     private bookingService: BookingService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private authenticationService: AuthenticationService
+
   ) { }
 
   ngOnInit() {

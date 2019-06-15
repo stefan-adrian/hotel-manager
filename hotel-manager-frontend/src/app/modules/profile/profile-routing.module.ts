@@ -27,7 +27,10 @@ const routes: Routes = [
   },
   {
     path: 'all-orders',
-    component: AllRoomservicesComponent
+    component: AllRoomservicesComponent,
+    data: {
+      expectedRole: 'ROLE_EMPLOYEE'
+    }
   },
   {
     path: 'all-bookings',

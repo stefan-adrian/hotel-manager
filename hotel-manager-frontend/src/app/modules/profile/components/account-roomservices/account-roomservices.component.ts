@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RoomserviceCreation} from "../../../../core/models/roomservice-creation.model";
 import {RoomserviceService} from "../../../../core/services/roomservice.service";
+import {AuthenticationService} from "../../../../core/services/authentication.service";
 
 @Component({
   selector: 'app-account-roomservices',
@@ -13,7 +14,9 @@ export class AccountRoomservicesComponent implements OnInit {
   private panelOpenState = false;
 
   constructor(
-    private roomserviceService:RoomserviceService
+    private roomserviceService:RoomserviceService,
+    private authenticationService: AuthenticationService
+
   ) { }
 
   ngOnInit() {

@@ -6,6 +6,7 @@ import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs";
 import {Message} from "primeng/api";
 import {BookingCreation} from "../../../../core/models/booking-creation.model";
+import {AuthenticationService} from "../../../../core/services/authentication.service";
 
 @Component({
   selector: 'app-account-bookings',
@@ -20,7 +21,9 @@ export class AccountBookingsComponent implements OnInit {
 
   constructor(
     private bookingService: BookingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authenticationService: AuthenticationService
+
   ) {
   }
 

@@ -54,6 +54,7 @@ public class RoomController {
     @ApiOperation(value = "Get list of all rooms")
     @ApiResponse(code = 200, message = "List of all rooms")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<RoomDto> getAll() {
         List<Room> rooms = roomService.getAll();
         return rooms.stream().map(roomMapper::map).collect(Collectors.toList());

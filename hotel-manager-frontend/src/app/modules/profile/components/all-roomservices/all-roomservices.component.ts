@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RoomserviceService} from "../../../../core/services/roomservice.service";
+import {AuthenticationService} from "../../../../core/services/authentication.service";
 
 @Component({
   selector: 'app-all-roomservices',
@@ -11,7 +12,9 @@ export class AllRoomservicesComponent implements OnInit {
   private allRoomService: any;
 
   constructor(
-    private roomserviceService: RoomserviceService
+    private roomserviceService: RoomserviceService,
+    private authenticationService: AuthenticationService
+
   ) { }
 
   ngOnInit() {

@@ -15,7 +15,7 @@
       <li *ngIf="authenticationService.isLoggedIn()" class="nav-item">
         <a class="nav-link" href="/aliments">Aliments</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="authenticationService.getUserRole()==='ROLE_ADMIN'">
         <a class="nav-link" href="/rooms">Rooms</a>
       </li>
       <li *ngIf="authenticationService.getUserRole()==='ROLE_ADMIN'" class="nav-item dropdown">
@@ -36,6 +36,8 @@
           <a class="nav-link" href="/profile" *ngIf="authenticationService.isLoggedIn()">My Profile</a>
           <a class="nav-link" href="/profile/bookings" *ngIf="authenticationService.isLoggedIn()">My Bookings</a>
           <a class="nav-link" href="/profile/orders" *ngIf="authenticationService.isLoggedIn()">Room services</a>
+          <a class="nav-link" href="/profile/orders" *ngIf="authenticationService.getUserRole()==='ROLE_EMPLOYEE'">All bookings</a>
+          <a class="nav-link" href="/profile/orders" *ngIf="authenticationService.getUserRole()==='ROLE_EMPLOYEE'">All room services</a>
           <a class="nav-link" href="/login" *ngIf="authenticationService.isLoggedIn()">Logout</a>
         </div>
       </li>

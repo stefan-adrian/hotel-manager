@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,12 +44,14 @@ public class RoomserviceController {
             @ApiResponse(code = 200, message = "Retrieved all room services")
     })
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
     public AllRoomservicesDto getAllRoomservices() {
         return roomserviceService.getAllRoomservices();
     }
 
 
     @PatchMapping(value = "/{id}/next-step")
+    @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
     public void takeRoomserviceOrderToNextStep(@PathVariable Long id){
         roomserviceService.actualizeRoomserviceOrderToNextStep(id);
     }
