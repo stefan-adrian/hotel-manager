@@ -42,17 +42,21 @@
           <p>
             {{customer.name}}
           </p>
+
+          <mat-card-subtitle>
+            Birthday
+          </mat-card-subtitle>
+          <p>
+            {{customer.birthday}}
+          </p>
         </mat-card-content>
 
         <mat-card-actions class="profile-button">
           <button (click)="getBarcode()" mat-button>GET ENTRY BARCODE</button>
         </mat-card-actions>
-        <mat-card-actions class="profile-button">
-          <button mat-button>EDIT PROFILE</button>
-        </mat-card-actions>
       </mat-card>
 
-      <mat-card class="example-card">
+      <mat-card class="example-card" *ngIf="booking!=null">
         <mat-card-header>
           <mat-card-title>Next scheduled booking</mat-card-title>
         </mat-card-header>

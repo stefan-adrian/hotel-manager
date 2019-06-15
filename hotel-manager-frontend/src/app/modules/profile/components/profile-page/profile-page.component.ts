@@ -13,7 +13,7 @@ import {AuthenticationService} from "../../../../core/services/authentication.se
 })
 export class ProfilePageComponent implements OnInit {
 
-  private booking: Booking;
+  private booking: Booking=null;
   private customer: Customer;
 
   constructor(
