@@ -30,6 +30,7 @@ export class CustomerCreationComponent implements OnInit {
   private hide = true;
   private roles: Role[] = [
     {value: 'ROLE_USER', viewValue: 'User'},
+    {value: 'ROLE_EMPLOYEE', viewValue: 'Employee'},
     {value: 'ROLE_ADMIN', viewValue: 'Admin'}
   ];
   private maxDate = new Date();
