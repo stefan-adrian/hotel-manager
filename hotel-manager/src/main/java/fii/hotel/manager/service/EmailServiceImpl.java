@@ -78,7 +78,7 @@ public class EmailServiceImpl implements EmailService {
         stringMessage+="This are the booking informations:\n";
         stringMessage+="Booking period:"+booking.getToTime()+" - "+booking.getFromTime()+"\n";
         stringMessage+="Booking price:"+booking.getPrice()+"\n";
-        stringMessage+="Booking room:"+booking.getRoom()+"\n";
+        stringMessage+="Booking room:"+booking.getRoom().getName()+"\n";
         stringMessage+="Customer full name:"+customerDto.getSurname()+" "+customerDto.getName()+"\n";
         stringMessage+="Customer Nationality:"+customerDto.getNationality()+"\n";
         stringMessage+="Customer Address:"+customerDto.getAddress()+"\n";
