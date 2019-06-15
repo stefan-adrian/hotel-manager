@@ -32,7 +32,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
           <a class="nav-link" href="/login" *ngIf="!authenticationService.isLoggedIn()">Login</a>
-          <a class="nav-link" href="/customers/add" *ngIf="!authenticationService.isLoggedIn()">Register</a>
+          <a class="nav-link" href="/customers/add" *ngIf="!authenticationService.isLoggedIn()||authenticationService.getUserRole()==='ROLE_ADMIN'">Register</a>
           <a class="nav-link" href="/profile" *ngIf="authenticationService.isLoggedIn()">My Profile</a>
           <a class="nav-link" href="/profile/bookings" *ngIf="authenticationService.isLoggedIn()">My Bookings</a>
           <a class="nav-link" href="/profile/orders" *ngIf="authenticationService.isLoggedIn()">Room services</a>

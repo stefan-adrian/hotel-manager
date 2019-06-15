@@ -48,7 +48,9 @@ export class CustomerCreationComponent implements OnInit {
   ngOnInit() {
     this.maxDate.setFullYear(this.maxDate.getFullYear()-18);
     this.customerCreationForm = this.createFormGroup();
-    this.authenticationService.logout();
+    if(this.authenticationService.getUserRole()!="ROLE_ADMIN") {
+      this.authenticationService.logout();
+    }
   }
 
   private createFormGroup(): FormGroup {
@@ -61,7 +63,7 @@ export class CustomerCreationComponent implements OnInit {
       address: [null, Validators.required],
       identificationNumber: [null, Validators.required],
       birthday: [null, Validators.required],
-      role: [null, Validators.required],
+      role: ['ROLE_USER', Validators.required],
       terms: [false]
     });
   }

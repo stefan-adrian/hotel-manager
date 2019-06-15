@@ -39,7 +39,7 @@
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field *ngIf="authenticationService.getUserRole()==='ROLE_ADMIN'">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role">
           <mat-option *ngFor="let role of roles" [value]="role.value">
