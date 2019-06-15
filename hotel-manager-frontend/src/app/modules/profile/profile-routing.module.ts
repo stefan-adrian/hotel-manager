@@ -7,19 +7,23 @@ import {AllRoomservicesComponent} from "./components/all-roomservices/all-roomse
 import {AllBookingsComponent} from "./components/all-bookings/all-bookings.component";
 import {AlimentCreationComponent} from "../aliments/components/aliment-creation/aliment-creation.component";
 import {RoleGuard} from "../../core/guards/role-guard";
+import {AuthenticationGuard} from "../../core/guards/authentication-guard";
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'bookings',
-    component: AccountBookingsComponent
+    component: AccountBookingsComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'orders',
-    component: AccountRoomservicesComponent
+    component: AccountRoomservicesComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: 'all-orders',
