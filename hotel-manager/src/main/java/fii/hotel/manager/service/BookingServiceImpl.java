@@ -49,7 +49,9 @@ public class BookingServiceImpl implements BookingService {
         Room room = roomService.getRoomByCategoryAvailableBetweenDates(bookingCreationDto.getFromTime(), bookingCreationDto.getToTime(),bookingCreationDto.getRoomCategoryName());
         Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
         try {
-            paymentService.executePay(bookingCreationDto.getPaymentId(), bookingCreationDto.getPayerId());
+            if(bookingCreationDto.getPayerId()!=null) {
+                paymentService.executePay(bookingCreationDto.getPaymentId(), bookingCreationDto.getPayerId());
+            }
             Booking savedBooking = bookingRepository.save(booking);
             logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
             return bookingMapper.mapToCreationDto(savedBooking);
