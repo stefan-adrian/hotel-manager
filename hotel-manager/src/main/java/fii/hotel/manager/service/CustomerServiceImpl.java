@@ -11,6 +11,7 @@ import fii.hotel.manager.exception.CustomerNotFoundException;
 import fii.hotel.manager.mapper.CustomerMapper;
 import fii.hotel.manager.model.Customer;
 import fii.hotel.manager.repository.CustomerRepository;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
     private EmailService emailService;
     private CustomerMapper customerMapper;
+    private Base64 base64=new Base64();
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
