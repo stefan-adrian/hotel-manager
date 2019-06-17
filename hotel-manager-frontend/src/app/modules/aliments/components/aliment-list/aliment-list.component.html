@@ -3,19 +3,14 @@
   <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-g">
-        <div class="ui-g-12 ui-md-4">
+        <div class="ui-g-4 ui-md-10">
           <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
                       (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
         </div>
-        <div class="ui-g-6 ui-md-4 filter-container">
-          <div style="position:relative">
-            <input type="text" pInputText placeholder="Search by name" (keyup)="dv.filter($event.target.value)">
-          </div>
-        </div>
-        <div class="ui-g-6 ui-md-3">
+        <div class="ui-g-4 ui-md-1">
           <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         </div>
-        <div class="ui-g-6 ui-md-1">
+        <div class="ui-g-4 ui-md-1">
           <mat-icon (click)="openDialog()" matBadge="{{cartAliments.length.toString()}}" matBadgeColor="warn">shopping_cart</mat-icon>
         </div>
       </div>
