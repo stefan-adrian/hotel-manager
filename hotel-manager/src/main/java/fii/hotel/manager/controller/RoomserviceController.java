@@ -51,7 +51,6 @@ public class RoomserviceController {
 
 
     @PatchMapping(value = "/{id}/next-step")
-    @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
     public void takeRoomserviceOrderToNextStep(@PathVariable Long id){
         roomserviceService.actualizeRoomserviceOrderToNextStep(id);
     }

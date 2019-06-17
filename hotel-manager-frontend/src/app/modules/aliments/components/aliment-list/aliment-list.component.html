@@ -32,7 +32,7 @@
           <div class="ui-g-10 ui-sm-6"><b>{{aliment.name}}</b></div>
 
           <div class="ui-g-2 ui-sm-6">Price: </div>
-          <div class="ui-g-10 ui-sm-6"><b>{{aliment.price}}</b></div>
+          <div class="ui-g-10 ui-sm-6"><b>{{aliment.price}} $</b></div>
 
         </div>
       </div>
@@ -45,7 +45,8 @@
     <div style="padding:.5em" class="ui-g-12 ui-md-3">
       <p-panel [header]="aliment.name" [style]="{'text-align':'center'}">
         <img class="smaller" [src]="'data:image/jpg;base64,'+aliment.image | safeHtml" />
-        <div><b>{{aliment.price}}</b></div>
+        <div><b>{{aliment.price}} $</b></div>
+        <button pButton (click)="addAlimentToCart(aliment)" label="Add to cart" class="btn btn-secondary"></button>
         <hr class="ui-widget-content" style="border-top:0">
       </p-panel>
     </div>
