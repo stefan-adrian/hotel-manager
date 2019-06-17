@@ -111,7 +111,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<BookingDto> getBookingDtosByCustomerEmail(String email){
-        List<Booking> bookings=bookingRepository.getBookingsFetchingRoomByCustomerEmail(email);
+        Set<Booking> bookings=bookingRepository.getBookingsFetchingRoomByCustomerEmail(email);
         return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
     }
 
