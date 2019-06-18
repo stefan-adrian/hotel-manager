@@ -99,19 +99,24 @@ public class PriceServiceImpl implements PriceService {
     private Double getPriceDiscountPercentageByCustomerPreviousBookings(String email) {
         List<Booking> bookings = bookingService.getBookingsByCustomerEmail(email);
         Integer numberOfBookings = bookings.size();
-        Double totalBookingsPrice = bookings.stream().mapToDouble(Booking::getPrice).sum();
-        if (totalBookingsPrice >= 50000.0) {
-            return 0.7;
-        }
-        if (numberOfBookings >= 10) {
-            return 0.8;
-        }
-        if (numberOfBookings >= 5) {
-            return 0.9;
-        }
-        if (numberOfBookings >= 2) {
-            return 0.95;
+        if (numberOfBookings != 0) {
+            if (bookings.get(0).getCustomer().getRole().equals(Role.ROLE_USER)) {
+                Double totalBookingsPrice = bookings.stream().mapToDouble(Booking::getPrice).sum();
+                if (totalBookingsPrice >= 50000.0) {
+                    return 0.7;
+                }
+                if (numberOfBookings >= 10) {
+                    return 0.8;
+                }
+                if (numberOfBookings >= 5) {
+                    return 0.9;
+                }
+                if (numberOfBookings >= 2) {
+                    return 0.95;
+                }
+            }
         }
         return 1.0;
+
     }
 }
