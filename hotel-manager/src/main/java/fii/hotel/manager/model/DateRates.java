@@ -2,18 +2,18 @@ package fii.hotel.manager.model;
 
 public enum DateRates {
     NEW_YEAR_DAY(1,1,0.3),
-    UNION_DAY(1,24,0.1),
-    VALENTINES_DAY(2,14,0.4),
+    UNION_DAY(1,24,0.05),
+    VALENTINES_DAY(2,14,0.3),
     SPRING_DAY(3,1,0.1),
-    WOMEN_DAY(3,8,0.5),
-    WORK_DAY(5,1,0.2),
+    WOMEN_DAY(3,8,0.3),
+    WORK_DAY(5,1,0.1),
     CHILD_DAY(6,1,0.1),
     SAINT_ANDREI_DAY(11,30,0.1),
     ROMANIAN_NATIONAL_DAY(12,1,0.1),
     CHRISTMAS_EVE(12,24,0.3),
     CHRISTMAS_FIRST_DAY(12,25,0.3),
     CHRISTMAS_SECOND_DAY(12,26,0.1),
-    NEW_YEAR_EVE(12,31,1.0);
+    NEW_YEAR_EVE(12,31,0.5);
 
     private Integer month;
     private Integer day;

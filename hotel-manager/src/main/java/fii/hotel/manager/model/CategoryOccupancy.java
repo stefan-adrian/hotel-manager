@@ -1,11 +1,11 @@
 package fii.hotel.manager.model;
 
 public enum CategoryOccupancy {
-    NINETY_PERCENT("NinetyPercent",0.9,0.5),
-    EIGHTY_PERCENT("EightyPercent",0.8,0.4),
-    SEVENTY_PERCENT("SeventyPercent",0.7,0.3),
-    SIXTY_PERCENT("SixtyPercent",0.6,0.2),
-    FIFTY_PERCENT("FiftyPercent",0.5,0.1);
+    NINETY_PERCENT("NinetyPercent",0.9,0.25),
+    EIGHTY_PERCENT("EightyPercent",0.8,0.2),
+    SEVENTY_PERCENT("SeventyPercent",0.7,0.15),
+    SIXTY_PERCENT("SixtyPercent",0.6,0.1),
+    FIFTY_PERCENT("FiftyPercent",0.5,0.05);
 
     private String label;
     private Double percent;
