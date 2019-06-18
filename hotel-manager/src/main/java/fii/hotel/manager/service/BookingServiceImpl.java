@@ -51,17 +51,17 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BookingCreationDto save(BookingCreationDto bookingCreationDto) {
         Customer customer = customerService.getByEmail(bookingCreationDto.getCustomerEmail());
-        Room room = roomService.getRoomByCategoryAvailableBetweenDates(bookingCreationDto.getFromTime(), bookingCreationDto.getToTime(),bookingCreationDto.getRoomCategoryName());
+        Room room = roomService.getRoomByCategoryAvailableBetweenDates(bookingCreationDto.getFromTime(), bookingCreationDto.getToTime(), bookingCreationDto.getRoomCategoryName());
         Booking booking = bookingMapper.map(customer, room, bookingCreationDto);
         try {
-            if(bookingCreationDto.getPayerId()!=null) {
+            if (bookingCreationDto.getPayerId() != null) {
                 paymentService.executePay(bookingCreationDto.getPaymentId(), bookingCreationDto.getPayerId());
             }
             Booking savedBooking = bookingRepository.save(booking);
-            emailService.sendNewBookingMail(customerMapper.map(customer),savedBooking);
+            emailService.sendNewBookingMail(customerMapper.map(customer), savedBooking);
             logger.debug("Booking for " + customer.getEmail() + " in room " + room.getName() + " with id " + savedBooking.getId() + " was saved in the database.");
             return bookingMapper.mapToCreationDto(savedBooking);
-        }catch (PayPalRESTException e){
+        } catch (PayPalRESTException e) {
             System.err.println(e.getDetails());
         }
         return null;
@@ -100,7 +100,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Integer getNumberOfBookingsIn24HoursIntervalBeforeNow() {
-        LocalDateTime oneDayBeforeNow=LocalDateTime.now().minusDays(1);
+        LocalDateTime oneDayBeforeNow = LocalDateTime.now().minusDays(1);
         return bookingRepository.getNumberOfBookingsAfterDate(oneDayBeforeNow);
     }
 
@@ -110,27 +110,27 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingDto> getBookingDtosByCustomerEmail(String email){
-        Set<Booking> bookings=bookingRepository.getBookingsFetchingRoomByCustomerEmail(email);
+    public List<BookingDto> getBookingDtosByCustomerEmail(String email) {
+        Set<Booking> bookings = bookingRepository.getBookingsFetchingRoomByCustomerEmail(email);
         return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
     }
 
     @Override
-    public List<BookingDto> getActiveBookingDtosByCustomerEmail(String email){
-        Set<Booking> bookings=bookingRepository.getActiveBookingsFetchingRoomByCustomerEmail(email);
+    public List<BookingDto> getActiveBookingDtosByCustomerEmail(String email) {
+        Set<Booking> bookings = bookingRepository.getActiveBookingsFetchingRoomByCustomerEmail(email);
         return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
     }
 
     @Override
-    public BookingDto getCustomerNextBookingDto(String email){
-        List<Booking> bookings=bookingRepository.getBookingsAfterCurrentDateFetchingRoomByCustomerEmail(email);
+    public BookingDto getCustomerNextBookingDto(String email) {
+        List<Booking> bookings = bookingRepository.getBookingsAfterCurrentDateFetchingRoomByCustomerEmail(email);
         return bookingMapper.map(bookings.get(0));
 
     }
 
     @Override
     public List<BookingDto> getAllBookingDtos() {
-        Set<Booking> bookings=bookingRepository.getAllBookings();
+        Set<Booking> bookings = bookingRepository.getAllBookings();
         return bookings.stream().map(bookingMapper::map).collect(Collectors.toList());
     }
 }

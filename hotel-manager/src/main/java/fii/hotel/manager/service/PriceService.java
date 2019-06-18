@@ -8,6 +8,6 @@ import java.util.Set;
 
 public interface PriceService {
 
-    Map<String, Double> getCategoriesPrices(Set<Category> categories,LocalDate arrivalDate,LocalDate departureDate,String email);
+    Map<String, Double> getCategoriesPrices(Set<Category> categories, LocalDate arrivalDate, LocalDate departureDate, String email);
 
 }

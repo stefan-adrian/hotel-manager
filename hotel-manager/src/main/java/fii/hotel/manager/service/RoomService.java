@@ -21,5 +21,5 @@ public interface RoomService {
 
     Room getRoomByCategoryAvailableBetweenDates(LocalDate arrivalDate, LocalDate departureDate, String roomCategory);
 
-    Integer getNumberOfAvailableRoomsBetweenDates(Set<Room> rooms,LocalDate arrivalDate,LocalDate departureDate);
+    Integer getNumberOfAvailableRoomsBetweenDates(Set<Room> rooms, LocalDate arrivalDate, LocalDate departureDate);
 }

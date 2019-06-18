@@ -111,7 +111,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Integer getNumberOfAvailableRoomsBetweenDates(Set<Room> rooms,LocalDate arrivalDate,LocalDate departureDate) {
+    public Integer getNumberOfAvailableRoomsBetweenDates(Set<Room> rooms, LocalDate arrivalDate, LocalDate departureDate) {
         return (int) rooms.stream().filter(room -> checkIfBookingTimeAvailable(room, arrivalDate, departureDate)).count();
     }
 }
