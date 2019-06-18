@@ -51,9 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors().and()
-                // we don't need CSRF because our token is invulnerable
                 .csrf().disable()
-                // don't create session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/authentication/**").permitAll()
@@ -61,10 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/categories").permitAll()
                 .antMatchers(HttpMethod.GET,"/categories/{id}").permitAll()
                 .antMatchers(HttpMethod.PATCH,"/room-services/**").permitAll()
-
-
                 .anyRequest().authenticated();
-
         http
                 .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
