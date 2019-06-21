@@ -15,6 +15,12 @@
         Total Price: {{categoryBooking.totalBookingPrice}}$
       </p>
       <button (click)="book()" class="btn btn-secondary btn-size">Finish Booking</button>
+      <mat-progress-spinner *ngIf="loading==true"
+                            class="spinner"
+                            [color]="color"
+                            [mode]="mode"
+                            [value]="value">
+      </mat-progress-spinner>
       <p-messages [(value)]="message"></p-messages>
     </div>
   </div>

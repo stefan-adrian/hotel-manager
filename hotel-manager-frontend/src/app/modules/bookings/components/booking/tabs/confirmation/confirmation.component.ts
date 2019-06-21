@@ -24,6 +24,11 @@ export class ConfirmationComponent implements OnInit {
   private departure: Date;
   private categoryBooking: CategoryBooking;
   private message: Message[] = [];
+  private loading: boolean = false;
+  private color = 'primary';
+  private mode = 'indeterminate';
+  private value = 50;
+
 
   constructor(
     private dataService: DataService,
@@ -51,6 +56,7 @@ export class ConfirmationComponent implements OnInit {
     booking.bookingPrice=this.categoryBooking.totalBookingPrice;
     booking.customerEmail=this.getUsername();
     if(this.authenticationService.getUserRole()==='ROLE_USER') {
+      this.loading=true;
       localStorage.setItem('bookingDetails', JSON.stringify(booking));
       let payment = new Payment();
       payment.amount = this.categoryBooking.totalBookingPrice;
