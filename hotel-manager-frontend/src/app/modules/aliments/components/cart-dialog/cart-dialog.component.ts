@@ -56,7 +56,7 @@ export class CartDialogComponent implements OnInit {
     roomserviceCreation.bookingId = this.selectedBooking.id;
     this.roomserviceService.add(roomserviceCreation).subscribe(result => {
       this.dialogRef.close();
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/profile/orders']);
     });
   }
 
