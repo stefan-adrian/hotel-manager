@@ -35,9 +35,9 @@
           <a class="nav-link" href="/customers/add" *ngIf="!authenticationService.isLoggedIn()||authenticationService.getUserRole()==='ROLE_ADMIN'">Register</a>
           <a class="nav-link" href="/profile" *ngIf="authenticationService.isLoggedIn()">My Profile</a>
           <a class="nav-link" href="/profile/bookings" *ngIf="authenticationService.isLoggedIn()">My Bookings</a>
-          <a class="nav-link" href="/profile/orders" *ngIf="authenticationService.isLoggedIn()">Room services</a>
+          <a class="nav-link" href="/profile/orders" *ngIf="authenticationService.isLoggedIn()">My orders</a>
           <a class="nav-link" href="/profile/all-bookings" *ngIf="authenticationService.getUserRole()==='ROLE_EMPLOYEE'">All bookings</a>
-          <a class="nav-link" href="/profile/all-orders" *ngIf="authenticationService.getUserRole()==='ROLE_EMPLOYEE'">All room services</a>
+          <a class="nav-link" href="/profile/all-orders" *ngIf="authenticationService.getUserRole()==='ROLE_EMPLOYEE'">All orders</a>
           <a class="nav-link" href="/login" *ngIf="authenticationService.isLoggedIn()">Logout</a>
         </div>
       </li>
