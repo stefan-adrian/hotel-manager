@@ -27,6 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [SafeHtml],
@@ -58,7 +59,8 @@ import {MatNativeDateModule} from "@angular/material";
     MatDialogModule,
     MatExpansionModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     HttpClientModule,
@@ -89,6 +91,7 @@ import {MatNativeDateModule} from "@angular/material";
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
 
     SafeHtml
 

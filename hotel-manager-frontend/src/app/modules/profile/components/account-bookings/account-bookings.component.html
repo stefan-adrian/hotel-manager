@@ -16,7 +16,16 @@
   </mat-drawer>
   <mat-drawer-content class="right-side">
 
-    <p-dataView  emptyMessage="" #dv [value]="bookings" [paginator]="true" [rows]="2" paginatorPosition="both" [loading]="loading">
+    <div class="spinner">
+    <mat-progress-spinner *ngIf="loading==true"
+      [color]="color"
+      [mode]="mode"
+      [value]="value">
+    </mat-progress-spinner>
+    </div>
+
+    <p-dataView  emptyMessage="" #dv [value]="bookings" [paginator]="true" [rows]="2" paginatorPosition="both"
+                 [loading]="loading" *ngIf="loading==false">
       <p-header>
         <div class="ui-helper-clearfix title-booking">
               <h4>

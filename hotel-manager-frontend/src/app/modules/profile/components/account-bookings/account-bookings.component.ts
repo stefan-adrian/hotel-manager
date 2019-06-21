@@ -18,6 +18,9 @@ export class AccountBookingsComponent implements OnInit {
   private bookings: Booking[];
   private message: Message[] = [];
   private loading: boolean = true;
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
 
   constructor(
     private bookingService: BookingService,
