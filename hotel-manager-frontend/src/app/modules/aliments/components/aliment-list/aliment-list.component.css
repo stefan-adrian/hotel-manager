@@ -2,3 +2,7 @@
   height: 200px;
   width: 270px;
 }
+
+.shopping-cart{
+  cursor: pointer;
+}
