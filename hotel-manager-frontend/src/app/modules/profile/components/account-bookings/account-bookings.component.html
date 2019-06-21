@@ -16,7 +16,7 @@
   </mat-drawer>
   <mat-drawer-content class="right-side">
 
-    <p-dataView #dv [value]="bookings" [paginator]="true" [rows]="2" paginatorPosition="both">
+    <p-dataView  emptyMessage="" #dv [value]="bookings" [paginator]="true" [rows]="2" paginatorPosition="both" [loading]="loading">
       <p-header>
         <div class="ui-helper-clearfix title-booking">
               <h4>

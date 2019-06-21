@@ -17,7 +17,7 @@ export class AccountBookingsComponent implements OnInit {
 
   private bookings: Booking[];
   private message: Message[] = [];
-
+  private loading: boolean = true;
 
   constructor(
     private bookingService: BookingService,
@@ -33,6 +33,7 @@ export class AccountBookingsComponent implements OnInit {
 
   getUserBookings(): void {
     this.bookingService.getAllCustomerBookings().subscribe(bookings => {
+      this.loading=false;
       this.bookings = bookings;
     });
   };
