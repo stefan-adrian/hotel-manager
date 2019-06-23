@@ -1,6 +1,7 @@
 package fii.hotel.manager.service;
 
 import fii.hotel.manager.model.*;
+import org.apache.commons.math3.util.Precision;
 import org.apache.tomcat.jni.Local;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,10 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PriceServiceImplTest {
@@ -87,18 +85,57 @@ public class PriceServiceImplTest {
     }
 
     @Test
-    public void getCategoriesPrices() {
+    public void getCategoriesPrices_whenTheBookingIsDoneFor30Days() {
         //given
         LocalDate arrivalDate = LocalDate.of(2019, 7, 1);
         LocalDate departureDate = LocalDate.of(2019, 7, 31);
         //when
-        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(Mockito.anySet(), Mockito.any(LocalDate.class),Mockito.any(LocalDate.class))).thenReturn(4);
+        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(Mockito.anySet(), Mockito.any(LocalDate.class),Mockito.any(LocalDate.class))).thenReturn(3);
         Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
         //then
         Map<String,Double> expectedMap=new HashMap<>();
         Double discountPercentage= NumberOfDaysDiscounts.valueOf("THIRTY").getDiscountPercentage();
         Double categoryPrice=category1.getPrice();
         expectedMap.put(category1.getName(),(categoryPrice*30)*(1.0-discountPercentage));
+        Assert.assertEquals(expectedMap,returnValue);
+    }
+
+    @Test
+    public void getCategoriesPrices_whenMoreThan100BookingsInLast24Hours() {
+        //given
+        LocalDate arrivalDate = LocalDate.of(2019, 7, 1);
+        LocalDate departureDate = LocalDate.of(2019, 7, 2);
+        //when
+        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(Mockito.anySet(), Mockito.any(LocalDate.class),Mockito.any(LocalDate.class))).thenReturn(3);
+        Mockito.when(bookingService.getNumberOfBookingsIn24HoursIntervalBeforeNow()).thenReturn(101);
+        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
+        //then
+        Map<String,Double> expectedMap=new HashMap<>();
+        Double categoryPrice=category1.getPrice()*Double.valueOf(1.1);
+        expectedMap.put(category1.getName(), Precision.round(categoryPrice, 2));
+        Assert.assertEquals(expectedMap,returnValue);
+    }
+
+    @Test
+    public void getCategoriesPrices_whenCustomerHasPreviousBookingsOf60k() {
+        //given
+        List<Booking> bookings=new ArrayList<>();
+        Customer customer=new Customer();
+        customer.setRole(Role.ROLE_USER);
+        Booking booking1=new Booking();
+        booking1.setCustomer(customer);
+        booking1.setPrice(60000.0);
+        bookings.add(booking1);
+        LocalDate arrivalDate = LocalDate.of(2019, 7, 1);
+        LocalDate departureDate = LocalDate.of(2019, 7, 2);
+        //when
+        Mockito.when(roomService.getNumberOfAvailableRoomsBetweenDates(Mockito.anySet(), Mockito.any(LocalDate.class),Mockito.any(LocalDate.class))).thenReturn(3);
+        Mockito.when(bookingService.getBookingsByCustomerEmail(email)).thenReturn(bookings);
+        Map<String,Double> returnValue=priceService.getCategoriesPrices(categories,arrivalDate,departureDate,email);
+        //then
+        Map<String,Double> expectedMap=new HashMap<>();
+        Double categoryPrice=category1.getPrice()*0.7;
+        expectedMap.put(category1.getName(), Precision.round(categoryPrice, 2));
         Assert.assertEquals(expectedMap,returnValue);
     }
 }
