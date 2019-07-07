@@ -1,1 +1,1 @@
-# hotel-manager-backend
+# hotel-manager
